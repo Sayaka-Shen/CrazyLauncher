@@ -1,0 +1,137 @@
+#include "UtilityWindow.h"
+#include <QCheckBox>
+#include <QHBoxLayout>
+#include <QButtonGroup>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include "ProjectManager.h"
+#include <QFileDialog>
+
+UtilityWindow::UtilityWindow(WindowMode mode, QWidget* parent, Project* project) : m_mode(mode), m_project(project)
+{
+	CreateLayout();
+	CreateUI();
+	SetupLayout();
+	SetupConnections();
+	
+	if (m_mode == Edit && m_project != nullptr)
+	{
+		SetDefaultValue();
+	}
+}
+
+UtilityWindow::~UtilityWindow() 
+{
+}
+
+void UtilityWindow::CreateUI()
+{
+	m_name = new QLabel("Nom du projet :", this);
+	m_nameField = new QLineEdit();
+
+	m_desc = new QLabel("Description :", this);
+	m_descField = new QLineEdit();
+
+	m_path = new QLabel("Chemin à lancer :", this);
+	m_pathField = new QLineEdit();
+
+	m_cancelBtn = new QPushButton("Annuler", this);
+	m_registerBtn = new QPushButton(m_mode == Add ? "Enregistrer" : "Modifier", this);
+
+	m_openExplorer = new QPushButton(this);
+}
+
+void UtilityWindow::CreateLayout()
+{
+	m_windowLayout = new QVBoxLayout(this);
+	m_buttonLayout = new QHBoxLayout();
+	m_pathLayout = new QHBoxLayout();
+}
+
+void UtilityWindow::SetupLayout()
+{
+	// Name
+	m_windowLayout->addWidget(m_name);
+	m_windowLayout->addWidget(m_nameField);
+
+	// Description
+	m_windowLayout->addWidget(m_desc);
+	m_windowLayout->addWidget(m_descField);
+
+	// Path and Icon path
+	m_windowLayout->addWidget(m_path);
+	m_pathLayout->addWidget(m_pathField);
+	m_pathLayout->addWidget(m_openExplorer);
+
+	// Add to bottom layout
+	m_buttonLayout->addWidget(m_cancelBtn);
+	m_buttonLayout->addWidget(m_registerBtn);
+
+	// Add to main layout
+	m_windowLayout->addLayout(m_pathLayout);
+	m_windowLayout->addLayout(m_buttonLayout);
+}
+
+void UtilityWindow::SetupConnections()
+{
+	connect(m_registerBtn, &QPushButton::pressed, this, &UtilityWindow::OnRegisterClicked);
+	connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
+	connect(m_openExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenExplorer);
+}
+
+void UtilityWindow::SetDefaultValue()
+{
+	m_nameField->setText(m_project->s_name);
+	m_descField->setText(m_project->s_description);
+	m_pathField->setText(m_project->s_path);
+}
+
+
+void UtilityWindow::closeEvent(QCloseEvent* event)
+{
+	QDialog::closeEvent(event);
+	emit E_CloseWindow();
+}
+
+void UtilityWindow::OpenExplorer()
+{
+	QFileDialog* explorer = new QFileDialog(this);
+	explorer->setFileMode(QFileDialog::FileMode::Directory);
+
+	connect(explorer, &QFileDialog::fileSelected, this, [this, explorer](const QString& path)
+	{
+		m_pathField->setText(path);
+		explorer->deleteLater();
+	});
+
+	explorer->open();
+}
+
+// SIGNALS
+void UtilityWindow::OnRegisterClicked()
+{
+	Project project(m_nameField->text(), m_descField->text(), m_pathField->text());
+
+	switch(m_mode)
+	{
+	case Add:
+		emit E_AddProject(project);
+		break;
+	case Edit:
+		//emit E_EditProject(project);
+		break;
+	default:
+		break;
+	}
+
+	emit E_CloseWindow();
+	accept();
+}
+
+void UtilityWindow::OnCancelClicked()
+{
+	emit E_CloseWindow();
+	reject();
+}
+

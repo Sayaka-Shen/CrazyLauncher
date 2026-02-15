@@ -1,0 +1,23 @@
+# Dossier Visual Studio
+.vs/
+
+# Fichiers de build et binaires
+*.o
+*.obj
+*.exe
+*.dll
+*.lib
+*.so
+*.dylib
+
+# Fichiers générés par Qt
+*.moc
+*.qrc.cpp
+*.ui.h
+*.ui.cpp
+
+# Fichiers de configuration spécifiques à l’utilisateur
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
