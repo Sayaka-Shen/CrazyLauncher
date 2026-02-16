@@ -3,6 +3,8 @@
 #include <QObject>
 #include "Project.h"
 
+class QString;
+
 class ProjectManager : public QObject
 {
 	Q_OBJECT
@@ -14,6 +16,7 @@ public:
 	void AddProjects(const Project& project);
 	void RemoveProjects(int indexProject);
 	void EditProjects(Project* baseProjectEdited);
+	void LaunchProjects(Project* project);
 	QList<Project>& GetProjects();
 
 private:

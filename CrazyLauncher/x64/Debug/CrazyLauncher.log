@@ -1,4 +1,9 @@
 ﻿   Qt/MSBuild: 3.4.1.0
    Qt: 6.10.2
+  moc ProjectManager.h
   CrazyLauncher.cpp
+  ProjectManager.cpp
+  UtilityWindow.cpp
+C:\Users\gaeta\Documents\ProjetPerso\Qt\CrazyLauncher\CrazyLauncher\UtilityWindow.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+  moc_ProjectManager.cpp
   CrazyLauncher.vcxproj -> C:\Users\gaeta\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe

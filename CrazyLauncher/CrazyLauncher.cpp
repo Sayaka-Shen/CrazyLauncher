@@ -47,8 +47,8 @@ void CrazyLauncher::CreateUI()
 
 void CrazyLauncher::SetupLayout()
 {
-	m_centralLayout->addWidget(m_projectView, 2);
-	m_centralLayout->addWidget(m_descView, 1);
+	m_centralLayout->addWidget(m_projectView, 1);
+	m_centralLayout->addWidget(m_descView, 0);
 	m_footerLayout->addWidget(m_settingView);
 
 	m_mainLayout->addLayout(m_centralLayout);
@@ -64,6 +64,7 @@ void CrazyLauncher::SetupConnections()
 	connect(m_projectManager, &ProjectManager::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
 	connect(m_projectManager, &ProjectManager::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
 
+	connect(m_settingView, &SettingsView::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
 	connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
 
 	connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, m_descView, &DescriptionView::OnSelectedProjectChanged);
@@ -144,6 +145,16 @@ void CrazyLauncher::OnProjectAdded(const Project& project)
 void CrazyLauncher::OnProjectEdited(Project* baseProjectEdited)
 {
 	m_projectManager->EditProjects(baseProjectEdited);
+}
+
+void CrazyLauncher::LaunchProject()
+{
+	Project* selectedProject = GetSelectedProjectWidget();
+
+	if (selectedProject)
+	{
+		m_projectManager->LaunchProjects(selectedProject);
+	}
 }
 
 void CrazyLauncher::OnRemoveProject()

@@ -36,7 +36,8 @@ private:
 	// Set edit field default value
 	void SetDefaultValue();
 	void closeEvent(QCloseEvent* event) override;
-	void OpenExplorer();
+	void OpenFileExplorer();
+	void OpenFolderExplorer();
 
 	// Button Function 
 	void OnRegisterClicked();
@@ -59,7 +60,8 @@ private:
 	QLineEdit* m_descField;
 	QLineEdit* m_pathField;
 	
-	QPushButton* m_openExplorer;
+	QPushButton* m_openFileExplorer;
+	QPushButton* m_openFolderExplorer;
 
 	QPushButton* m_cancelBtn;
 	QPushButton* m_registerBtn;

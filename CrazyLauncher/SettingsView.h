@@ -16,6 +16,7 @@ public:
 	void OnAddWindowClicked();
 	void OnEditWindowClicked();
 	void OnRemoveProjectClicked();
+	void OnLaunchProjectClicked();
 
 private:
 	void CreateUI();
@@ -37,6 +38,7 @@ signals:
 	void E_CreateAddWindow();
 	void E_CreateEditWindow();
 	void E_RemoveProject();
+	void E_LaunchProject();
 
 };
 

@@ -47,6 +47,7 @@ void SettingsView::SetupConnections()
 	connect(m_addBtn, &QPushButton::pressed, this, &SettingsView::OnAddWindowClicked);
 	connect(m_editBtn, &QPushButton::pressed, this, &SettingsView::OnEditWindowClicked);
 	connect(m_deleteBtn, &QPushButton::pressed, this, &SettingsView::OnRemoveProjectClicked);
+	connect(m_launchBtn, &QPushButton::pressed, this, &SettingsView::OnLaunchProjectClicked);
 }
 
 void SettingsView::OnAddWindowClicked()
@@ -62,4 +63,9 @@ void SettingsView::OnEditWindowClicked()
 void SettingsView::OnRemoveProjectClicked()
 {
 	emit E_RemoveProject();
+}
+
+void SettingsView::OnLaunchProjectClicked()
+{
+	emit E_LaunchProject();
 }

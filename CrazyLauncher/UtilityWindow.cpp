@@ -39,7 +39,8 @@ void UtilityWindow::CreateUI()
 	m_cancelBtn = new QPushButton("Annuler", this);
 	m_registerBtn = new QPushButton(m_mode == Add ? "Enregistrer" : "Modifier", this);
 
-	m_openExplorer = new QPushButton(this);
+	m_openFileExplorer = new QPushButton(this);
+	m_openFolderExplorer = new QPushButton(this);
 }
 
 void UtilityWindow::CreateLayout()
@@ -62,7 +63,8 @@ void UtilityWindow::SetupLayout()
 	// Path and Icon path
 	m_windowLayout->addWidget(m_path);
 	m_pathLayout->addWidget(m_pathField);
-	m_pathLayout->addWidget(m_openExplorer);
+	m_pathLayout->addWidget(m_openFileExplorer);
+	m_pathLayout->addWidget(m_openFolderExplorer);
 
 	// Add to bottom layout
 	m_buttonLayout->addWidget(m_cancelBtn);
@@ -77,7 +79,8 @@ void UtilityWindow::SetupConnections()
 {
 	connect(m_registerBtn, &QPushButton::pressed, this, m_mode == Add ? &UtilityWindow::OnRegisterClicked : &UtilityWindow::OnEditClicked);
 	connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
-	connect(m_openExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenExplorer);
+	connect(m_openFileExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenFileExplorer);
+	connect(m_openFolderExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenFolderExplorer);
 }
 
 void UtilityWindow::SetDefaultValue()
@@ -94,18 +97,24 @@ void UtilityWindow::closeEvent(QCloseEvent* event)
 	emit E_CloseWindow();
 }
 
-void UtilityWindow::OpenExplorer()
+void UtilityWindow::OpenFileExplorer()
 {
-	QFileDialog* explorer = new QFileDialog(this);
-	explorer->setFileMode(QFileDialog::FileMode::Directory);
+	QString path = QFileDialog::getOpenFileName(this, tr("Select a project file"), QString(), tr("All Files (*.*)"));
 
-	connect(explorer, &QFileDialog::fileSelected, this, [this, explorer](const QString& path)
+	if (!path.isEmpty())
 	{
 		m_pathField->setText(path);
-		explorer->deleteLater();
-	});
+	}
+}
 
-	explorer->open();
+void UtilityWindow::OpenFolderExplorer()
+{
+	QString path = QFileDialog::getExistingDirectory(this, tr("Select a project folder"));
+
+	if (!path.isEmpty())
+	{
+		m_pathField->setText(path);
+	}
 }
 
 // SIGNALS

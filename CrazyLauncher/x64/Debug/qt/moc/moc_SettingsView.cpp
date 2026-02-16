@@ -42,7 +42,8 @@ template <> constexpr inline auto SettingsView::qt_create_metaobjectdata<qt_meta
         "E_CreateAddWindow",
         "",
         "E_CreateEditWindow",
-        "E_RemoveProject"
+        "E_RemoveProject",
+        "E_LaunchProject"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -52,6 +53,8 @@ template <> constexpr inline auto SettingsView::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'E_RemoveProject'
         QtMocHelpers::SignalData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'E_LaunchProject'
+        QtMocHelpers::SignalData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -78,6 +81,7 @@ void SettingsView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->E_CreateAddWindow(); break;
         case 1: _t->E_CreateEditWindow(); break;
         case 2: _t->E_RemoveProject(); break;
+        case 3: _t->E_LaunchProject(); break;
         default: ;
         }
     }
@@ -87,6 +91,8 @@ void SettingsView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         if (QtMocHelpers::indexOfMethod<void (SettingsView::*)()>(_a, &SettingsView::E_CreateEditWindow, 1))
             return;
         if (QtMocHelpers::indexOfMethod<void (SettingsView::*)()>(_a, &SettingsView::E_RemoveProject, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (SettingsView::*)()>(_a, &SettingsView::E_LaunchProject, 3))
             return;
     }
 }
@@ -110,14 +116,14 @@ int SettingsView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
@@ -138,5 +144,11 @@ void SettingsView::E_CreateEditWindow()
 void SettingsView::E_RemoveProject()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void SettingsView::E_LaunchProject()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 QT_WARNING_POP
