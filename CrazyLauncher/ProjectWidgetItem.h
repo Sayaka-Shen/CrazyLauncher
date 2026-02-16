@@ -16,6 +16,9 @@ public:
 	QString GetProjectTitle();
 	QString GetProjectDescription();
 
+	void SetProjectTitle(QString newTitle);
+	void SetProjectDescription(QString newDescription);
+
 private:
 	void CreateUI();
 	void CreateLayout();

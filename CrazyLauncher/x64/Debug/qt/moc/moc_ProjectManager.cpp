@@ -43,6 +43,8 @@ template <> constexpr inline auto ProjectManager::qt_create_metaobjectdata<qt_me
         "",
         "Project",
         "project",
+        "E_EditProjectToView",
+        "Project*",
         "E_RemoveProjectToView",
         "indexProject"
     };
@@ -52,9 +54,13 @@ template <> constexpr inline auto ProjectManager::qt_create_metaobjectdata<qt_me
         QtMocHelpers::SignalData<void(const Project &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
+        // Signal 'E_EditProjectToView'
+        QtMocHelpers::SignalData<void(Project *)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 6, 4 },
+        }}),
         // Signal 'E_RemoveProjectToView'
-        QtMocHelpers::SignalData<void(int)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Int, 6 },
+        QtMocHelpers::SignalData<void(int)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 8 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -80,14 +86,17 @@ void ProjectManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->E_AddProjectToView((*reinterpret_cast<std::add_pointer_t<Project>>(_a[1]))); break;
-        case 1: _t->E_RemoveProjectToView((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
+        case 1: _t->E_EditProjectToView((*reinterpret_cast<std::add_pointer_t<Project*>>(_a[1]))); break;
+        case 2: _t->E_RemoveProjectToView((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (ProjectManager::*)(const Project & )>(_a, &ProjectManager::E_AddProjectToView, 0))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ProjectManager::*)(int )>(_a, &ProjectManager::E_RemoveProjectToView, 1))
+        if (QtMocHelpers::indexOfMethod<void (ProjectManager::*)(Project * )>(_a, &ProjectManager::E_EditProjectToView, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ProjectManager::*)(int )>(_a, &ProjectManager::E_RemoveProjectToView, 2))
             return;
     }
 }
@@ -111,14 +120,14 @@ int ProjectManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -130,8 +139,14 @@ void ProjectManager::E_AddProjectToView(const Project & _t1)
 }
 
 // SIGNAL 1
-void ProjectManager::E_RemoveProjectToView(int _t1)
+void ProjectManager::E_EditProjectToView(Project * _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+}
+
+// SIGNAL 2
+void ProjectManager::E_RemoveProjectToView(int _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }
 QT_WARNING_POP

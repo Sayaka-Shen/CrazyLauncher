@@ -19,6 +19,11 @@ void ProjectManager::RemoveProjects(int indexProject)
 	emit E_RemoveProjectToView(indexProject);
 }
 
+void ProjectManager::EditProjects(Project* baseProjectEdited)
+{
+	emit E_EditProjectToView(baseProjectEdited);
+}
+
 QList<Project>& ProjectManager::GetProjects()
 {
 	return projects;

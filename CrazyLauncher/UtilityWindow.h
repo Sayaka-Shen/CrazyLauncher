@@ -40,6 +40,7 @@ private:
 
 	// Button Function 
 	void OnRegisterClicked();
+	void OnEditClicked();
 	void OnCancelClicked();
 	
 	// Button custom functions
@@ -65,6 +66,7 @@ private:
 
 signals:
 	void E_AddProject(const Project& project);
+	void E_EditProject(Project* baseProjectEdited);
 	void E_CloseWindow();
 
 };

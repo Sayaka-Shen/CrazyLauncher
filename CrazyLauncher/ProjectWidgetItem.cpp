@@ -26,6 +26,16 @@ QString ProjectWidgetItem::GetProjectDescription()
 	return m_projectDesc->text();
 }
 
+void ProjectWidgetItem::SetProjectTitle(QString newTitle)
+{
+	m_projectTitle->setText(newTitle);
+}
+
+void ProjectWidgetItem::SetProjectDescription(QString newDescription)
+{
+	m_projectDesc->setText(newDescription);
+}
+
 void ProjectWidgetItem::CreateUI()
 {
 	m_projectIcon = new QLabel(this);

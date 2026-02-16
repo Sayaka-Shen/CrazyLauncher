@@ -49,7 +49,9 @@ public slots:
     void EditUtilityWindow();
 
     void OnProjectAdded(const Project& project);
-	void OnRemoveProject();
+    void OnProjectEdited(Project* baseProjectEdited);
+
+    void OnRemoveProject();
 
     void OnCloseUtilityWindow();
 

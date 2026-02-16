@@ -45,6 +45,9 @@ template <> constexpr inline auto CrazyLauncher::qt_create_metaobjectdata<qt_met
         "OnProjectAdded",
         "Project",
         "project",
+        "OnProjectEdited",
+        "Project*",
+        "baseProjectEdited",
         "OnRemoveProject",
         "OnCloseUtilityWindow"
     };
@@ -58,10 +61,14 @@ template <> constexpr inline auto CrazyLauncher::qt_create_metaobjectdata<qt_met
         QtMocHelpers::SlotData<void(const Project &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 5, 6 },
         }}),
+        // Slot 'OnProjectEdited'
+        QtMocHelpers::SlotData<void(Project *)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
+        }}),
         // Slot 'OnRemoveProject'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'OnCloseUtilityWindow'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -88,8 +95,9 @@ void CrazyLauncher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->RegisterUtilityWindow(); break;
         case 1: _t->EditUtilityWindow(); break;
         case 2: _t->OnProjectAdded((*reinterpret_cast<std::add_pointer_t<Project>>(_a[1]))); break;
-        case 3: _t->OnRemoveProject(); break;
-        case 4: _t->OnCloseUtilityWindow(); break;
+        case 3: _t->OnProjectEdited((*reinterpret_cast<std::add_pointer_t<Project*>>(_a[1]))); break;
+        case 4: _t->OnRemoveProject(); break;
+        case 5: _t->OnCloseUtilityWindow(); break;
         default: ;
         }
     }
@@ -114,14 +122,14 @@ int CrazyLauncher::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

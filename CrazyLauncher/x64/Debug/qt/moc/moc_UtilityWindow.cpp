@@ -43,6 +43,9 @@ template <> constexpr inline auto UtilityWindow::qt_create_metaobjectdata<qt_met
         "",
         "Project",
         "project",
+        "E_EditProject",
+        "Project*",
+        "baseProjectEdited",
         "E_CloseWindow"
     };
 
@@ -51,8 +54,12 @@ template <> constexpr inline auto UtilityWindow::qt_create_metaobjectdata<qt_met
         QtMocHelpers::SignalData<void(const Project &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
+        // Signal 'E_EditProject'
+        QtMocHelpers::SignalData<void(Project *)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 6, 7 },
+        }}),
         // Signal 'E_CloseWindow'
-        QtMocHelpers::SignalData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SignalData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -77,14 +84,17 @@ void UtilityWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->E_AddProject((*reinterpret_cast<std::add_pointer_t<Project>>(_a[1]))); break;
-        case 1: _t->E_CloseWindow(); break;
+        case 1: _t->E_EditProject((*reinterpret_cast<std::add_pointer_t<Project*>>(_a[1]))); break;
+        case 2: _t->E_CloseWindow(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (UtilityWindow::*)(const Project & )>(_a, &UtilityWindow::E_AddProject, 0))
             return;
-        if (QtMocHelpers::indexOfMethod<void (UtilityWindow::*)()>(_a, &UtilityWindow::E_CloseWindow, 1))
+        if (QtMocHelpers::indexOfMethod<void (UtilityWindow::*)(Project * )>(_a, &UtilityWindow::E_EditProject, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (UtilityWindow::*)()>(_a, &UtilityWindow::E_CloseWindow, 2))
             return;
     }
 }
@@ -108,14 +118,14 @@ int UtilityWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -127,8 +137,14 @@ void UtilityWindow::E_AddProject(const Project & _t1)
 }
 
 // SIGNAL 1
+void UtilityWindow::E_EditProject(Project * _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+}
+
+// SIGNAL 2
 void UtilityWindow::E_CloseWindow()
 {
-    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP

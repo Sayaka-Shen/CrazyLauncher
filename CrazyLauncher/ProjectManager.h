@@ -13,6 +13,7 @@ public:
 
 	void AddProjects(const Project& project);
 	void RemoveProjects(int indexProject);
+	void EditProjects(Project* baseProjectEdited);
 	QList<Project>& GetProjects();
 
 private:
@@ -20,6 +21,7 @@ private:
 
 signals:
 	void E_AddProjectToView(const Project& project);
+	void E_EditProjectToView(Project* project);
 	void E_RemoveProjectToView(int indexProject);
 };
 

@@ -28,6 +28,7 @@ private:
 
 public slots:
 	void AddProjectInView(const Project& project);
+	void EditProjectInView(Project* project);
 	void RemoveProjectInView(int indexProject);
 
 };

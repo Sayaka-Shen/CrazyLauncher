@@ -55,6 +55,21 @@ void ProjectView::AddProjectInView(const Project& project)
 	m_projectsList->setItemWidget(item, widgetItem);
 }
 
+void ProjectView::EditProjectInView(Project* project)
+{
+	QListWidgetItem* item = m_projectsList->currentItem();
+	if (item == nullptr) return;
+
+	ProjectWidgetItem* widgetItem = (ProjectWidgetItem*)m_projectsList->itemWidget(item);
+	if (widgetItem == nullptr) return;
+
+	if (widgetItem->GetProjectTitle() != project->s_name)
+	{
+		widgetItem->SetProjectTitle(project->s_name);
+		widgetItem->SetProjectDescription(project->s_description);
+	}
+}
+
 void ProjectView::RemoveProjectInView(int indexProject)
 {
 	m_projectsList->takeItem(indexProject);

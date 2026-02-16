@@ -13,10 +13,20 @@ public:
 	~DescriptionView();
 
 private:
+	void CreateLayout();
+	void CreateUI();
+	void SetupLayout();
+	void SetupConnections();
+
 	QVBoxLayout* m_descViewLayout;
+
 	QLabel* m_title;
+
 	QLabel* m_description;
+	QLabel* m_descriptionField;
+
 	QLabel* m_path;
+	QLabel* m_pathField;
 
 };
 

@@ -75,7 +75,7 @@ void UtilityWindow::SetupLayout()
 
 void UtilityWindow::SetupConnections()
 {
-	connect(m_registerBtn, &QPushButton::pressed, this, &UtilityWindow::OnRegisterClicked);
+	connect(m_registerBtn, &QPushButton::pressed, this, m_mode == Add ? &UtilityWindow::OnRegisterClicked : &UtilityWindow::OnEditClicked);
 	connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
 	connect(m_openExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenExplorer);
 }
@@ -111,20 +111,24 @@ void UtilityWindow::OpenExplorer()
 // SIGNALS
 void UtilityWindow::OnRegisterClicked()
 {
+	if (m_nameField->text().isEmpty() || m_descField->text().isEmpty() || m_pathField->text().isEmpty()) return;
+
 	Project project(m_nameField->text(), m_descField->text(), m_pathField->text());
+	emit E_AddProject(project);
+	emit E_CloseWindow();
+	accept();
+}
 
-	switch(m_mode)
-	{
-	case Add:
-		emit E_AddProject(project);
-		break;
-	case Edit:
-		//emit E_EditProject(project);
-		break;
-	default:
-		break;
-	}
+void UtilityWindow::OnEditClicked()
+{
+	if (m_project == nullptr) return;
+	if (m_project->s_name == m_nameField->text() && m_project->s_description == m_descField->text() && m_project->s_path == m_pathField->text()) return;
 
+	m_project->s_name = m_nameField->text();
+	m_project->s_description = m_descField->text();
+	m_project->s_path = m_pathField->text();
+
+	emit E_EditProject(m_project);
 	emit E_CloseWindow();
 	accept();
 }
