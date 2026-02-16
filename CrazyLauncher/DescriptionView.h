@@ -3,6 +3,7 @@
 
 class QVBoxLayout;
 class QLabel;
+class QListWidgetItem;
 
 class DescriptionView : public QWidget
 {
@@ -18,6 +19,8 @@ private:
 	void SetupLayout();
 	void SetupConnections();
 
+	void SetDefaultValue();
+
 	QVBoxLayout* m_descViewLayout;
 
 	QLabel* m_title;
@@ -27,6 +30,9 @@ private:
 
 	QLabel* m_path;
 	QLabel* m_pathField;
+
+public slots:
+	void OnSelectedProjectChanged(QListWidgetItem* current, QListWidgetItem* previous);
 
 };
 

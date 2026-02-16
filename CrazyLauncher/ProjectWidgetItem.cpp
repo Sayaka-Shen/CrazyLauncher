@@ -4,7 +4,7 @@
 #include "QVBoxLayout"
 
 
-ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QWidget* parent)
+ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QWidget* parent)
 {
 	CreateLayout();
 	CreateUI();
@@ -12,6 +12,7 @@ ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QWidget
 	
 	m_projectTitle->setText(title);
 	m_projectDesc->setText(description);
+	m_projectPath->setText(path);
 }
 
 ProjectWidgetItem::~ProjectWidgetItem() {}
@@ -26,6 +27,11 @@ QString ProjectWidgetItem::GetProjectDescription()
 	return m_projectDesc->text();
 }
 
+QString ProjectWidgetItem::GetProjectPath()
+{
+	return m_projectPath->text();
+}
+
 void ProjectWidgetItem::SetProjectTitle(QString newTitle)
 {
 	m_projectTitle->setText(newTitle);
@@ -36,11 +42,19 @@ void ProjectWidgetItem::SetProjectDescription(QString newDescription)
 	m_projectDesc->setText(newDescription);
 }
 
+void ProjectWidgetItem::SetProjectPath(QString newPath)
+{
+	m_projectPath->setText(newPath);
+}
+
 void ProjectWidgetItem::CreateUI()
 {
 	m_projectIcon = new QLabel(this);
 	m_projectTitle = new QLabel(this);
 	m_projectDesc = new QLabel(this);
+
+	m_projectPath = new QLabel(this);
+	m_projectPath->hide();
 }
 
 void ProjectWidgetItem::CreateLayout()

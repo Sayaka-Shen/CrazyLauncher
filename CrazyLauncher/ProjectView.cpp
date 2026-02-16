@@ -13,6 +13,8 @@ ProjectView::ProjectView(QWidget* parent)
 	CreateUI();
 	SetupLayout();
 	SetupConnections();
+
+	m_projectsList->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 ProjectView::~ProjectView() {}
@@ -43,7 +45,6 @@ void ProjectView::SetupLayout()
 
 void ProjectView::SetupConnections()
 {
-
 }
 
 void ProjectView::AddProjectInView(const Project& project)
@@ -51,7 +52,7 @@ void ProjectView::AddProjectInView(const Project& project)
 	QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 	item->setSizeHint(QSize(0, 56));
 
-	ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, this);
+	ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, project.s_path, this);
 	m_projectsList->setItemWidget(item, widgetItem);
 }
 
@@ -67,6 +68,7 @@ void ProjectView::EditProjectInView(Project* project)
 	{
 		widgetItem->SetProjectTitle(project->s_name);
 		widgetItem->SetProjectDescription(project->s_description);
+		widgetItem->SetProjectPath(project->s_path);
 	}
 }
 
@@ -74,3 +76,4 @@ void ProjectView::RemoveProjectInView(int indexProject)
 {
 	m_projectsList->takeItem(indexProject);
 }
+

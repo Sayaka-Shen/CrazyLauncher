@@ -62,8 +62,11 @@ void CrazyLauncher::SetupConnections()
 
 	connect(m_projectManager, &ProjectManager::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
 	connect(m_projectManager, &ProjectManager::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
-	connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
 	connect(m_projectManager, &ProjectManager::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
+
+	connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
+
+	connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, m_descView, &DescriptionView::OnSelectedProjectChanged);
 }
 
 Project* CrazyLauncher::GetSelectedProjectWidget()
@@ -90,8 +93,8 @@ int CrazyLauncher::GetSelectedProjectWidgetIndex()
 	QListWidgetItem* item = m_projectView->GetProjectList()->currentItem();
 	if (item == nullptr) return -1;
 
-	ProjectWidgetItem* itemWidget = (ProjectWidgetItem*)m_projectView->GetProjectList()->itemWidget(item);
-	if (itemWidget) return -1;
+	ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(item));
+	if (itemWidget == nullptr) return -1;
 
 	for (int i = 0; i < m_projectManager->GetProjects().size(); ++i)
 	{
