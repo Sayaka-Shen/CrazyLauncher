@@ -117,7 +117,9 @@
     <QtMoc Include="ProjectWidgetItem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PathState.h" />
     <ClInclude Include="Project.h" />
+    <ClInclude Include="WindowMode.h" />
     <QtMoc Include="ProjectManager.h" />
     <QtMoc Include="UtilityWindow.h" />
   </ItemGroup>

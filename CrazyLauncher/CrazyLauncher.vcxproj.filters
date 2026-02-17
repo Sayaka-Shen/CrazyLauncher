@@ -83,5 +83,11 @@
     <ClInclude Include="Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PathState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

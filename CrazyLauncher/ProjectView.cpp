@@ -32,7 +32,7 @@ void ProjectView::CreateLayout()
 void ProjectView::CreateUI()
 {
 	m_searchBar = new QLineEdit(this);
-	m_searchBar->setPlaceholderText("Rechercher....");
+	m_searchBar->setPlaceholderText("Search....");
 
 	m_projectsList = new QListWidget(this);
 }
@@ -52,7 +52,7 @@ void ProjectView::AddProjectInView(const Project& project)
 	QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 	item->setSizeHint(QSize(0, 56));
 
-	ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, project.s_path, this);
+	ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, project.s_path, project.s_software, this);
 	m_projectsList->setItemWidget(item, widgetItem);
 }
 

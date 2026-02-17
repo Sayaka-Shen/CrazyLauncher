@@ -1,7 +1,8 @@
 #pragma once
-#include <array>
 #include <QDialog>
 #include "Project.h"
+#include <WindowMode.h>
+#include <PathState.h>
 
 class QString;
 class QLabel;
@@ -11,12 +12,8 @@ class QCheckBox;
 class QVBoxLayout;
 class QHBoxLayout;
 class QButtonGroup;
+class QCheckBox;
 
-enum WindowMode
-{
-	Add,
-	Edit
-};
 
 class UtilityWindow : public QDialog
 {
@@ -34,10 +31,14 @@ private:
 	void SetupConnections();
 
 	// Set edit field default value
-	void SetDefaultValue();
+	void SetEditModeDefaultValue();
 	void closeEvent(QCloseEvent* event) override;
-	void OpenFileExplorer();
-	void OpenFolderExplorer();
+
+	// Path
+	void UpdatePathState();
+	void CheckPathContent(QString& path);
+	void OpenProjectExplorer();
+	void OpenSoftwareExplorer();
 
 	// Button Function 
 	void OnRegisterClicked();
@@ -46,22 +47,34 @@ private:
 	
 	// Button custom functions
 	WindowMode m_mode;
+	PathState m_pathState = PathState::File;
 	Project* m_project;
 
 	QVBoxLayout* m_windowLayout;
 	QHBoxLayout* m_buttonLayout;
-	QHBoxLayout* m_pathLayout;
+	QHBoxLayout* m_pathProjectLayout;
+	QHBoxLayout* m_pathSoftwareLayout;
+	QHBoxLayout* m_typeLayout;
 
 	QLabel* m_name;
 	QLabel* m_desc;
+
+	// Create different ways for handling different project
+	QLabel* m_pathType;
+	QButtonGroup* m_typesGroup;
+	QCheckBox* m_directoryType;
+	QCheckBox* m_fileType;
+
 	QLabel* m_path;
+	QLabel* m_softwarePath;
 
 	QLineEdit* m_nameField;
 	QLineEdit* m_descField;
 	QLineEdit* m_pathField;
+	QLineEdit* m_softwarePathField;
 	
-	QPushButton* m_openFileExplorer;
-	QPushButton* m_openFolderExplorer;
+	QPushButton* m_projectExplorer;
+	QPushButton* m_softwareExplorer;
 
 	QPushButton* m_cancelBtn;
 	QPushButton* m_registerBtn;

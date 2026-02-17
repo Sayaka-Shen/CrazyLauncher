@@ -25,12 +25,13 @@ void DescriptionView::CreateUI()
 	m_title = new QLabel(this);
 
 	m_description = new QLabel(this);
-
 	m_descriptionField = new QLabel(this);
 
 	m_path = new QLabel(this);
-
 	m_pathField = new QLabel(this);
+
+	m_pathSoftware = new QLabel(this);
+	m_pathSoftwareField = new QLabel(this);
 }
 
 void DescriptionView::SetupLayout()
@@ -42,6 +43,9 @@ void DescriptionView::SetupLayout()
 
 	m_descViewLayout->addWidget(m_path);
 	m_descViewLayout->addWidget(m_pathField);
+
+	m_descViewLayout->addWidget(m_pathSoftware);
+	m_descViewLayout->addWidget(m_pathSoftwareField);
 }
 
 void DescriptionView::SetupConnections()
@@ -56,6 +60,8 @@ void DescriptionView::SetDefaultValue()
 	m_descriptionField->setText("This is Project X...");
 	m_path->setText("Path :");
 	m_pathField->setText("C:/");
+	m_pathSoftware->setText("Software Used :");
+	m_pathSoftwareField->setText("C:/");
 }
 
 void DescriptionView::OnSelectedProjectChanged(QListWidgetItem* current, QListWidgetItem* previous)
@@ -72,4 +78,5 @@ void DescriptionView::OnSelectedProjectChanged(QListWidgetItem* current, QListWi
 	m_title->setText(currentWidgetItem->GetProjectTitle());
 	m_descriptionField->setText(currentWidgetItem->GetProjectDescription());
 	m_pathField->setText(currentWidgetItem->GetProjectPath());
+	m_pathSoftwareField->setText(currentWidgetItem->GetProjectPath());
 }

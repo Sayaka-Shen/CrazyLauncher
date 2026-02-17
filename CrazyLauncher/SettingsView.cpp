@@ -17,16 +17,16 @@ SettingsView::~SettingsView() {}
 void SettingsView::CreateUI()
 {
 	m_addBtn = new QPushButton(this);
-	m_addBtn->setText("Ajouter");
+	m_addBtn->setText("Add");
 
 	m_editBtn = new QPushButton(this);
-	m_editBtn->setText("Modifier");
+	m_editBtn->setText("Edit");
 
 	m_deleteBtn = new QPushButton(this);
-	m_deleteBtn->setText("Supprimer");
+	m_deleteBtn->setText("Delete");
 
 	m_launchBtn = new QPushButton(this);
-	m_launchBtn->setText("Lancer");
+	m_launchBtn->setText("Launch");
 }
 
 void SettingsView::CreateLayout()

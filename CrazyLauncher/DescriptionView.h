@@ -31,6 +31,9 @@ private:
 	QLabel* m_path;
 	QLabel* m_pathField;
 
+	QLabel* m_pathSoftware;
+	QLabel* m_pathSoftwareField; 
+
 public slots:
 	void OnSelectedProjectChanged(QListWidgetItem* current, QListWidgetItem* previous);
 

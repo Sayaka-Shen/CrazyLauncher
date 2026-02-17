@@ -4,7 +4,7 @@
 #include "QVBoxLayout"
 
 
-ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QWidget* parent)
+ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QString softwarePath, QWidget* parent)
 {
 	CreateLayout();
 	CreateUI();
@@ -13,6 +13,7 @@ ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString
 	m_projectTitle->setText(title);
 	m_projectDesc->setText(description);
 	m_projectPath->setText(path);
+	m_softwarePath->setText(softwarePath);
 }
 
 ProjectWidgetItem::~ProjectWidgetItem() {}
@@ -32,6 +33,11 @@ QString ProjectWidgetItem::GetProjectPath()
 	return m_projectPath->text();
 }
 
+QString ProjectWidgetItem::GetSoftwarePath()
+{
+	return m_softwarePath->text();
+}
+
 void ProjectWidgetItem::SetProjectTitle(QString newTitle)
 {
 	m_projectTitle->setText(newTitle);
@@ -47,6 +53,11 @@ void ProjectWidgetItem::SetProjectPath(QString newPath)
 	m_projectPath->setText(newPath);
 }
 
+void ProjectWidgetItem::SetSoftwarePath(QString newSoftPath)
+{
+	m_softwarePath->setText(newSoftPath);
+}
+
 void ProjectWidgetItem::CreateUI()
 {
 	m_projectIcon = new QLabel(this);
@@ -55,6 +66,9 @@ void ProjectWidgetItem::CreateUI()
 
 	m_projectPath = new QLabel(this);
 	m_projectPath->hide();
+
+	m_softwarePath = new QLabel(this);
+	m_softwarePath->hide();
 }
 
 void ProjectWidgetItem::CreateLayout()

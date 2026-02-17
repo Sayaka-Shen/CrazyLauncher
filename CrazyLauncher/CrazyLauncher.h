@@ -9,7 +9,7 @@ class ProjectView;
 class DescriptionView;
 class SettingsView;
 class QString;
-class Project;
+struct Project;
 class UtilityWindow;
 class ProjectManager;
 class ProjectWidgetItem;

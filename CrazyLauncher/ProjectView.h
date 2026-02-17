@@ -4,7 +4,7 @@
 class QLineEdit;
 class QListWidget;
 class QVBoxLayout;
-class Project;
+struct Project;
 
 class ProjectView : public QWidget
 {
