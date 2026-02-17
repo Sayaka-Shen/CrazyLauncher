@@ -1,9 +1,23 @@
 ﻿   Qt/MSBuild: 3.4.1.0
+  Reading Qt configuration (C:/Qt/6.10.2/msvc2022_64/bin/qmake)
    Qt: 6.10.2
-  moc ProjectManager.h
-  CrazyLauncher.cpp
+  DescriptionView.cpp
   ProjectManager.cpp
+  ProjectView.cpp
+  ProjectWidgetItem.cpp
+  SettingsView.cpp
   UtilityWindow.cpp
-C:\Users\gaeta\Documents\ProjetPerso\Qt\CrazyLauncher\CrazyLauncher\UtilityWindow.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+  CrazyLauncher.cpp
+  main.cpp
+C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\CrazyLauncher\UtilityWindow.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\CrazyLauncher\DescriptionView.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  qrc_CrazyLauncher.cpp
+  moc_CrazyLauncher.cpp
+  moc_ProjectView.cpp
+  moc_DescriptionView.cpp
+  moc_SettingsView.cpp
+  moc_ProjectWidgetItem.cpp
   moc_ProjectManager.cpp
-  CrazyLauncher.vcxproj -> C:\Users\gaeta\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe
+  moc_UtilityWindow.cpp
+  LINK : C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe not found or not built by the last incremental link; performing full link
+  CrazyLauncher.vcxproj -> C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe

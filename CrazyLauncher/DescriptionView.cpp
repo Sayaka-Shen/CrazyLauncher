@@ -1,6 +1,6 @@
 #include "DescriptionView.h"
 #include <QVBoxLayout>
-#include <QLabel>*
+#include <QLabel>
 #include "ProjectWidgetItem.h"
 #include <QListWidget>
 
