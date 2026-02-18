@@ -1,5 +1,6 @@
 ﻿   Qt/MSBuild: 3.4.1.0
    Qt: 6.10.2
-  moc AddWindow.h
-   C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\CrazyLauncher\AddWindow.h(31:1): error: Parse error at ")"
-C:\Users\Gaetan\AppData\Local\QtMsBuild\qt_work.targets(136,5): error MSB4181: The "QtRunWork" task returned false but did not log an error.
+  ProjectView.cpp
+  moc_AddWindow.cpp
+  moc_ProjectWidgetItem.cpp
+  CrazyLauncher.vcxproj -> C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe

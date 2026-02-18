@@ -55,8 +55,8 @@ namespace Cl
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 		item->setSizeHint(QSize(0, 56));
 
-		//ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, project.s_path, project.s_software, this);
-		//m_projectsList->setItemWidget(item, widgetItem);
+		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, this);
+		m_projectsList->setItemWidget(item, widgetItem);
 	}
 
 	void ProjectView::EditProjectInView(Project* project)

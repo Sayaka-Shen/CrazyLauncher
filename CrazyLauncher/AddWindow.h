@@ -1,7 +1,6 @@
 #pragma once
 #include "UtilityWindow.h"
 
-class QString;
 class QLabel;
 class QLineEdit;
 class QWidget;
@@ -28,7 +27,7 @@ namespace Cl
 		void OnRegisterProject();
 
 	signals:
-		void E_AddProject(const Project& project)
+		void E_AddProject(const Project& project);
 
 	};
 }

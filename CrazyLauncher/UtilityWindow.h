@@ -1,7 +1,6 @@
 #pragma once
 #include "QDialog"
 
-class QString;
 class QLabel;
 class QLineEdit;
 class QWidget;
@@ -61,6 +60,9 @@ namespace Cl
 		void SetupConnections();
 
 		void SetupProjectTypeDP();
+
+		// Utility Functions 
+		void OpenExplorer();
 
 		// Close Window
 		void closeEvent(QCloseEvent* event) override;

@@ -22,10 +22,7 @@ namespace Cl
 		SetupConnections();
 	}
 
-	UtilityWindow::~UtilityWindow()
-	{
-
-	}
+	UtilityWindow::~UtilityWindow() {}
 
 	void UtilityWindow::CreateLayout()
 	{
@@ -87,12 +84,12 @@ namespace Cl
 
 	void UtilityWindow::SetupConnections()
 	{
-		//connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
+		connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
 
 		/*connect(m_directoryType, &QCheckBox::checkStateChanged, this, &AddWindow::UpdatePathState);
-		//connect(m_fileType, &QCheckBox::checkStateChanged, this, &AddWindow::UpdatePathState);
+		//connect(m_fileType, &QCheckBox::checkStateChanged, this, &AddWindow::UpdatePathState); */
 
-		connect(m_projectExplorer, &QPushButton::pressed, this, &AddWindow::OpenProjectExplorer);*/
+		connect(m_projectExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenExplorer);
 	}
 
 	void UtilityWindow::SetupProjectTypeDP()
@@ -106,6 +103,18 @@ namespace Cl
 		m_projectTypeDP->addItem("Custom", QVariant::fromValue(ProjectType::Custom));
 	}
 	
+	void UtilityWindow::OpenExplorer()
+	{
+		if (m_projectTypeDP->currentData().value<ProjectType>() == ProjectType::Unity)
+		{
+			QFileDialog::getExistingDirectory();
+		}
+		else
+		{
+
+		}
+	}
+
 	// Utilities Functions
 	void UtilityWindow::SetButtonRegisterText(QString registerText)
 	{

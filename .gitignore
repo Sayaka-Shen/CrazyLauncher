@@ -1,6 +1,9 @@
 # Dossier Visual Studio
 .vs/
 
+# Dossier de build x64
+x64/
+
 # Fichiers de build et binaires
 *.o
 *.obj
@@ -9,7 +12,6 @@
 *.lib
 *.so
 *.dylib
-
 # Fichiers générés par Qt
 *.moc
 *.qrc.cpp

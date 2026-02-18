@@ -26,7 +26,7 @@ namespace Cl
 		QString s_softwareExe;
 
 
-		Project(QString& name, QString& descripton, ProjectType type, QString& path, bool isDirectory, QString& softwareExe)
+		Project(QString name, QString descripton, ProjectType type, QString path, bool isDirectory, QString softwareExe)
 			: s_name(name), s_description(descripton), s_type(type), s_path(path), s_isDirectory(isDirectory), s_softwareExe(softwareExe)
 		{
 		}

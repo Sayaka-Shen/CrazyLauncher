@@ -5,7 +5,7 @@
 
 namespace Cl
 {
-	ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QString softwarePath, QWidget* parent)
+	ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QWidget* parent)
 	{
 		CreateLayout();
 		CreateUI();

@@ -12,7 +12,7 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		explicit ProjectWidgetItem(QString title, QString description, QString path, QString softwarePath, QWidget* parent = nullptr);
+		explicit ProjectWidgetItem(QString title, QString description, QWidget* parent = nullptr);
 		~ProjectWidgetItem();
 
 		QString GetProjectTitle();
