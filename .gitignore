@@ -2,7 +2,7 @@
 .vs/
 
 # Dossier de build x64
-x64/
+/x64/
 
 # Fichiers de build et binaires
 *.o
