@@ -116,7 +116,7 @@ namespace Cl
 			path = QFileDialog::getOpenFileName(this, tr("Open File"), "/C:");
 		}
 
-		if (path.isEmpty())
+		if (!path.isEmpty())
 		{
 			m_pathField->setText(path);
 		}
