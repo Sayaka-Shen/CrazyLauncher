@@ -52,10 +52,16 @@
     <ClCompile Include="ProjectWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UtilityWindow.cpp">
+    <ClCompile Include="AddWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProjectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilityWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,18 +81,18 @@
     <QtMoc Include="ProjectManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="AddWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="UtilityWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PathState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

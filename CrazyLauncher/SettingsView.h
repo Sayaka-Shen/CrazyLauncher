@@ -5,40 +5,42 @@ class QHBoxLayout;
 class QPushButton;
 class QDialog;
 
-class SettingsView : public QWidget
+namespace Cl
 {
-	Q_OBJECT
+	class SettingsView : public QWidget
+	{
+		Q_OBJECT
 
-public:
-	explicit SettingsView(QWidget* parent = nullptr);
-	~SettingsView();
+	public:
+		explicit SettingsView(QWidget* parent = nullptr);
+		~SettingsView();
 
-	void OnAddWindowClicked();
-	void OnEditWindowClicked();
-	void OnRemoveProjectClicked();
-	void OnLaunchProjectClicked();
+		void OnAddWindowClicked();
+		void OnEditWindowClicked();
+		void OnRemoveProjectClicked();
+		void OnLaunchProjectClicked();
 
-private:
-	void CreateUI();
-	void CreateLayout();
-	void SetupLayout();
-	void SetupConnections();
+	private:
+		void CreateUI();
+		void CreateLayout();
+		void SetupLayout();
+		void SetupConnections();
 
-	QHBoxLayout* m_settingsLayout;
+		QHBoxLayout* m_settingsLayout;
 
-	QPushButton* m_addBtn;
-	QPushButton* m_editBtn;
-	QPushButton* m_deleteBtn;
-	QPushButton* m_launchBtn;
+		QPushButton* m_addBtn;
+		QPushButton* m_editBtn;
+		QPushButton* m_deleteBtn;
+		QPushButton* m_launchBtn;
 
-	QDialog* m_addBtnWindow;
-	QDialog* m_editBtnWindow;
+		QDialog* m_addBtnWindow;
+		QDialog* m_editBtnWindow;
 
-signals:
-	void E_CreateAddWindow();
-	void E_CreateEditWindow();
-	void E_RemoveProject();
-	void E_LaunchProject();
+	signals:
+		void E_CreateAddWindow();
+		void E_CreateEditWindow();
+		void E_RemoveProject();
+		void E_LaunchProject();
 
-};
-
+	};
+}

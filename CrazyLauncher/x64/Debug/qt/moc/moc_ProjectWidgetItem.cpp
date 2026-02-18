@@ -31,14 +31,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN17ProjectWidgetItemE_t {};
+struct qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto ProjectWidgetItem::qt_create_metaobjectdata<qt_meta_tag_ZN17ProjectWidgetItemE_t>()
+template <> constexpr inline auto Cl::ProjectWidgetItem::qt_create_metaobjectdata<qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "ProjectWidgetItem"
+        "Cl::ProjectWidgetItem"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -47,20 +47,20 @@ template <> constexpr inline auto ProjectWidgetItem::qt_create_metaobjectdata<qt
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<ProjectWidgetItem, qt_meta_tag_ZN17ProjectWidgetItemE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<ProjectWidgetItem, qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject ProjectWidgetItem::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Cl::ProjectWidgetItem::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN17ProjectWidgetItemE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN17ProjectWidgetItemE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN17ProjectWidgetItemE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>.metaTypes,
     nullptr
 } };
 
-void ProjectWidgetItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Cl::ProjectWidgetItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<ProjectWidgetItem *>(_o);
     (void)_t;
@@ -69,20 +69,20 @@ void ProjectWidgetItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     (void)_a;
 }
 
-const QMetaObject *ProjectWidgetItem::metaObject() const
+const QMetaObject *Cl::ProjectWidgetItem::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ProjectWidgetItem::qt_metacast(const char *_clname)
+void *Cl::ProjectWidgetItem::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN17ProjectWidgetItemE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl17ProjectWidgetItemE_t>.strings))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int ProjectWidgetItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Cl::ProjectWidgetItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;

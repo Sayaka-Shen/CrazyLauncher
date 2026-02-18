@@ -31,14 +31,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN14ProjectManagerE_t {};
+struct qt_meta_tag_ZN2Cl14ProjectManagerE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto ProjectManager::qt_create_metaobjectdata<qt_meta_tag_ZN14ProjectManagerE_t>()
+template <> constexpr inline auto Cl::ProjectManager::qt_create_metaobjectdata<qt_meta_tag_ZN2Cl14ProjectManagerE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "ProjectManager",
+        "Cl::ProjectManager",
         "E_AddProjectToView",
         "",
         "Project",
@@ -67,20 +67,20 @@ template <> constexpr inline auto ProjectManager::qt_create_metaobjectdata<qt_me
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<ProjectManager, qt_meta_tag_ZN14ProjectManagerE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<ProjectManager, qt_meta_tag_ZN2Cl14ProjectManagerE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject ProjectManager::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Cl::ProjectManager::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN14ProjectManagerE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN14ProjectManagerE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl14ProjectManagerE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl14ProjectManagerE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN14ProjectManagerE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN2Cl14ProjectManagerE_t>.metaTypes,
     nullptr
 } };
 
-void ProjectManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Cl::ProjectManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<ProjectManager *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -101,20 +101,20 @@ void ProjectManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     }
 }
 
-const QMetaObject *ProjectManager::metaObject() const
+const QMetaObject *Cl::ProjectManager::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ProjectManager::qt_metacast(const char *_clname)
+void *Cl::ProjectManager::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN14ProjectManagerE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl14ProjectManagerE_t>.strings))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int ProjectManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Cl::ProjectManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -133,19 +133,19 @@ int ProjectManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ProjectManager::E_AddProjectToView(const Project & _t1)
+void Cl::ProjectManager::E_AddProjectToView(const Project & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
 }
 
 // SIGNAL 1
-void ProjectManager::E_EditProjectToView(Project * _t1)
+void Cl::ProjectManager::E_EditProjectToView(Project * _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
 }
 
 // SIGNAL 2
-void ProjectManager::E_RemoveProjectToView(int _t1)
+void Cl::ProjectManager::E_RemoveProjectToView(int _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }

@@ -4,32 +4,35 @@
 class QLineEdit;
 class QListWidget;
 class QVBoxLayout;
-struct Project;
 
-class ProjectView : public QWidget
+namespace Cl
 {
-	Q_OBJECT
+	struct Project;
 
-public:
-	explicit ProjectView(QWidget* parent = nullptr);
-	~ProjectView();
+	class ProjectView : public QWidget
+	{
+		Q_OBJECT
 
-	QListWidget* GetProjectList();
+	public:
+		explicit ProjectView(QWidget* parent = nullptr);
+		~ProjectView();
 
-private:
-	void CreateLayout();
-	void CreateUI();
-	void SetupLayout();
-	void SetupConnections();
+		QListWidget* GetProjectList();
 
-	QVBoxLayout* m_projectViewLayout;
-	QLineEdit* m_searchBar;
-	QListWidget* m_projectsList;
+	private:
+		void CreateLayout();
+		void CreateUI();
+		void SetupLayout();
+		void SetupConnections();
 
-public slots:
-	void AddProjectInView(const Project& project);
-	void EditProjectInView(Project* project);
-	void RemoveProjectInView(int indexProject);
+		QVBoxLayout* m_projectViewLayout;
+		QLineEdit* m_searchBar;
+		QListWidget* m_projectsList;
 
-};
+	public slots:
+		void AddProjectInView(const Project& project);
+		void EditProjectInView(Project* project);
+		void RemoveProjectInView(int indexProject);
 
+	};
+}

@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    CrazyLauncher window;
+    Cl::CrazyLauncher window;
     window.show();
     return app.exec();
 }

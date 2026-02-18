@@ -31,14 +31,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN12SettingsViewE_t {};
+struct qt_meta_tag_ZN2Cl12SettingsViewE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto SettingsView::qt_create_metaobjectdata<qt_meta_tag_ZN12SettingsViewE_t>()
+template <> constexpr inline auto Cl::SettingsView::qt_create_metaobjectdata<qt_meta_tag_ZN2Cl12SettingsViewE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "SettingsView",
+        "Cl::SettingsView",
         "E_CreateAddWindow",
         "",
         "E_CreateEditWindow",
@@ -60,20 +60,20 @@ template <> constexpr inline auto SettingsView::qt_create_metaobjectdata<qt_meta
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<SettingsView, qt_meta_tag_ZN12SettingsViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<SettingsView, qt_meta_tag_ZN2Cl12SettingsViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject SettingsView::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Cl::SettingsView::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SettingsViewE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SettingsViewE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl12SettingsViewE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl12SettingsViewE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN12SettingsViewE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN2Cl12SettingsViewE_t>.metaTypes,
     nullptr
 } };
 
-void SettingsView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Cl::SettingsView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<SettingsView *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -97,20 +97,20 @@ void SettingsView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     }
 }
 
-const QMetaObject *SettingsView::metaObject() const
+const QMetaObject *Cl::SettingsView::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *SettingsView::qt_metacast(const char *_clname)
+void *Cl::SettingsView::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SettingsViewE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl12SettingsViewE_t>.strings))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int SettingsView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Cl::SettingsView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -129,25 +129,25 @@ int SettingsView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SettingsView::E_CreateAddWindow()
+void Cl::SettingsView::E_CreateAddWindow()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void SettingsView::E_CreateEditWindow()
+void Cl::SettingsView::E_CreateEditWindow()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void SettingsView::E_RemoveProject()
+void Cl::SettingsView::E_RemoveProject()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 
 // SIGNAL 3
-void SettingsView::E_LaunchProject()
+void Cl::SettingsView::E_LaunchProject()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }

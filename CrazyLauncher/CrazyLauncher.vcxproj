@@ -93,10 +93,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DescriptionView.cpp" />
+    <ClCompile Include="EditWindow.cpp" />
     <ClCompile Include="ProjectManager.cpp" />
     <ClCompile Include="ProjectView.cpp" />
     <ClCompile Include="ProjectWidgetItem.cpp" />
     <ClCompile Include="SettingsView.cpp" />
+    <ClCompile Include="AddWindow.cpp" />
     <ClCompile Include="UtilityWindow.cpp" />
     <QtRcc Include="CrazyLauncher.qrc" />
     <QtUic Include="CrazyLauncher.ui" />
@@ -117,11 +119,11 @@
     <QtMoc Include="ProjectWidgetItem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PathState.h" />
-    <ClInclude Include="Project.h" />
-    <ClInclude Include="WindowMode.h" />
-    <QtMoc Include="ProjectManager.h" />
     <QtMoc Include="UtilityWindow.h" />
+    <QtMoc Include="EditWindow.h" />
+    <ClInclude Include="Project.h" />
+    <QtMoc Include="ProjectManager.h" />
+    <QtMoc Include="AddWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

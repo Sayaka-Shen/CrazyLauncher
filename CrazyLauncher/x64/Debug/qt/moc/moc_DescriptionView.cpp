@@ -31,14 +31,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN15DescriptionViewE_t {};
+struct qt_meta_tag_ZN2Cl15DescriptionViewE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto DescriptionView::qt_create_metaobjectdata<qt_meta_tag_ZN15DescriptionViewE_t>()
+template <> constexpr inline auto Cl::DescriptionView::qt_create_metaobjectdata<qt_meta_tag_ZN2Cl15DescriptionViewE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "DescriptionView",
+        "Cl::DescriptionView",
         "OnSelectedProjectChanged",
         "",
         "QListWidgetItem*",
@@ -56,20 +56,20 @@ template <> constexpr inline auto DescriptionView::qt_create_metaobjectdata<qt_m
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<DescriptionView, qt_meta_tag_ZN15DescriptionViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<DescriptionView, qt_meta_tag_ZN2Cl15DescriptionViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject DescriptionView::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Cl::DescriptionView::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN15DescriptionViewE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN15DescriptionViewE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl15DescriptionViewE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl15DescriptionViewE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN15DescriptionViewE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN2Cl15DescriptionViewE_t>.metaTypes,
     nullptr
 } };
 
-void DescriptionView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Cl::DescriptionView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<DescriptionView *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -80,20 +80,20 @@ void DescriptionView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     }
 }
 
-const QMetaObject *DescriptionView::metaObject() const
+const QMetaObject *Cl::DescriptionView::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *DescriptionView::qt_metacast(const char *_clname)
+void *Cl::DescriptionView::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN15DescriptionViewE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl15DescriptionViewE_t>.strings))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int DescriptionView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Cl::DescriptionView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)

@@ -5,55 +5,69 @@ class QWidget;
 class QVBoxLayout;
 class QHBoxLayout;
 class QPushButton;
-class ProjectView;
-class DescriptionView;
-class SettingsView;
 class QString;
-struct Project;
-class UtilityWindow;
-class ProjectManager;
-class ProjectWidgetItem;
 
-class CrazyLauncher : public QMainWindow
+namespace Cl
 {
-    Q_OBJECT
+	class ProjectView;
+	class DescriptionView;
+	class SettingsView;
+	struct Project;
+	class AddWindow;
+	class EditWindow;
+	class ProjectManager;
+	class ProjectWidgetItem;
 
-public:
-    CrazyLauncher(QWidget *parent = nullptr);
-    ~CrazyLauncher();
+	class CrazyLauncher : public QMainWindow
+	{
+		Q_OBJECT
 
-private:
-    void CreateController();
-    void CreateLayout();
-    void CreateUI();
-    void SetupLayout();
-    void SetupConnections();
+	public:
+		CrazyLauncher(QWidget* parent = nullptr);
+		~CrazyLauncher();
 
-    Project* GetSelectedProjectWidget();
-    int GetSelectedProjectWidgetIndex();
-    
-    QWidget* m_centralWidget;
-    ProjectManager* m_projectManager;
-	UtilityWindow* m_utiltyWindow;
+	private:
+		QWidget* m_centralWidget;
+		ProjectManager* m_projectManager;
 
-    QVBoxLayout* m_mainLayout;
-    QHBoxLayout* m_centralLayout;
-    QHBoxLayout* m_footerLayout;
+		// Pop up Window for Add - Edit projects 
+		AddWindow* m_addWindow;
+		EditWindow* m_editWindow;
 
-    ProjectView* m_projectView;
-    DescriptionView* m_descView;
-    SettingsView* m_settingView;
+		// Main app layout
+		QVBoxLayout* m_mainLayout;
+		QHBoxLayout* m_centralLayout;
+		QHBoxLayout* m_footerLayout;
 
-public slots:
-    void RegisterUtilityWindow();
-    void EditUtilityWindow();
+		// Main app views
+		ProjectView* m_projectView;
+		DescriptionView* m_descView;
+		SettingsView* m_settingView;
+		
+		// Base Crazy Launcher functions
+		void CreateController();
+		void CreateLayout();
+		void CreateUI();
+		void SetupLayout();
+		void SetupConnections();
 
-    void OnProjectAdded(const Project& project);
-    void OnProjectEdited(Project* baseProjectEdited);
-    void LaunchProject();
-    void OnRemoveProject();
+		// Get  Set
+		Project* GetSelectedProjectWidget();
+		int GetSelectedProjectWidgetIndex();
 
-    void OnCloseUtilityWindow();
 
-};
+	public slots:
+		void CreateAddWindow();
+		void CreateEditWindow();
+		void OnCloseUtilityWindow();
+
+		void OnProjectAdded(const Project& project);
+		void OnProjectEdited(Project* baseProjectEdited);
+		void OnRemoveProject();
+		void LaunchProject();
+
+
+	};
+}
+
 

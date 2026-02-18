@@ -31,14 +31,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN11ProjectViewE_t {};
+struct qt_meta_tag_ZN2Cl11ProjectViewE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto ProjectView::qt_create_metaobjectdata<qt_meta_tag_ZN11ProjectViewE_t>()
+template <> constexpr inline auto Cl::ProjectView::qt_create_metaobjectdata<qt_meta_tag_ZN2Cl11ProjectViewE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "ProjectView",
+        "Cl::ProjectView",
         "AddProjectInView",
         "",
         "Project",
@@ -67,20 +67,20 @@ template <> constexpr inline auto ProjectView::qt_create_metaobjectdata<qt_meta_
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<ProjectView, qt_meta_tag_ZN11ProjectViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<ProjectView, qt_meta_tag_ZN2Cl11ProjectViewE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject ProjectView::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Cl::ProjectView::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11ProjectViewE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11ProjectViewE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl11ProjectViewE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl11ProjectViewE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN11ProjectViewE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN2Cl11ProjectViewE_t>.metaTypes,
     nullptr
 } };
 
-void ProjectView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Cl::ProjectView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<ProjectView *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -93,20 +93,20 @@ void ProjectView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     }
 }
 
-const QMetaObject *ProjectView::metaObject() const
+const QMetaObject *Cl::ProjectView::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ProjectView::qt_metacast(const char *_clname)
+void *Cl::ProjectView::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11ProjectViewE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN2Cl11ProjectViewE_t>.strings))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int ProjectView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Cl::ProjectView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)

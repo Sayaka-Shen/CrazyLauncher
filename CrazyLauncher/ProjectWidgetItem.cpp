@@ -3,60 +3,62 @@
 #include "QHBoxLayout"
 #include "QVBoxLayout"
 
-
-ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QString softwarePath, QWidget* parent)
+namespace Cl
 {
-	CreateLayout();
-	CreateUI();
-	SetupLayout();
-	
-	m_projectTitle->setText(title);
-	m_projectDesc->setText(description);
-}
+	ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QString path, QString softwarePath, QWidget* parent)
+	{
+		CreateLayout();
+		CreateUI();
+		SetupLayout();
 
-ProjectWidgetItem::~ProjectWidgetItem() {}
+		m_projectTitle->setText(title);
+		m_projectDesc->setText(description);
+	}
 
-void ProjectWidgetItem::CreateUI()
-{
-	m_projectIcon = new QLabel(this);
-	m_projectTitle = new QLabel(this);
-	m_projectDesc = new QLabel(this);
-}
+	ProjectWidgetItem::~ProjectWidgetItem() {}
 
-void ProjectWidgetItem::CreateLayout()
-{
-	m_itemLayout = new QHBoxLayout(this);
-	m_textItemLayout = new QVBoxLayout();
-}
+	void ProjectWidgetItem::CreateUI()
+	{
+		m_projectIcon = new QLabel(this);
+		m_projectTitle = new QLabel(this);
+		m_projectDesc = new QLabel(this);
+	}
 
-void ProjectWidgetItem::SetupLayout()
-{
-	m_textItemLayout->addWidget(m_projectTitle);
-	m_textItemLayout->addWidget(m_projectDesc);
+	void ProjectWidgetItem::CreateLayout()
+	{
+		m_itemLayout = new QHBoxLayout(this);
+		m_textItemLayout = new QVBoxLayout();
+	}
 
-	m_itemLayout->addWidget(m_projectIcon, 0);
-	m_itemLayout->addLayout(m_textItemLayout, 1);
-}
+	void ProjectWidgetItem::SetupLayout()
+	{
+		m_textItemLayout->addWidget(m_projectTitle);
+		m_textItemLayout->addWidget(m_projectDesc);
 
-
-// Getter, Setter for the widget infos
-QString ProjectWidgetItem::GetProjectTitle()
-{
-	return m_projectTitle->text();
-}
-
-QString ProjectWidgetItem::GetProjectDescription()
-{
-	return m_projectDesc->text();
-}
+		m_itemLayout->addWidget(m_projectIcon, 0);
+		m_itemLayout->addLayout(m_textItemLayout, 1);
+	}
 
 
-void ProjectWidgetItem::SetProjectTitle(QString newTitle)
-{
-	m_projectTitle->setText(newTitle);
-}
+	// Getter, Setter for the widget infos
+	QString ProjectWidgetItem::GetProjectTitle()
+	{
+		return m_projectTitle->text();
+	}
 
-void ProjectWidgetItem::SetProjectDescription(QString newDescription)
-{
-	m_projectDesc->setText(newDescription);
+	QString ProjectWidgetItem::GetProjectDescription()
+	{
+		return m_projectDesc->text();
+	}
+
+
+	void ProjectWidgetItem::SetProjectTitle(QString newTitle)
+	{
+		m_projectTitle->setText(newTitle);
+	}
+
+	void ProjectWidgetItem::SetProjectDescription(QString newDescription)
+	{
+		m_projectDesc->setText(newDescription);
+	}
 }
