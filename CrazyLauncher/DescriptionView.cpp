@@ -77,6 +77,4 @@ void DescriptionView::OnSelectedProjectChanged(QListWidgetItem* current, QListWi
 
 	m_title->setText(currentWidgetItem->GetProjectTitle());
 	m_descriptionField->setText(currentWidgetItem->GetProjectDescription());
-	m_pathField->setText(currentWidgetItem->GetProjectPath());
-	m_pathSoftwareField->setText(currentWidgetItem->GetProjectPath());
 }

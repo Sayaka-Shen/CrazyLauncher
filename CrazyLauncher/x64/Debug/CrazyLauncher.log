@@ -1,4 +1,8 @@
 ﻿   Qt/MSBuild: 3.4.1.0
    Qt: 6.10.2
-  UtilityWindow.cpp
+  moc SettingsView.h
+  CrazyLauncher.cpp
+  ProjectWidgetItem.cpp
+  SettingsView.cpp
+  moc_SettingsView.cpp
   CrazyLauncher.vcxproj -> C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe

@@ -68,7 +68,7 @@ void ProjectView::EditProjectInView(Project* project)
 	{
 		widgetItem->SetProjectTitle(project->s_name);
 		widgetItem->SetProjectDescription(project->s_description);
-		widgetItem->SetProjectPath(project->s_path);
+		//widgetItem->SetProjectPath(project->s_path);
 	}
 }
 

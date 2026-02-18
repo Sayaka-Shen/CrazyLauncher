@@ -10,7 +10,5 @@ struct Project
 	QString s_software;
 	PathState s_pathState;
 
-	Project() = default;
-	Project(QString name, QString descripton, QString path, QString software = "") : s_name(name), s_description(descripton), s_path(path), s_software(software) {};
-	~Project() = default;
-};
+	Project(QString& name, QString& descripton, QString& path, QString& software) : s_name(name), s_description(descripton), s_path(path), s_software(software) {};
+};)

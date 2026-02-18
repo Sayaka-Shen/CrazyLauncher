@@ -15,13 +15,9 @@ public:
 
 	QString GetProjectTitle();
 	QString GetProjectDescription();
-	QString GetProjectPath();
-	QString GetSoftwarePath();
 
 	void SetProjectTitle(QString newTitle);
 	void SetProjectDescription(QString newDescription);
-	void SetProjectPath(QString newPath);
-	void SetSoftwarePath(QString newSoftPath);
 
 private:
 	void CreateUI();
@@ -34,8 +30,6 @@ private:
 	QLabel* m_projectIcon;
 	QLabel* m_projectTitle;
 	QLabel* m_projectDesc;
-	QLabel* m_projectPath;
-	QLabel* m_softwarePath;
 
 };
 

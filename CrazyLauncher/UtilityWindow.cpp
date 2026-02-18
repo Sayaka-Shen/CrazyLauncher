@@ -8,7 +8,6 @@
 #include "ProjectManager.h"
 #include <QFileDialog>
 
-// SIGNALS
 UtilityWindow::UtilityWindow(WindowMode mode, QWidget* parent, Project* project) : m_mode(mode), m_project(project)
 {
 	CreateLayout();
@@ -203,7 +202,6 @@ void UtilityWindow::CheckPathContent(QString& path)
 		m_softwarePath = nullptr;
 		m_softwarePathField = nullptr;
 		m_softwareExplorer = nullptr;
-
 	}
 }
 

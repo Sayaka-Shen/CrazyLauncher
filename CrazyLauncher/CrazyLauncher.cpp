@@ -9,6 +9,7 @@
 #include "ProjectWidgetItem.h"
 #include "Project.h"
 #include <iostream>
+#include <QSettings>
 
 CrazyLauncher::CrazyLauncher(QWidget *parent)
     : QMainWindow(parent)
