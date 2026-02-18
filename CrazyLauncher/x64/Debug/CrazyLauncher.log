@@ -1,6 +1,0 @@
-﻿   Qt/MSBuild: 3.4.1.0
-   Qt: 6.10.2
-  ProjectView.cpp
-  moc_AddWindow.cpp
-  moc_ProjectWidgetItem.cpp
-  CrazyLauncher.vcxproj -> C:\Users\Gaetan\Documents\ProjetPerso\Qt\CrazyLauncher\x64\Debug\CrazyLauncher.exe
