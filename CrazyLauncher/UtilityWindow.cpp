@@ -105,13 +105,20 @@ namespace Cl
 	
 	void UtilityWindow::OpenExplorer()
 	{
+		QString path;
+
 		if (m_projectTypeDP->currentData().value<ProjectType>() == ProjectType::Unity)
 		{
-			QFileDialog::getExistingDirectory();
+			path = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/C:");
 		}
 		else
 		{
+			path = QFileDialog::getOpenFileName(this, tr("Open File"), "/C:");
+		}
 
+		if (path.isEmpty())
+		{
+			m_pathField->setText(path);
 		}
 	}
 
