@@ -142,12 +142,8 @@ namespace Cl
 
 	void CrazyLauncher::LaunchProject()
 	{
-		//Project* selectedProject = GetSelectedProjectWidget();
-
-		/*if (selectedProject)
-		{
-			m_projectManager->LaunchProjects(selectedProject);
-		}*/
+		if (m_currentProjectSelected == nullptr) return;
+		m_projectManager->LaunchProjects(m_currentProjectSelected);
 	}
 
 	void CrazyLauncher::OnCloseUtilityWindow()

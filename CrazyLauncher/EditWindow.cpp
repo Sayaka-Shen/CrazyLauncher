@@ -40,7 +40,20 @@ namespace Cl
 	{
 		m_nameField->setText(m_editProject->s_name);
 		m_descField->setText(m_editProject->s_description);
+
+		int currentProjectTypeIndex = m_projectTypeDP->findData(m_editProject->s_type);
+		m_projectTypeDP->setCurrentIndex(currentProjectTypeIndex);
+		
 		m_pathField->setText(m_editProject->s_path);
-		m_softwarePathField->setText(m_editProject->s_softwareExe);
+
+		if (!m_editProject->s_softwareExe.isEmpty())
+		{
+			m_softwarePathField->setText(m_editProject->s_softwareExe);
+			ShowSoftwarePath();
+		}
+		else
+		{
+			HideSoftwarePath();
+		}
 	}
 }

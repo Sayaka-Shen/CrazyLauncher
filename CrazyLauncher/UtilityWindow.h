@@ -50,9 +50,15 @@ namespace Cl
 		QPushButton* m_cancelBtn;
 		QPushButton* m_registerBtn;
 
+
+		// Utility functions
 		void SetButtonRegisterText(QString registerText);
+
 		bool IsOneOfTheFieldEmpty();
 		bool HasOneOfTheFieldChanged(const Project& project);
+
+		void ShowSoftwarePath();
+		void HideSoftwarePath();
 
 	private:
 		// UI Add Window base functions
@@ -68,8 +74,6 @@ namespace Cl
 		void FindSoftware();
 		void CheckProjectType(int index);
 
-		void ShowSoftwarePath();
-		void HideSoftwarePath();
 
 		// Close Window
 		void closeEvent(QCloseEvent* event) override;
