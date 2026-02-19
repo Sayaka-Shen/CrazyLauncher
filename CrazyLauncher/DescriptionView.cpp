@@ -1,8 +1,11 @@
 #include "DescriptionView.h"
+#include "ProjectWidgetItem.h"
+#include "Project.h"
+
 #include <QVBoxLayout>
 #include <QLabel>
-#include "ProjectWidgetItem.h"
 #include <QListWidget>
+
 
 namespace Cl
 {
@@ -50,10 +53,7 @@ namespace Cl
 		m_descViewLayout->addWidget(m_pathSoftwareField);
 	}
 
-	void DescriptionView::SetupConnections()
-	{
-
-	}
+	void DescriptionView::SetupConnections() {}
 
 	void DescriptionView::SetDefaultValue()
 	{
@@ -66,18 +66,28 @@ namespace Cl
 		m_pathSoftwareField->setText("C:/");
 	}
 
-	void DescriptionView::OnSelectedProjectChanged(QListWidgetItem* current, QListWidgetItem* previous)
+	void DescriptionView::OnSelectedProjectChanged(Project& project)
 	{
-		if (current == nullptr)
+		if (project.IsEmpty())
 		{
 			SetDefaultValue();
 			return;
 		}
 
-		QListWidget* projectList = current->listWidget();
-		ProjectWidgetItem* currentWidgetItem = static_cast<ProjectWidgetItem*>(projectList->itemWidget(current));
+		m_title->setText(project.s_name);
+		m_descriptionField->setText(project.s_description);
+		m_pathField->setText(project.s_path);
 
-		m_title->setText(currentWidgetItem->GetProjectTitle());
-		m_descriptionField->setText(currentWidgetItem->GetProjectDescription());
+		if (project.s_softwareExe == "")
+		{
+			m_pathSoftware->hide();
+			m_pathSoftwareField->hide();
+		}
+		else
+		{
+			m_pathSoftware->show();
+			m_pathSoftwareField->show();
+			m_pathSoftwareField->setText(project.s_softwareExe);
+		}
 	}
 }

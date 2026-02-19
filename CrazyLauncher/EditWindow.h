@@ -15,16 +15,10 @@ namespace Cl
 
 	private:
 		Project* m_editProject;
-
-		// Edit Window base functions
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
-		void SetupConnections();
+		void OnEditProject();
 
 		// Set edit field default value
-		// void SetEditModeDefaultValue();
-		// void closeEvent(QCloseEvent* event) override;
+		void SetEditModeDefaultValue();
 
 	signals:
 		void E_EditProject(Project* baseProjectEdited);

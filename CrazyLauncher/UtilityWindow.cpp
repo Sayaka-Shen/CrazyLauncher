@@ -1,5 +1,6 @@
 #include "UtilityWindow.h"
 #include "ProjectManager.h"
+#include "Project.h"
 
 #include <QCheckBox>
 #include <QHBoxLayout>
@@ -9,6 +10,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QComboBox>
+#include <QStandardPaths>
 
 namespace Cl
 {
@@ -23,6 +25,7 @@ namespace Cl
 	}
 
 	UtilityWindow::~UtilityWindow() {}
+
 
 	void UtilityWindow::CreateLayout()
 	{
@@ -46,8 +49,12 @@ namespace Cl
 
 		m_path = new QLabel("Project Path :", this);
 		m_pathField = new QLineEdit();
-
 		m_projectExplorer = new QPushButton(this);
+
+		m_softwareExe = new QLabel("Software Used :", this);
+		m_softwarePathField = new QLineEdit();
+		m_softwareExplorer = new QPushButton(this);
+		HideSoftwarePath();
 
 		m_cancelBtn = new QPushButton("Cancel", this);
 		m_registerBtn = new QPushButton();
@@ -71,14 +78,19 @@ namespace Cl
 		m_windowLayout->addWidget(m_path);
 		m_pathProjectLayout->addWidget(m_pathField);
 		m_pathProjectLayout->addWidget(m_projectExplorer);
+		m_windowLayout->addLayout(m_pathProjectLayout);
+
+		// Software Path
+		m_windowLayout->addWidget(m_softwareExe);
+		m_pathSoftwareLayout->addWidget(m_softwarePathField);
+		m_pathSoftwareLayout->addWidget(m_softwareExplorer);
+		m_windowLayout->addLayout(m_pathSoftwareLayout);
 
 		// Add to bottom layout
 		m_buttonLayout->addWidget(m_cancelBtn);
 		m_buttonLayout->addWidget(m_registerBtn);
 
 		// Add to main layout
-		m_windowLayout->addLayout(m_pathProjectLayout);
-		m_windowLayout->addLayout(m_pathSoftwareLayout);
 		m_windowLayout->addLayout(m_buttonLayout);
 	}
 
@@ -86,10 +98,10 @@ namespace Cl
 	{
 		connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
 
-		/*connect(m_directoryType, &QCheckBox::checkStateChanged, this, &AddWindow::UpdatePathState);
-		//connect(m_fileType, &QCheckBox::checkStateChanged, this, &AddWindow::UpdatePathState); */
-
-		connect(m_projectExplorer, &QPushButton::pressed, this, &UtilityWindow::OpenExplorer);
+		connect(m_projectTypeDP, &QComboBox::currentIndexChanged, this, &UtilityWindow::CheckProjectType);
+		
+		connect(m_projectExplorer, &QPushButton::pressed, this, &UtilityWindow::FindProject);
+		connect(m_softwareExplorer, &QPushButton::pressed, this, &UtilityWindow::FindSoftware);
 	}
 
 	void UtilityWindow::SetupProjectTypeDP()
@@ -102,25 +114,6 @@ namespace Cl
 		m_projectTypeDP->addItem("Photoshop", QVariant::fromValue(ProjectType::Photoshop));
 		m_projectTypeDP->addItem("Custom", QVariant::fromValue(ProjectType::Custom));
 	}
-	
-	void UtilityWindow::OpenExplorer()
-	{
-		QString path;
-
-		if (m_projectTypeDP->currentData().value<ProjectType>() == ProjectType::Unity)
-		{
-			path = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/C:");
-		}
-		else
-		{
-			path = QFileDialog::getOpenFileName(this, tr("Open File"), "/C:");
-		}
-
-		if (!path.isEmpty())
-		{
-			m_pathField->setText(path);
-		}
-	}
 
 	// Utilities Functions
 	void UtilityWindow::SetButtonRegisterText(QString registerText)
@@ -131,6 +124,68 @@ namespace Cl
 	bool UtilityWindow::IsOneOfTheFieldEmpty()
 	{
 		return m_nameField->text().isEmpty() || m_descField->text().isEmpty() || m_pathField->text().isEmpty();
+	}
+
+	bool UtilityWindow::HasOneOfTheFieldChanged(const Project& project) 
+	{
+		return project.s_name != m_nameField->text() || project.s_description != m_descField->text() || project.s_path != m_pathField->text() || project.s_softwareExe != m_softwarePathField->text();
+	}
+	
+	void UtilityWindow::FindProject()
+	{
+		QString path;
+
+		if (m_projectTypeDP->currentData().value<ProjectType>() == ProjectType::Unity)
+		{
+			path = QFileDialog::getExistingDirectory(this, tr("Open Directory"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+		}
+		else
+		{
+			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+		}
+
+		if (!path.isEmpty())
+		{
+			m_pathField->setText(path);
+		}
+	}
+
+	void UtilityWindow::FindSoftware()
+	{
+		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
+
+		if (!path.isEmpty())
+		{
+			m_softwarePathField->setText(path);
+		}
+	}
+
+	void UtilityWindow::CheckProjectType(int index)
+	{
+		ProjectType projectType = m_projectTypeDP->itemData(index).value<ProjectType>();
+		if (projectType == ProjectType::Script || projectType == ProjectType::Executable || projectType == ProjectType::Unreal)
+		{
+			HideSoftwarePath();
+		}
+		else
+		{
+			ShowSoftwarePath();
+		}
+	}
+
+	void UtilityWindow::ShowSoftwarePath()
+	{
+		m_softwareExe->show();
+		m_softwarePathField->show();
+		m_softwareExplorer->show();
+	}
+
+	void UtilityWindow::HideSoftwarePath()
+	{
+		m_softwarePathField->setText("");
+		m_softwareExe->hide();
+		m_softwarePathField->hide();
+		m_softwareExplorer->hide();
 	}
 
 	// Close Window

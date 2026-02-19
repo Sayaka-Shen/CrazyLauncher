@@ -1,16 +1,6 @@
 #pragma once
 #include "UtilityWindow.h"
 
-class QLabel;
-class QLineEdit;
-class QWidget;
-class QCheckBox;
-class QVBoxLayout;
-class QHBoxLayout;
-class QButtonGroup;
-class QCheckBox;
-class QComboBox;
-
 namespace Cl
 {
 	struct Project;

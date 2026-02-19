@@ -7,6 +7,8 @@ class QListWidgetItem;
 
 namespace Cl
 {
+	struct Project;
+
 	class DescriptionView : public QWidget
 	{
 		Q_OBJECT
@@ -37,7 +39,7 @@ namespace Cl
 		QLabel* m_pathSoftwareField;
 
 	public slots:
-		void OnSelectedProjectChanged(QListWidgetItem* current, QListWidgetItem* previous);
+		void OnSelectedProjectChanged(Project& project);
 	};
 }
 

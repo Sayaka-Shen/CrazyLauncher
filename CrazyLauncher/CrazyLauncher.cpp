@@ -68,48 +68,34 @@ namespace Cl
 		connect(m_projectManager, &ProjectManager::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
 		connect(m_projectManager, &ProjectManager::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
 
+		connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
+		connect(this, &CrazyLauncher::E_DisplayProject, m_descView, &DescriptionView::OnSelectedProjectChanged);
+		connect(m_projectManager, &ProjectManager::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
+
 		connect(m_settingView, &SettingsView::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
 		connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
-
-		connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, m_descView, &DescriptionView::OnSelectedProjectChanged);
 	}
 
-	Project* CrazyLauncher::GetSelectedProjectWidget()
+	void CrazyLauncher::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
 	{
-		QListWidgetItem* item = m_projectView->GetProjectList()->currentItem();
-		if (item == nullptr) return nullptr;
+		if (current == nullptr) return;
 
-		ProjectWidgetItem* itemWidget = (ProjectWidgetItem*)m_projectView->GetProjectList()->itemWidget(item);
-		if (itemWidget == nullptr) return nullptr;
+		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(current));
+		if (itemWidget == nullptr) return;
 
 		for (Project& project : m_projectManager->GetProjects())
 		{
 			if (project.s_name == itemWidget->GetProjectTitle())
 			{
-				return &project;
+				emit E_DisplayProject(project);
+				m_currentProjectSelected = &project; 
 			}
 		}
-
-		return nullptr;
 	}
 
 	int CrazyLauncher::GetSelectedProjectWidgetIndex()
 	{
-		QListWidgetItem* item = m_projectView->GetProjectList()->currentItem();
-		if (item == nullptr) return -1;
-
-		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(item));
-		if (itemWidget == nullptr) return -1;
-
-		for (int i = 0; i < m_projectManager->GetProjects().size(); ++i)
-		{
-			if (m_projectManager->GetProjects()[i].s_name == itemWidget->GetProjectTitle())
-			{
-				return i;
-			}
-		}
-
-		return -1;
+		return m_projectView->GetProjectList()->currentRow();
 	}
 
 	// SLOTS
@@ -121,22 +107,20 @@ namespace Cl
 		m_addWindow->resize(this->size());
 		m_addWindow->show();
 
-		connect(m_addWindow, &AddWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
 		connect(m_addWindow, &AddWindow::E_AddProject, this, &CrazyLauncher::OnProjectAdded);
+		connect(m_addWindow, &AddWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
 	}
 
 	void CrazyLauncher::CreateEditWindow()
 	{
-		Project* selectedProject = GetSelectedProjectWidget();
+		if (m_editWindow != nullptr || m_currentProjectSelected == nullptr) return;
 
-		if (m_editWindow != nullptr || selectedProject == nullptr) return;
-
-		m_editWindow = new EditWindow(this, selectedProject);
+		m_editWindow = new EditWindow(this, m_currentProjectSelected);
 		m_editWindow->resize(this->size());
 		m_editWindow->show();
 
+		connect(m_editWindow, &EditWindow::E_EditProject, this, &CrazyLauncher::OnProjectEdited);
 		connect(m_editWindow, &EditWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
-		//connect(m_utiltyWindow, &AddWindow::E_EditProject, this, &CrazyLauncher::OnProjectEdited);
 	}
 
 	void CrazyLauncher::OnProjectAdded(const Project& project)
@@ -149,21 +133,21 @@ namespace Cl
 		m_projectManager->EditProjects(baseProjectEdited);
 	}
 
-	void CrazyLauncher::LaunchProject()
-	{
-		Project* selectedProject = GetSelectedProjectWidget();
-
-		if (selectedProject)
-		{
-			m_projectManager->LaunchProjects(selectedProject);
-		}
-	}
-
 	void CrazyLauncher::OnRemoveProject()
 	{
 		if (GetSelectedProjectWidgetIndex() == -1) return;
 		int currentProjectSelectedIndex = GetSelectedProjectWidgetIndex();
 		m_projectManager->RemoveProjects(currentProjectSelectedIndex);
+	}
+
+	void CrazyLauncher::LaunchProject()
+	{
+		//Project* selectedProject = GetSelectedProjectWidget();
+
+		/*if (selectedProject)
+		{
+			m_projectManager->LaunchProjects(selectedProject);
+		}*/
 	}
 
 	void CrazyLauncher::OnCloseUtilityWindow()

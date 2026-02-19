@@ -21,6 +21,7 @@ namespace Cl
 	void ProjectManager::EditProjects(Project* baseProjectEdited)
 	{
 		emit E_EditProjectToView(baseProjectEdited);
+		emit E_EditProjectToDescriptionView(*baseProjectEdited);
 	}
 
 	void ProjectManager::LaunchProjects(Project* project)

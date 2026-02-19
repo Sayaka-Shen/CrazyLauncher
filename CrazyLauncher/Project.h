@@ -25,10 +25,15 @@ namespace Cl
 		bool s_isDirectory;
 		QString s_softwareExe;
 
-
+		Project() = default;
 		Project(QString name, QString descripton, ProjectType type, QString path, bool isDirectory, QString softwareExe)
 			: s_name(name), s_description(descripton), s_type(type), s_path(path), s_isDirectory(isDirectory), s_softwareExe(softwareExe)
 		{
+		}
+
+		bool IsEmpty()
+		{
+			return s_name == "" && s_description == "" && s_path == "" && s_softwareExe == "";
 		}
 	};
 }

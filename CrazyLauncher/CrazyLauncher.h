@@ -6,6 +6,7 @@ class QVBoxLayout;
 class QHBoxLayout;
 class QPushButton;
 class QString;
+class QListWidgetItem;
 
 namespace Cl
 {
@@ -29,6 +30,7 @@ namespace Cl
 	private:
 		QWidget* m_centralWidget;
 		ProjectManager* m_projectManager;
+		Project* m_currentProjectSelected;
 
 		// Pop up Window for Add - Edit projects 
 		AddWindow* m_addWindow;
@@ -52,9 +54,12 @@ namespace Cl
 		void SetupConnections();
 
 		// Get  Set
-		Project* GetSelectedProjectWidget();
+		void GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous);
 		int GetSelectedProjectWidgetIndex();
 
+
+	signals:
+		void E_DisplayProject(Project& project);
 
 	public slots:
 		void CreateAddWindow();

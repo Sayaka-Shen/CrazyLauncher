@@ -13,6 +13,8 @@ class QComboBox;
 
 namespace Cl
 {
+	struct Project;
+
 	class UtilityWindow : public QDialog
 	{
 		Q_OBJECT 
@@ -39,11 +41,10 @@ namespace Cl
 
 		QLabel* m_path;
 		QLineEdit* m_pathField;
-
-		QLabel* m_softwarePath;
-		QLineEdit* m_softwarePathField;
-
 		QPushButton* m_projectExplorer;
+
+		QLabel* m_softwareExe;
+		QLineEdit* m_softwarePathField;
 		QPushButton* m_softwareExplorer;
 
 		QPushButton* m_cancelBtn;
@@ -51,6 +52,7 @@ namespace Cl
 
 		void SetButtonRegisterText(QString registerText);
 		bool IsOneOfTheFieldEmpty();
+		bool HasOneOfTheFieldChanged(const Project& project);
 
 	private:
 		// UI Add Window base functions
@@ -62,7 +64,12 @@ namespace Cl
 		void SetupProjectTypeDP();
 
 		// Utility Functions 
-		void OpenExplorer();
+		void FindProject();
+		void FindSoftware();
+		void CheckProjectType(int index);
+
+		void ShowSoftwarePath();
+		void HideSoftwarePath();
 
 		// Close Window
 		void closeEvent(QCloseEvent* event) override;

@@ -30,6 +30,7 @@ namespace Cl
 	signals:
 		void E_AddProjectToView(const Project& project);
 		void E_EditProjectToView(Project* project);
+		void E_EditProjectToDescriptionView(Project& project);
 		void E_RemoveProjectToView(int indexProject);
 	};
 }

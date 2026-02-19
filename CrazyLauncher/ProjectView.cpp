@@ -64,14 +64,16 @@ namespace Cl
 		QListWidgetItem* item = m_projectsList->currentItem();
 		if (item == nullptr) return;
 
-		ProjectWidgetItem* widgetItem = (ProjectWidgetItem*)m_projectsList->itemWidget(item);
+		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectsList->itemWidget(item));
 		if (widgetItem == nullptr) return;
 
 		if (widgetItem->GetProjectTitle() != project->s_name)
 		{
 			widgetItem->SetProjectTitle(project->s_name);
+		}
+		else if (widgetItem->GetProjectDescription() != project->s_description)
+		{
 			widgetItem->SetProjectDescription(project->s_description);
-			//widgetItem->SetProjectPath(project->s_path);
 		}
 	}
 
