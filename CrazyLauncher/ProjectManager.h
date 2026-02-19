@@ -24,6 +24,10 @@ namespace Cl
 		void LaunchProjects(Project* project);
 		QList<Project>& GetProjects();
 
+		QString GetProjectsFilePath() const;
+		void SaveProjects();
+		void LoadProjects();
+
 	private:
 		QList<Project> projects;
 
@@ -32,5 +36,8 @@ namespace Cl
 		void E_EditProjectToView(Project* project);
 		void E_EditProjectToDescriptionView(Project& project);
 		void E_RemoveProjectToView(int indexProject);
+
+		void E_ClearProjectInListWidget();
+		void E_FillProjectInListWidget(Project& project);
 	};
 }

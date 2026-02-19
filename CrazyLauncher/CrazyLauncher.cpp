@@ -26,6 +26,8 @@ namespace Cl
 		CreateController();
 		SetupLayout();
 		SetupConnections();
+
+		m_projectManager->LoadProjects();
 	}
 
 	CrazyLauncher::~CrazyLauncher() {}
@@ -61,9 +63,11 @@ namespace Cl
 
 	void CrazyLauncher::SetupConnections()
 	{
+		// Create windows the user use to add project or edit project
 		connect(m_settingView, &SettingsView::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
 		connect(m_settingView, &SettingsView::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);
 
+		// Manage to display project in views
 		connect(m_projectManager, &ProjectManager::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
 		connect(m_projectManager, &ProjectManager::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
 		connect(m_projectManager, &ProjectManager::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
@@ -72,8 +76,13 @@ namespace Cl
 		connect(this, &CrazyLauncher::E_DisplayProject, m_descView, &DescriptionView::OnSelectedProjectChanged);
 		connect(m_projectManager, &ProjectManager::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
 
+		// Launch / Remove Projects
 		connect(m_settingView, &SettingsView::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
 		connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
+
+		// Load saves projects
+		connect(m_projectManager, &ProjectManager::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
+		connect(m_projectManager, &ProjectManager::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
 	}
 
 	void CrazyLauncher::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
@@ -144,6 +153,16 @@ namespace Cl
 	{
 		if (m_currentProjectSelected == nullptr) return;
 		m_projectManager->LaunchProjects(m_currentProjectSelected);
+	}
+
+	void CrazyLauncher::ClearListWidget()
+	{
+		m_projectView->GetProjectList()->clear();
+	}
+
+	void CrazyLauncher::FillListWidget(Project& project)
+	{
+		m_projectView->AddProjectInView(project);
 	}
 
 	void CrazyLauncher::OnCloseUtilityWindow()

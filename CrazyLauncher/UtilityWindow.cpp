@@ -152,7 +152,7 @@ namespace Cl
 
 	void UtilityWindow::FindSoftware()
 	{
-		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation), tr("Executables (*.exe)"));
+		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation), tr("Executables(*.exe)"));
 
 		if (!path.isEmpty())
 		{

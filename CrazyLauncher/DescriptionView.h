@@ -18,13 +18,6 @@ namespace Cl
 		~DescriptionView();
 
 	private:
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
-		void SetupConnections();
-
-		void SetDefaultValue();
-
 		QVBoxLayout* m_descViewLayout;
 
 		QLabel* m_title;
@@ -37,6 +30,13 @@ namespace Cl
 
 		QLabel* m_pathSoftware;
 		QLabel* m_pathSoftwareField;
+
+		void CreateLayout();
+		void CreateUI();
+		void SetupLayout();
+		void SetupConnections();
+
+		void SetDefaultValue();
 
 	public slots:
 		void OnSelectedProjectChanged(Project& project);

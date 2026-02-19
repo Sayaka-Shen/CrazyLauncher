@@ -20,14 +20,14 @@ namespace Cl
 		QListWidget* GetProjectList();
 
 	private:
+		QVBoxLayout* m_projectViewLayout;
+		QLineEdit* m_searchBar;
+		QListWidget* m_projectsList;
+
 		void CreateLayout();
 		void CreateUI();
 		void SetupLayout();
 		void SetupConnections();
-
-		QVBoxLayout* m_projectViewLayout;
-		QLineEdit* m_searchBar;
-		QListWidget* m_projectsList;
 
 	public slots:
 		void AddProjectInView(const Project& project);

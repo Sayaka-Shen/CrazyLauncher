@@ -71,7 +71,9 @@ namespace Cl
 		void OnRemoveProject();
 		void LaunchProject();
 
-
+		// Load saved data
+		void ClearListWidget();
+		void FillListWidget(Project& project);
 	};
 }
 
