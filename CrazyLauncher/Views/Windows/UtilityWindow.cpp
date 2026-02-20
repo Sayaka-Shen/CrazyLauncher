@@ -1,6 +1,6 @@
 #include "UtilityWindow.h"
-#include "ProjectManager.h"
-#include "Project.h"
+#include "../../Core/ProjectManager.h"
+#include "../../Core/Project.h"
 
 #include <QCheckBox>
 #include <QHBoxLayout>
@@ -128,7 +128,7 @@ namespace Cl
 
 	bool UtilityWindow::HasOneOfTheFieldChanged(const Project& project) 
 	{
-		return project.s_name != m_nameField->text() || project.s_description != m_descField->text() || project.s_path != m_pathField->text() || project.s_softwareExe != m_softwarePathField->text();
+		return project.name != m_nameField->text() || project.description != m_descField->text() || project.path != m_pathField->text() || project.softwareExe != m_softwarePathField->text();
 	}
 	
 	void UtilityWindow::FindProject()
@@ -152,7 +152,8 @@ namespace Cl
 
 	void UtilityWindow::FindSoftware()
 	{
-		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
+		QString programFiles = qEnvironmentVariable("ProgramFiles(x86)");
+		QString path = QFileDialog::getOpenFileName(this, tr("Choose an Application"), programFiles, tr("Applications (*.exe)"));
 
 		if (!path.isEmpty())
 		{

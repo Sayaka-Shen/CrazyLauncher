@@ -1,5 +1,6 @@
 #pragma once
 #include "QDialog"
+#include "../../Core/Project.h"
 
 class QLabel;
 class QLineEdit;
@@ -13,8 +14,6 @@ class QComboBox;
 
 namespace Cl
 {
-	struct Project;
-
 	class UtilityWindow : public QDialog
 	{
 		Q_OBJECT 

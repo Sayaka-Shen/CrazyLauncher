@@ -92,14 +92,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DescriptionView.cpp" />
-    <ClCompile Include="EditWindow.cpp" />
-    <ClCompile Include="ProjectManager.cpp" />
-    <ClCompile Include="ProjectView.cpp" />
-    <ClCompile Include="ProjectWidgetItem.cpp" />
-    <ClCompile Include="SettingsView.cpp" />
-    <ClCompile Include="AddWindow.cpp" />
-    <ClCompile Include="UtilityWindow.cpp" />
+    <ClCompile Include="Views\DescriptionView.cpp" />
+    <ClCompile Include="Views\Windows\EditWindow.cpp" />
+    <ClCompile Include="Core\ProjectManager.cpp" />
+    <ClCompile Include="Views\ProjectView.cpp" />
+    <ClCompile Include="Views\ProjectWidgetItem.cpp" />
+    <ClCompile Include="Views\SettingsView.cpp" />
+    <ClCompile Include="Views\Windows\AddWindow.cpp" />
+    <ClCompile Include="Views\Windows\UtilityWindow.cpp" />
     <QtRcc Include="CrazyLauncher.qrc" />
     <QtUic Include="CrazyLauncher.ui" />
     <QtMoc Include="CrazyLauncher.h" />
@@ -107,23 +107,24 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ProjectView.h" />
+    <QtMoc Include="Views\ProjectView.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="DescriptionView.h" />
+    <QtMoc Include="Views\DescriptionView.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SettingsView.h" />
+    <QtMoc Include="Views\SettingsView.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ProjectWidgetItem.h" />
+    <QtMoc Include="Views\ProjectWidgetItem.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="UtilityWindow.h" />
-    <QtMoc Include="EditWindow.h" />
-    <ClInclude Include="Project.h" />
-    <QtMoc Include="ProjectManager.h" />
-    <QtMoc Include="AddWindow.h" />
+    <ClInclude Include="Core\ProjectType.h" />
+    <QtMoc Include="Views\Windows\UtilityWindow.h" />
+    <QtMoc Include="Views\Windows\EditWindow.h" />
+    <ClInclude Include="Core\Project.h" />
+    <QtMoc Include="Core\ProjectManager.h" />
+    <QtMoc Include="Views\Windows\AddWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

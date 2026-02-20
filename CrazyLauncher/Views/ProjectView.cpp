@@ -1,6 +1,6 @@
 #include "ProjectView.h"
 #include "ProjectWidgetItem.h"
-#include "Project.h"
+#include "../Core/Project.h"
 
 #include <QLineEdit>
 #include <QListWidget>
@@ -55,7 +55,7 @@ namespace Cl
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 		item->setSizeHint(QSize(0, 56));
 
-		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.s_name, project.s_description, this);
+		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.name, project.description, this);
 		m_projectsList->setItemWidget(item, widgetItem);
 	}
 
@@ -67,13 +67,13 @@ namespace Cl
 		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectsList->itemWidget(item));
 		if (widgetItem == nullptr) return;
 
-		if (widgetItem->GetProjectTitle() != project->s_name)
+		if (widgetItem->GetProjectTitle() != project->name)
 		{
-			widgetItem->SetProjectTitle(project->s_name);
+			widgetItem->SetProjectTitle(project->name);
 		}
-		else if (widgetItem->GetProjectDescription() != project->s_description)
+		else if (widgetItem->GetProjectDescription() != project->description)
 		{
-			widgetItem->SetProjectDescription(project->s_description);
+			widgetItem->SetProjectDescription(project->description);
 		}
 	}
 

@@ -1,6 +1,6 @@
 #include "DescriptionView.h"
 #include "ProjectWidgetItem.h"
-#include "Project.h"
+#include "../Core/Project.h"
 
 #include <QVBoxLayout>
 #include <QLabel>
@@ -74,11 +74,11 @@ namespace Cl
 			return;
 		}
 
-		m_title->setText(project.s_name);
-		m_descriptionField->setText(project.s_description);
-		m_pathField->setText(project.s_path);
+		m_title->setText(project.name);
+		m_descriptionField->setText(project.description);
+		m_pathField->setText(project.path);
 
-		if (project.s_softwareExe == "")
+		if (project.softwareExe == "")
 		{
 			m_pathSoftware->hide();
 			m_pathSoftwareField->hide();
@@ -87,7 +87,7 @@ namespace Cl
 		{
 			m_pathSoftware->show();
 			m_pathSoftwareField->show();
-			m_pathSoftwareField->setText(project.s_softwareExe);
+			m_pathSoftwareField->setText(project.softwareExe);
 		}
 	}
 }

@@ -1,12 +1,14 @@
 #include "CrazyLauncher.h"
-#include "ProjectView.h"
-#include "DescriptionView.h"
-#include "SettingsView.h"
-#include "ProjectManager.h"
-#include "AddWindow.h"
-#include "EditWindow.h"
-#include "ProjectWidgetItem.h"
-#include "Project.h"
+#include "Core/ProjectManager.h"
+#include "Core/Project.h"
+
+#include "Views/ProjectView.h"
+#include "Views/DescriptionView.h"
+#include "Views/SettingsView.h"
+#include "Views/ProjectWidgetItem.h"
+
+#include "Views/Windows/AddWindow.h"
+#include "Views/Windows/EditWindow.h"
 
 #include <QListWidget>
 #include <QVBoxLayout>
@@ -94,7 +96,7 @@ namespace Cl
 
 		for (Project& project : m_projectManager->GetProjects())
 		{
-			if (project.s_name == itemWidget->GetProjectTitle())
+			if (project.name == itemWidget->GetProjectTitle())
 			{
 				emit E_DisplayProject(project);
 				m_currentProjectSelected = &project; 

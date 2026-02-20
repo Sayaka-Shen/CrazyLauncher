@@ -14,6 +14,7 @@
 #include <QJsonDocument>
 #include <QJsonValue>
 #include <QSettings>
+#include <QUrlQuery>
 
 namespace Cl
 {
@@ -41,31 +42,14 @@ namespace Cl
 
 	void ProjectManager::LaunchProjects(Project* project)
 	{
-		if (!project || project->s_path.isEmpty()) return;
+		if (!project || project->path.isEmpty()) return;
 
-		QString cleanProjectPath = QDir::cleanPath(project->s_path);
-		QString cleanSoftwarePath = QDir::cleanPath(project->s_softwareExe);
-
-		QFileInfo softwareFI(cleanSoftwarePath);
+		QString cleanProjectPath = QDir::cleanPath(project->path);
+		QString cleanSoftwarePath = QDir::cleanPath(project->softwareExe);
 
 		if (!cleanSoftwarePath.isEmpty())
 		{
-			if (softwareFI.suffix().toLower() == "url")
-			{
-				QSettings settings(cleanSoftwarePath, QSettings::IniFormat);
-				QString urlString = settings.value("InternetShortcut/URL").toString();
-				QUrl url(urlString);
-
-				if (url.isValid())
-				{
-					QDesktopServices::openUrl(url);
-				}
-
-				return;
-			}
-			
 			QProcess::startDetached(cleanSoftwarePath, { cleanProjectPath });
-
 			return;
 		}
 
@@ -97,12 +81,12 @@ namespace Cl
 		for (const Project& project : projects)
 		{
 			QJsonObject obj;
-			obj["name"] = project.s_name;
-			obj["description"] = project.s_description;
-			obj["type"] = static_cast<ProjectType>(project.s_type);
-			obj["path"] = project.s_path;
-			obj["isDir"] = project.s_isDirectory;
-			obj["softwareExe"] = project.s_softwareExe;
+			obj["name"] = project.name;
+			obj["description"] = project.description;
+			obj["type"] = static_cast<ProjectType>(project.type);
+			obj["path"] = project.path;
+			obj["isDir"] = project.isDirectory;
+			obj["softwareExe"] = project.softwareExe;
 
 			jsonArray.append(obj);
 		}

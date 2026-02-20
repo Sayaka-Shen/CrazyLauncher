@@ -1,5 +1,4 @@
 #include "SettingsView.h"
-#include "AddWindow.h"
 
 #include <QHBoxLayout>
 #include <QPushButton>

@@ -1,4 +1,5 @@
 #include "ProjectWidgetItem.h"
+
 #include "QLabel"
 #include "QHBoxLayout"
 #include "QVBoxLayout"

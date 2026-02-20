@@ -1,5 +1,5 @@
 #include "AddWindow.h"
-#include "Project.h"
+#include "../../Core/Project.h"
 
 #include <QLabel>
 #include <QLineEdit>

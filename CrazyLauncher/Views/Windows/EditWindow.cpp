@@ -1,11 +1,10 @@
 #include "EditWindow.h"
-#include "Project.h"
+#include "../../Core/Project.h"
 
 #include <QLabel>
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QComboBox>
-#include <QPushButton>
 #include <QPushButton>
 
 namespace Cl
@@ -25,10 +24,10 @@ namespace Cl
 		if (m_editProject == nullptr) return;
 		if (!HasOneOfTheFieldChanged(*m_editProject)) return;
 
-		m_editProject->s_name = m_nameField->text();
-		m_editProject->s_description = m_descField->text();
-		m_editProject->s_path = m_pathField->text();
-		m_editProject->s_softwareExe = m_softwarePathField->text();
+		m_editProject->name = m_nameField->text();
+		m_editProject->description = m_descField->text();
+		m_editProject->path = m_pathField->text();
+		m_editProject->softwareExe = m_softwarePathField->text();
 		
 		emit E_EditProject(m_editProject);
 		emit E_CloseWindow();
@@ -38,17 +37,17 @@ namespace Cl
 
 	void EditWindow::SetEditModeDefaultValue()
 	{
-		m_nameField->setText(m_editProject->s_name);
-		m_descField->setText(m_editProject->s_description);
+		m_nameField->setText(m_editProject->name);
+		m_descField->setText(m_editProject->description);
 
-		int currentProjectTypeIndex = m_projectTypeDP->findData(m_editProject->s_type);
+		int currentProjectTypeIndex = m_projectTypeDP->findData(m_editProject->type);
 		m_projectTypeDP->setCurrentIndex(currentProjectTypeIndex);
 		
-		m_pathField->setText(m_editProject->s_path);
+		m_pathField->setText(m_editProject->path);
 
-		if (!m_editProject->s_softwareExe.isEmpty())
+		if (!m_editProject->softwareExe.isEmpty())
 		{
-			m_softwarePathField->setText(m_editProject->s_softwareExe);
+			m_softwarePathField->setText(m_editProject->softwareExe);
 			ShowSoftwarePath();
 		}
 		else

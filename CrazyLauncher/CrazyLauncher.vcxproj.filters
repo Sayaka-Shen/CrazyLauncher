@@ -40,59 +40,62 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectView.cpp">
+    <ClCompile Include="Views\ProjectView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DescriptionView.cpp">
+    <ClCompile Include="Views\DescriptionView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsView.cpp">
+    <ClCompile Include="Views\SettingsView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectWidgetItem.cpp">
+    <ClCompile Include="Views\ProjectWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddWindow.cpp">
+    <ClCompile Include="Views\Windows\AddWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectManager.cpp">
+    <ClCompile Include="Core\ProjectManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditWindow.cpp">
+    <ClCompile Include="Views\Windows\EditWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UtilityWindow.cpp">
+    <ClCompile Include="Views\Windows\UtilityWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ProjectView.h">
+    <QtMoc Include="Views\ProjectView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="DescriptionView.h">
+    <QtMoc Include="Views\DescriptionView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SettingsView.h">
+    <QtMoc Include="Views\SettingsView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ProjectWidgetItem.h">
+    <QtMoc Include="Views\ProjectWidgetItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ProjectManager.h">
+    <QtMoc Include="Core\ProjectManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="AddWindow.h">
+    <QtMoc Include="Views\Windows\AddWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="EditWindow.h">
+    <QtMoc Include="Views\Windows\EditWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UtilityWindow.h">
+    <QtMoc Include="Views\Windows\UtilityWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Project.h">
+    <ClInclude Include="Core\Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ProjectType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
