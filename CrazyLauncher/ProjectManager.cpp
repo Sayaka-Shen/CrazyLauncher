@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
+#include <QSettings>
 
 namespace Cl
 {
@@ -42,30 +43,33 @@ namespace Cl
 	{
 		if (!project || project->s_path.isEmpty()) return;
 
-		QString cleanPath = QDir::cleanPath(project->s_path);
-		QFileInfo fileInfo(cleanPath);
+		QString cleanProjectPath = QDir::cleanPath(project->s_path);
+		QString cleanSoftwarePath = QDir::cleanPath(project->s_softwareExe);
 
-		if (!project->s_softwareExe.isEmpty())
+		QFileInfo softwareFI(cleanSoftwarePath);
+
+		if (!cleanSoftwarePath.isEmpty())
 		{
-			QString softwarePath = project->s_softwareExe;
-			QStringList args;
-			args << cleanPath;
-
-			QProcess::startDetached(softwarePath, args);
-		}
-		else
-		{
-			QString ext = fileInfo.suffix().toLower();
-
-			if (ext == "exe")
+			if (softwareFI.suffix().toLower() == "url")
 			{
-				QProcess::startDetached(project->s_path);
+				QSettings settings(cleanSoftwarePath, QSettings::IniFormat);
+				QString urlString = settings.value("InternetShortcut/URL").toString();
+				QUrl url(urlString);
+
+				if (url.isValid())
+				{
+					QDesktopServices::openUrl(url);
+				}
+
+				return;
 			}
-			else
-			{
-				QDesktopServices::openUrl(QUrl::fromLocalFile(cleanPath));
-			}
+			
+			QProcess::startDetached(cleanSoftwarePath, { cleanProjectPath });
+
+			return;
 		}
+
+		QDesktopServices::openUrl(QUrl::fromLocalFile(cleanProjectPath));
 	}
 
 	QList<Project>& ProjectManager::GetProjects()
@@ -76,6 +80,8 @@ namespace Cl
 	QString ProjectManager::GetProjectsFilePath() const
 	{
 		QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+		// Create path if it does not exist
 		QDir().mkpath(savePath);
 		return savePath + "/crazy_projects.json";
 	}

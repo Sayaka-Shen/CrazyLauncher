@@ -23,6 +23,17 @@ namespace Cl
 		explicit UtilityWindow(QWidget* parent = nullptr);
 		~UtilityWindow();
 
+		std::map<ProjectType, QString> projectTypeToFilter =
+		{
+			{ Executable, "*.exe" },
+			{ Script, "*.sln" },
+			{ Unreal, "*.uproject" },
+			{ Unity, "" },
+			{ Blender, "*.blend" },
+			{ Photoshop, "*.psd" },
+			{ Custom, "" },
+		};
+
 	protected:
 		QVBoxLayout* m_windowLayout;
 		QHBoxLayout* m_buttonLayout;

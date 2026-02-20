@@ -141,7 +141,7 @@ namespace Cl
 		}
 		else
 		{
-			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), projectTypeToFilter[m_projectTypeDP->currentData().value<ProjectType>()]);
 		}
 
 		if (!path.isEmpty())
@@ -152,7 +152,7 @@ namespace Cl
 
 	void UtilityWindow::FindSoftware()
 	{
-		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation), tr("Executables(*.exe)"));
+		QString path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
 
 		if (!path.isEmpty())
 		{
