@@ -8,6 +8,10 @@ namespace Cl
 {
 	SettingsView::SettingsView(QWidget* parent)
 	{
+		// Style for the whole widget
+		setObjectName("SettingsView");
+		setAttribute(Qt::WA_StyledBackground, true);
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
@@ -38,6 +42,7 @@ namespace Cl
 
 	void SettingsView::SetupLayout()
 	{
+		//m_settingsLayout->addStretch(1);
 		m_settingsLayout->addWidget(m_addBtn);
 		m_settingsLayout->addWidget(m_editBtn);
 		m_settingsLayout->addWidget(m_deleteBtn);

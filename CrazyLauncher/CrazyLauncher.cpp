@@ -42,8 +42,11 @@ namespace Cl
 	void CrazyLauncher::CreateLayout()
 	{
 		m_mainLayout = new QVBoxLayout(m_centralWidget);
-		m_centralLayout = new QHBoxLayout(m_centralWidget);
-		m_footerLayout = new QHBoxLayout(m_centralWidget);
+		m_centralLayout = new QHBoxLayout();
+		m_footerLayout = new QHBoxLayout();
+
+		m_mainLayout->setContentsMargins(0, 0, 0, 0);
+		m_mainLayout->setSpacing(0);
 	}
 
 	void CrazyLauncher::CreateUI()
@@ -55,8 +58,8 @@ namespace Cl
 
 	void CrazyLauncher::SetupLayout()
 	{
-		m_centralLayout->addWidget(m_projectView, 1);
-		m_centralLayout->addWidget(m_descView, 0);
+		m_centralLayout->addWidget(m_projectView, 2);
+		m_centralLayout->addWidget(m_descView, 2);
 		m_footerLayout->addWidget(m_settingView);
 
 		m_mainLayout->addLayout(m_centralLayout);

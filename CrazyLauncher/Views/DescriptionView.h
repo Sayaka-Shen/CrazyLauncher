@@ -37,6 +37,7 @@ namespace Cl
 		void SetupConnections();
 
 		void SetDefaultValue();
+		void SetupStyle();
 
 	public slots:
 		void OnSelectedProjectChanged(Project& project);

@@ -101,6 +101,7 @@
     <ClCompile Include="Views\Windows\AddWindow.cpp" />
     <ClCompile Include="Views\Windows\UtilityWindow.cpp" />
     <QtRcc Include="CrazyLauncher.qrc" />
+    <QtRcc Include="Resources\Resource.qrc" />
     <QtUic Include="CrazyLauncher.ui" />
     <QtMoc Include="CrazyLauncher.h" />
     <ClCompile Include="CrazyLauncher.cpp" />
@@ -125,6 +126,12 @@
     <ClInclude Include="Core\Project.h" />
     <QtMoc Include="Core\ProjectManager.h" />
     <QtMoc Include="Views\Windows\AddWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Folder-Icon.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

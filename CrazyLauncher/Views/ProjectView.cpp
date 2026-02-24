@@ -12,6 +12,10 @@ namespace Cl
 {
 	ProjectView::ProjectView(QWidget* parent)
 	{
+		// Style for the whole widget
+		setObjectName("ProjectView");
+		setAttribute(Qt::WA_StyledBackground, true);
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();

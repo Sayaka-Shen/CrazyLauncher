@@ -2,6 +2,7 @@
 
 #include "QLabel"
 #include "QHBoxLayout"
+#include "QPixmap"
 #include "QVBoxLayout"
 
 namespace Cl
@@ -23,6 +24,10 @@ namespace Cl
 		m_projectIcon = new QLabel(this);
 		m_projectTitle = new QLabel(this);
 		m_projectDesc = new QLabel(this);
+
+		QPixmap pixmap(":/new/prefix1/Folder-Icon");
+		pixmap = pixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		m_projectIcon->setPixmap(pixmap);
 	}
 
 	void ProjectWidgetItem::CreateLayout()

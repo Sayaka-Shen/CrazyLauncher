@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>style.css</file>
+        <file>Folder-Icon.png</file>
+    </qresource>
+</RCC>

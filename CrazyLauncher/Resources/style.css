@@ -1,0 +1,126 @@
+/* Fenêtre Principale */
+QMainWindow 
+{
+    background-color: #1C212D;
+}
+
+
+/* --- VUE DE GAUCHE (ProjectView) --- */
+#ProjectView 
+{
+    margin: 10px 0 10px 8px;
+}
+
+QLabel
+{
+    margin: 0; 
+    padding: 0;
+}
+
+/* La barre de recherche (si elle est dans ProjectView) */
+QLineEdit 
+{
+    background-color: #262A35;
+    border: 1px solid #333743;
+    border-radius: 2px;
+    padding: 8px;
+
+    color: #ffffff;
+}
+
+QListWidget 
+{
+    border: none;
+    outline: none;
+}
+
+QListWidget::item 
+{
+    background-color: #232733;
+    border: 1px solid #333743; 
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+QListWidget::item:selected 
+{
+    background-color: #233C66;
+    border: 1px solid #333743;
+}
+
+/* --- VUE DE DROITE (DescriptionView) --- */
+#DescriptionView 
+{
+    margin: 10px 8px 10px 0;
+    background-color: #282D3A;
+    border: 1px solid #333743;
+    border-radius: 2px;
+}
+
+#ProjectTitle 
+{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 12px 12px 10px 12px;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #333743;
+}
+
+#DescriptionLabel, #PathLabel, #SoftwareLabel 
+{
+    color: #c1c2d2;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 12px 0 12px;
+
+    padding-bottom: 10px;
+}
+
+#DescriptionField, #PathField, #SoftwareField 
+{
+    font-size: 13px;
+    margin: 0 12px 0 12px;
+    padding-bottom: 10px;
+}
+
+/* --- VUE DU BAS (SettingsView) --- */
+#SettingsView 
+{
+    padding: 15px;
+    border-top: 1px solid #333743;
+}
+
+QPushButton 
+{
+    background-color: #2a2f3b;
+    border: 1px solid #3d4455;
+    border-radius: 2px;
+
+    padding: 7px 30px;
+    margin: 0 10px; 
+
+    color: #ffffff;
+}
+
+QPushButton:hover 
+{
+    background-color: #353b4a;
+}
+
+QPushButton#BtnLaunch 
+{
+    background-color: #1a5fb4;
+    border: none;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+QPushButton#BtnLaunch:hover {
+    background-color: #1e71d4;
+}

@@ -11,11 +11,16 @@ namespace Cl
 {
 	DescriptionView::DescriptionView(QWidget* parent)
 	{
+		// Style for the whole widget
+		setObjectName("DescriptionView");
+		setAttribute(Qt::WA_StyledBackground, true);
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
 		SetupConnections();
 		SetDefaultValue();
+		SetupStyle();
 	}
 
 	DescriptionView::~DescriptionView() {}
@@ -23,6 +28,8 @@ namespace Cl
 	void DescriptionView::CreateLayout()
 	{
 		m_descViewLayout = new QVBoxLayout(this);
+		m_descViewLayout->setContentsMargins(0, 0, 0, 0);
+		m_descViewLayout->setSpacing(0);
 	}
 
 	void DescriptionView::CreateUI()
@@ -44,6 +51,7 @@ namespace Cl
 		m_descViewLayout->addWidget(m_title);
 
 		m_descViewLayout->addWidget(m_description);
+		m_descViewLayout->addSpacing(0);
 		m_descViewLayout->addWidget(m_descriptionField);
 
 		m_descViewLayout->addWidget(m_path);
@@ -51,6 +59,8 @@ namespace Cl
 
 		m_descViewLayout->addWidget(m_pathSoftware);
 		m_descViewLayout->addWidget(m_pathSoftwareField);
+
+		m_descViewLayout->addStretch(1);
 	}
 
 	void DescriptionView::SetupConnections() {}
@@ -61,9 +71,33 @@ namespace Cl
 		m_description->setText("Description :");
 		m_descriptionField->setText("This is Project X...");
 		m_path->setText("Path :");
-		m_pathField->setText("C:/");
+		m_pathField->setText("C:/");  
 		m_pathSoftware->setText("Software Used :");
 		m_pathSoftwareField->setText("C:/");
+	}
+
+	void DescriptionView::SetupStyle()
+	{
+		// Title
+		m_title->setObjectName("ProjectTitle");
+		
+		// Description Label and Field
+		m_description->setObjectName("DescriptionLabel");
+
+		m_descriptionField->setObjectName("DescriptionField");
+		m_descriptionField->setWordWrap(true);
+
+		// Project Path Label and Field
+		m_path->setObjectName("PathLabel");
+
+		m_pathField->setObjectName("PathField");
+		m_pathField->setWordWrap(true);
+
+		// Software Path Label and Field
+		m_pathSoftware->setObjectName("SoftwareLabel");
+
+		m_pathSoftwareField->setObjectName("SoftwareField");
+		m_pathSoftwareField->setWordWrap(true);
 	}
 
 	void DescriptionView::OnSelectedProjectChanged(Project& project)
