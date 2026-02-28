@@ -50,7 +50,7 @@ namespace Cl
 
 		m_desc = new QLabel("Description :", this);
 		m_descField = new QLineEdit();
-		m_descField->setMaxLength(250);
+		m_descField->setMaxLength(150);
 
 		m_projectType = new QLabel("Project Type :", this);
 		m_projectTypeDP = new QComboBox(this);

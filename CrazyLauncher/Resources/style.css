@@ -108,7 +108,7 @@ QWidget#ProjectWidgetItem #Desc
 QWidget#SettingsView #LaunchBtn 
 {
     background-color: #3768B3;
-    border: none;
+    border: 1px solid #3768B3;
 }
 
 QWidget#SettingsView #LaunchBtn:hover 
@@ -193,6 +193,7 @@ QWidget#SettingsView QPushButton:hover
 QWidget#WindowButtonView #RegisterBtn
 {
     background-color: #3768B3;
+    border: 1px solid #3768B3;
 }
 
 QWidget#WindowButtonView QPushButton
