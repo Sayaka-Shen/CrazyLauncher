@@ -29,6 +29,11 @@ namespace Cl
 		void SetupLayout();
 		void SetupConnections();
 
+		void OnProjetFilter(const QString& text);
+
+	signals:
+		void E_FilterProjects(const QString& text);
+
 	public slots:
 		void AddProjectInView(const Project& project);
 		void EditProjectInView(Project* project);

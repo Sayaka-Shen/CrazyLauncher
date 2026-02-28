@@ -14,7 +14,7 @@ namespace Cl
 		SetButtonRegisterText("Edit");
 		SetEditModeDefaultValue();
 
-		connect(m_registerBtn, &QPushButton::pressed, this, &EditWindow::OnEditProject);
+		connect(m_buttonView->GetRegisterBtn(), &QPushButton::pressed, this, &EditWindow::OnEditProject);
 	}
 
 	EditWindow::~EditWindow() {}

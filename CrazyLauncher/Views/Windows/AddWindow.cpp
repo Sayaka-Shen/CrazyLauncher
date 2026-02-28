@@ -13,7 +13,7 @@ namespace Cl
 	{
 		SetButtonRegisterText("Register");
 		
-		connect(m_registerBtn, &QPushButton::pressed, this, &AddWindow::OnRegisterProject);
+		connect(m_buttonView->GetRegisterBtn(), &QPushButton::pressed, this, &AddWindow::OnRegisterProject);
 	}
 
 	AddWindow::~AddWindow() {}

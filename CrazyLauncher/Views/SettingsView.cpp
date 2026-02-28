@@ -24,15 +24,19 @@ namespace Cl
 	{
 		m_addBtn = new QPushButton(this);
 		m_addBtn->setText("Add");
+		m_addBtn->setIcon(QIcon(":/new/prefix1/Plus-Icon.png"));
 
 		m_editBtn = new QPushButton(this);
 		m_editBtn->setText("Edit");
+		m_editBtn->setIcon(QIcon(":/new/prefix1/Edit-Icon.png"));
 
 		m_deleteBtn = new QPushButton(this);
 		m_deleteBtn->setText("Delete");
+		m_deleteBtn->setIcon(QIcon(":/new/prefix1/Bin-Icon.png"));
 
 		m_launchBtn = new QPushButton(this);
 		m_launchBtn->setText("Launch");
+		m_launchBtn->setObjectName("LaunchBtn");
 	}
 
 	void SettingsView::CreateLayout()
@@ -42,7 +46,6 @@ namespace Cl
 
 	void SettingsView::SetupLayout()
 	{
-		//m_settingsLayout->addStretch(1);
 		m_settingsLayout->addWidget(m_addBtn);
 		m_settingsLayout->addWidget(m_editBtn);
 		m_settingsLayout->addWidget(m_deleteBtn);

@@ -13,8 +13,8 @@ namespace Cl
 		CreateUI();
 		SetupLayout();
 
-		m_projectTitle->setText(title);
-		m_projectDesc->setText(description);
+		SetProjectTitle(title);
+		SetProjectDescription(description);
 	}
 
 	ProjectWidgetItem::~ProjectWidgetItem() {}
@@ -45,7 +45,6 @@ namespace Cl
 		m_itemLayout->addLayout(m_textItemLayout, 1);
 	}
 
-
 	// Getter, Setter for the widget infos
 	QString ProjectWidgetItem::GetProjectTitle()
 	{
@@ -57,7 +56,6 @@ namespace Cl
 		return m_projectDesc->text();
 	}
 
-
 	void ProjectWidgetItem::SetProjectTitle(QString newTitle)
 	{
 		m_projectTitle->setText(newTitle);
@@ -65,6 +63,14 @@ namespace Cl
 
 	void ProjectWidgetItem::SetProjectDescription(QString newDescription)
 	{
-		m_projectDesc->setText(newDescription);
+		int textLimit = 35;
+		QString displayText = newDescription; 
+
+		if (newDescription.length() > textLimit)
+		{
+			displayText = newDescription.left(textLimit) + "...";
+		}
+		
+		m_projectDesc->setText(displayText);
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "QDialog"
 #include "../../Core/Project.h"
+#include "../WindowButtonView.h"
 
 class QLabel;
 class QLineEdit;
@@ -57,9 +58,7 @@ namespace Cl
 		QLineEdit* m_softwarePathField;
 		QPushButton* m_softwareExplorer;
 
-		QPushButton* m_cancelBtn;
-		QPushButton* m_registerBtn;
-
+		WindowButtonView* m_buttonView;
 
 		// Utility functions
 		void SetButtonRegisterText(QString registerText);
@@ -83,7 +82,6 @@ namespace Cl
 		void FindProject();
 		void FindSoftware();
 		void CheckProjectType(int index);
-
 
 		// Close Window
 		void closeEvent(QCloseEvent* event) override;

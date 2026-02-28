@@ -88,6 +88,9 @@ namespace Cl
 		// Load saves projects
 		connect(m_projectManager, &ProjectManager::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
 		connect(m_projectManager, &ProjectManager::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
+
+		// Filter Projects
+		connect(m_projectView, &ProjectView::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
 	}
 
 	void CrazyLauncher::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
@@ -118,7 +121,7 @@ namespace Cl
 		if (m_addWindow != nullptr) return;
 
 		m_addWindow = new AddWindow(this);
-		m_addWindow->resize(this->size());
+		m_addWindow->setFixedWidth(600);
 		m_addWindow->show();
 
 		connect(m_addWindow, &AddWindow::E_AddProject, this, &CrazyLauncher::OnProjectAdded);
@@ -130,7 +133,7 @@ namespace Cl
 		if (m_editWindow != nullptr || m_currentProjectSelected == nullptr) return;
 
 		m_editWindow = new EditWindow(this, m_currentProjectSelected);
-		m_editWindow->resize(this->size());
+		m_editWindow->setFixedWidth(600);
 		m_editWindow->show();
 
 		connect(m_editWindow, &EditWindow::E_EditProject, this, &CrazyLauncher::OnProjectEdited);
@@ -168,6 +171,19 @@ namespace Cl
 	void CrazyLauncher::FillListWidget(Project& project)
 	{
 		m_projectView->AddProjectInView(project);
+	}
+
+	void CrazyLauncher::FilterProjects(const QString& text)
+	{
+		for (int i = 0; i < m_projectView->GetProjectList()->count(); ++i)
+		{
+			QListWidgetItem* item = m_projectView->GetProjectList()->item(i);
+			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(item));
+
+			bool matches = widgetItem->GetProjectTitle().contains(text, Qt::CaseInsensitive);
+			
+			item->setHidden(!matches);
+		}
 	}
 
 	void CrazyLauncher::OnCloseUtilityWindow()

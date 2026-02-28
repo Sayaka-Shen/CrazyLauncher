@@ -74,6 +74,8 @@ namespace Cl
 		// Load saved data
 		void ClearListWidget();
 		void FillListWidget(Project& project);
+
+		void FilterProjects(const QString& text);
 	};
 }
 

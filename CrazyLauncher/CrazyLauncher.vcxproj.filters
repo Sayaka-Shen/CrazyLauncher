@@ -67,6 +67,9 @@
     <ClCompile Include="Views\Windows\UtilityWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Views\WindowButtonView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Views\ProjectView.h">
@@ -93,6 +96,9 @@
     <QtMoc Include="Views\Windows\UtilityWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Views\WindowButtonView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Project.h">
@@ -107,6 +113,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Folder-Icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Bin-Icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Edit-Icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Plus-Icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\folder-black-white.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

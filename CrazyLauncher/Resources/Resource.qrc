@@ -2,5 +2,9 @@
     <qresource prefix="/new/prefix1">
         <file>style.css</file>
         <file>Folder-Icon.png</file>
+        <file>Bin-Icon.png</file>
+        <file>Edit-Icon.png</file>
+        <file>Plus-Icon.png</file>
+        <file>folder-black-white.png</file>
     </qresource>
 </RCC>

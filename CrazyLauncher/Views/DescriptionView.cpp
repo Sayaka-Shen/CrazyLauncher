@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QListWidget>
+#include <QScrollArea>
 
 
 namespace Cl

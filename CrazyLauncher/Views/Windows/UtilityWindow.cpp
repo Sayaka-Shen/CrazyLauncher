@@ -16,12 +16,18 @@ namespace Cl
 {
 	UtilityWindow::UtilityWindow(QWidget* parent)
 	{
+		// Style for the whole widget
+		setObjectName("UtilityWindow");
+		setAttribute(Qt::WA_StyledBackground, true);
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
 
 		SetupProjectTypeDP();
 		SetupConnections();
+
+		CheckProjectType(m_projectTypeDP->currentIndex());
 	}
 
 	UtilityWindow::~UtilityWindow() {}
@@ -39,25 +45,37 @@ namespace Cl
 	void UtilityWindow::CreateUI()
 	{
 		m_name = new QLabel("Project Name :", this);
+		m_name->setObjectName("ProjectName");
 		m_nameField = new QLineEdit();
 
 		m_desc = new QLabel("Description :", this);
 		m_descField = new QLineEdit();
+		m_descField->setMaxLength(250);
 
 		m_projectType = new QLabel("Project Type :", this);
 		m_projectTypeDP = new QComboBox(this);
 
 		m_path = new QLabel("Project Path :", this);
+
 		m_pathField = new QLineEdit();
+		m_pathField->setObjectName("PathField");
+
 		m_projectExplorer = new QPushButton(this);
+		m_projectExplorer->setObjectName("ExplorerBtn");
+		m_projectExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
 
 		m_softwareExe = new QLabel("Software Used :", this);
+
 		m_softwarePathField = new QLineEdit();
+		m_softwarePathField->setObjectName("SoftwarePathField");
+
 		m_softwareExplorer = new QPushButton(this);
+		m_softwareExplorer->setObjectName("ExplorerBtn");
+		m_softwareExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
+
 		HideSoftwarePath();
 
-		m_cancelBtn = new QPushButton("Cancel", this);
-		m_registerBtn = new QPushButton();
+		m_buttonView = new WindowButtonView(this);
 	}
 
 	void UtilityWindow::SetupLayout()
@@ -86,17 +104,17 @@ namespace Cl
 		m_pathSoftwareLayout->addWidget(m_softwareExplorer);
 		m_windowLayout->addLayout(m_pathSoftwareLayout);
 
-		// Add to bottom layout
-		m_buttonLayout->addWidget(m_cancelBtn);
-		m_buttonLayout->addWidget(m_registerBtn);
+		m_windowLayout->setContentsMargins(0, 0, 0, 0);
+		m_windowLayout->setSpacing(0);
+		m_windowLayout->addStretch(1);
 
 		// Add to main layout
-		m_windowLayout->addLayout(m_buttonLayout);
+		m_windowLayout->addWidget(m_buttonView);
 	}
 
 	void UtilityWindow::SetupConnections()
 	{
-		connect(m_cancelBtn, &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
+		connect(m_buttonView->GetCancelBtn(), &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
 
 		connect(m_projectTypeDP, &QComboBox::currentIndexChanged, this, &UtilityWindow::CheckProjectType);
 		
@@ -118,7 +136,7 @@ namespace Cl
 	// Utilities Functions
 	void UtilityWindow::SetButtonRegisterText(QString registerText)
 	{
-		m_registerBtn->setText(registerText);
+		m_buttonView->GetRegisterBtn()->setText(registerText);
 	}
 
 	bool UtilityWindow::IsOneOfTheFieldEmpty()
@@ -172,6 +190,9 @@ namespace Cl
 		{
 			ShowSoftwarePath();
 		}
+
+		this->adjustSize();
+		this->setFixedHeight(this->sizeHint().height());
 	}
 
 	void UtilityWindow::ShowSoftwarePath()

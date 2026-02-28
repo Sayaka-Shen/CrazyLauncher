@@ -40,6 +40,7 @@ namespace Cl
 	{
 		m_searchBar = new QLineEdit(this);
 		m_searchBar->setPlaceholderText("Search....");
+		m_searchBar->setObjectName("SearchBar");
 
 		m_projectsList = new QListWidget(this);
 	}
@@ -52,6 +53,12 @@ namespace Cl
 
 	void ProjectView::SetupConnections()
 	{
+		connect(m_searchBar, &QLineEdit::textChanged, this, &ProjectView::OnProjetFilter);
+	}
+
+	void ProjectView::OnProjetFilter(const QString& text)
+	{
+		emit E_FilterProjects(text);
 	}
 
 	void ProjectView::AddProjectInView(const Project& project)
@@ -60,6 +67,7 @@ namespace Cl
 		item->setSizeHint(QSize(0, 56));
 
 		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.name, project.description, this);
+
 		m_projectsList->setItemWidget(item, widgetItem);
 	}
 

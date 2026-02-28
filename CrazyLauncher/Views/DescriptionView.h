@@ -4,6 +4,7 @@
 class QVBoxLayout;
 class QLabel;
 class QListWidgetItem;
+class QScrollArea;
 
 namespace Cl
 {

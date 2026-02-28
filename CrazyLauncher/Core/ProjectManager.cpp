@@ -37,6 +37,7 @@ namespace Cl
 	void ProjectManager::EditProjects(Project* baseProjectEdited)
 	{
 		emit E_EditProjectToView(baseProjectEdited);
+		SaveProjects();
 		emit E_EditProjectToDescriptionView(*baseProjectEdited);
 	}
 
