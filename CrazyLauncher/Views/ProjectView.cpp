@@ -64,7 +64,7 @@ namespace Cl
 	void ProjectView::AddProjectInView(const Project& project)
 	{
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
-		item->setSizeHint(QSize(0, 56));
+		item->setSizeHint(QSize(0, 65));
 
 		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.name, project.description, this);
 

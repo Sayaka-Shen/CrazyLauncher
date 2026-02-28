@@ -9,6 +9,9 @@ namespace Cl
 {
 	ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QWidget* parent)
 	{
+		setObjectName("ProjectWidgetItem");
+		setAttribute(Qt::WA_StyledBackground, true);
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
@@ -22,8 +25,13 @@ namespace Cl
 	void ProjectWidgetItem::CreateUI()
 	{
 		m_projectIcon = new QLabel(this);
+		m_projectIcon->setObjectName("Icon");
+
 		m_projectTitle = new QLabel(this);
+		m_projectTitle->setObjectName("Title");
+
 		m_projectDesc = new QLabel(this);
+		m_projectDesc->setObjectName("Desc");
 
 		QPixmap pixmap(":/new/prefix1/Folder-Icon");
 		pixmap = pixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -41,8 +49,15 @@ namespace Cl
 		m_textItemLayout->addWidget(m_projectTitle);
 		m_textItemLayout->addWidget(m_projectDesc);
 
+		m_textItemLayout->setSpacing(0);
+		m_textItemLayout->setContentsMargins(0, 0, 0, 0);
+		m_textItemLayout->addStretch(1);
+
 		m_itemLayout->addWidget(m_projectIcon, 0);
 		m_itemLayout->addLayout(m_textItemLayout, 1);
+
+		m_itemLayout->setSpacing(0);
+		m_itemLayout->setContentsMargins(0, 0, 0, 0);
 	}
 
 	// Getter, Setter for the widget infos
@@ -64,13 +79,13 @@ namespace Cl
 	void ProjectWidgetItem::SetProjectDescription(QString newDescription)
 	{
 		int textLimit = 35;
-		QString displayText = newDescription; 
+		QString displayText = newDescription;
 
 		if (newDescription.length() > textLimit)
 		{
 			displayText = newDescription.left(textLimit) + "...";
 		}
-		
+
 		m_projectDesc->setText(displayText);
 	}
 }
