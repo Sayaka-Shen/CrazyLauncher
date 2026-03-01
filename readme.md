@@ -22,7 +22,7 @@ En tant que programmeur passionné par de nombreux domaines, je voulais aussi un
 
 ### Via CrazyInstaller
 
-1. Téléchargez l'installeur : **[Télécharger CrazyLauncher.exe](https://github.com/Sayaka-Shen/CrazyLauncher/releases/latest/download/CrazyLauncherInstaller.exe)**
+1. Téléchargez l'installeur : **[CrazyLauncherInstaller.exe](https://github.com/Sayaka-Shen/CrazyLauncher/releases/latest/download/CrazyLauncherInstaller.exe)**
 2. Lancez l'exécutable et suivez les étapes de l'assistant d'installation
 3. Choisissez le dossier de destination souhaité
 4. C'est tout — l'application est prête à être utilisée ! ✅
