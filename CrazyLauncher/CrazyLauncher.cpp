@@ -23,6 +23,8 @@ namespace Cl
 		m_centralWidget = new QWidget(this);
 		setCentralWidget(m_centralWidget);
 
+		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+
 		CreateLayout();
 		CreateUI();
 		CreateController();
