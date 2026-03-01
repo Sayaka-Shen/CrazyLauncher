@@ -8,7 +8,6 @@
 # Fichiers de build et binaires
 *.o
 *.obj
-*.exe
 *.dll
 *.lib
 *.so
