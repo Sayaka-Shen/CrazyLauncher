@@ -20,6 +20,8 @@ namespace Cl
 		setObjectName("UtilityWindow");
 		setAttribute(Qt::WA_StyledBackground, true);
 
+		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
@@ -32,6 +34,37 @@ namespace Cl
 
 	UtilityWindow::~UtilityWindow() {}
 
+
+	// Utilities Functions
+	void UtilityWindow::SetButtonRegisterText(QString registerText)
+	{
+		m_buttonView->GetRegisterBtn()->setText(registerText);
+	}
+
+	bool UtilityWindow::IsOneOfTheFieldEmpty()
+	{
+		return m_nameField->text().isEmpty() || m_descField->text().isEmpty() || m_pathField->text().isEmpty();
+	}
+
+	bool UtilityWindow::HasOneOfTheFieldChanged(const Project& project) 
+	{
+		return project.name != m_nameField->text() || project.description != m_descField->text() || project.path != m_pathField->text() || project.softwareExe != m_softwarePathField->text();
+	}
+	
+	void UtilityWindow::ShowSoftwarePath()
+	{
+		m_softwareExe->show();
+		m_softwarePathField->show();
+		m_softwareExplorer->show();
+	}
+
+	void UtilityWindow::HideSoftwarePath()
+	{
+		m_softwarePathField->setText("");
+		m_softwareExe->hide();
+		m_softwarePathField->hide();
+		m_softwareExplorer->hide();
+	}
 
 	void UtilityWindow::CreateLayout()
 	{
@@ -58,18 +91,28 @@ namespace Cl
 		m_path = new QLabel("Project Path :", this);
 
 		m_pathField = new QLineEdit();
+		// QSS
 		m_pathField->setObjectName("PathField");
 
 		m_projectExplorer = new QPushButton(this);
+		m_projectExplorer->setDefault(false);
+		m_projectExplorer->setAutoDefault(false);
+
+		// Button QSS and Icon
 		m_projectExplorer->setObjectName("ExplorerBtn");
 		m_projectExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
 
 		m_softwareExe = new QLabel("Software Used :", this);
 
 		m_softwarePathField = new QLineEdit();
+		// QSS
 		m_softwarePathField->setObjectName("SoftwarePathField");
 
 		m_softwareExplorer = new QPushButton(this);
+		m_softwareExplorer->setDefault(false);
+		m_softwareExplorer->setAutoDefault(false);
+
+		// Button QSS and Icon
 		m_softwareExplorer->setObjectName("ExplorerBtn");
 		m_softwareExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
 
@@ -133,22 +176,6 @@ namespace Cl
 		m_projectTypeDP->addItem("Custom", QVariant::fromValue(ProjectType::Custom));
 	}
 
-	// Utilities Functions
-	void UtilityWindow::SetButtonRegisterText(QString registerText)
-	{
-		m_buttonView->GetRegisterBtn()->setText(registerText);
-	}
-
-	bool UtilityWindow::IsOneOfTheFieldEmpty()
-	{
-		return m_nameField->text().isEmpty() || m_descField->text().isEmpty() || m_pathField->text().isEmpty();
-	}
-
-	bool UtilityWindow::HasOneOfTheFieldChanged(const Project& project) 
-	{
-		return project.name != m_nameField->text() || project.description != m_descField->text() || project.path != m_pathField->text() || project.softwareExe != m_softwarePathField->text();
-	}
-	
 	void UtilityWindow::FindProject()
 	{
 		QString path;
@@ -193,21 +220,6 @@ namespace Cl
 
 		this->adjustSize();
 		this->setFixedHeight(this->sizeHint().height());
-	}
-
-	void UtilityWindow::ShowSoftwarePath()
-	{
-		m_softwareExe->show();
-		m_softwarePathField->show();
-		m_softwareExplorer->show();
-	}
-
-	void UtilityWindow::HideSoftwarePath()
-	{
-		m_softwarePathField->setText("");
-		m_softwareExe->hide();
-		m_softwarePathField->hide();
-		m_softwareExplorer->hide();
 	}
 
 	// Close Window

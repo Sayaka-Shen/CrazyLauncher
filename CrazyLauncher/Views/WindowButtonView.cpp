@@ -39,9 +39,12 @@ namespace Cl
 	void WindowButtonView::CreateUI()
 	{
 		m_registerBtn = new QPushButton(this); 
+		m_registerBtn->setDefault(true);
+		// QSS for the button
 		m_registerBtn->setObjectName("RegisterBtn");
 
 		m_cancelBtn = new QPushButton("Cancel", this);
+		m_cancelBtn->setDefault(false);
 	}
 
 	void WindowButtonView::SetupLayout()
