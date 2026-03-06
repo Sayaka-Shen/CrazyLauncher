@@ -22,12 +22,19 @@ En tant que programmeur passionné par de nombreux domaines, je voulais aussi un
 
 ### Via CrazyInstaller
 
+⚠️ Si votre Windows est en thème sombre la lisibilité de l'installeur sera peut-être réduite.
+
 1. Téléchargez l'installeur : **[CrazyLauncherInstaller.exe](https://github.com/Sayaka-Shen/CrazyLauncher/releases/latest/download/CrazyLauncherInstaller.exe)**
 2. Lancez l'exécutable et suivez les étapes de l'assistant d'installation
 3. Choisissez le dossier de destination souhaité
-4. C'est tout — l'application est prête à être utilisée ! ✅
+4. C'est tout, l'application est prête à être utilisée ! ✅
 
-⚠️ Si votre Windows est en thème sombre la lisibilité de l'installeur sera peut-être réduite.
+### 🔧 Installation d'une nouvelle version
+
+1. Désinstallez la version actuelle sur votre PC.
+2. Suivez les étapes d'installation ci-dessus pour la nouvelle version. Le lien de l'installeur est mis à jour automatiquement avec la dernière version.
+
+⚠️ Vous pouvez désinstaller la version actuellement installée sur votre PC sans craindre de perdre vos projets enregistrés.
 
 ---
 
