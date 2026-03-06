@@ -50,7 +50,7 @@ namespace Cl
 
 		if (!cleanSoftwarePath.isEmpty())
 		{
-			QProcess::startDetached(cleanSoftwarePath, { cleanProjectPath });
+			QProcess::startDetached(cleanSoftwarePath, { QDir::toNativeSeparators(cleanProjectPath) });
 			return;
 		}
 

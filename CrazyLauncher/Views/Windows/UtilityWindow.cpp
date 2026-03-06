@@ -209,7 +209,7 @@ namespace Cl
 	void UtilityWindow::CheckProjectType(int index)
 	{
 		ProjectType projectType = m_projectTypeDP->itemData(index).value<ProjectType>();
-		if (projectType == ProjectType::Script || projectType == ProjectType::Executable || projectType == ProjectType::Unreal)
+		if (projectType == ProjectType::Script || projectType == ProjectType::Executable || projectType == ProjectType::Unreal || ProjectType::Photoshop)
 		{
 			HideSoftwarePath();
 		}
