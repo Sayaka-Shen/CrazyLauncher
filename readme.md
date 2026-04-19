@@ -22,8 +22,6 @@ En tant que programmeur passionné par de nombreux domaines, je voulais aussi un
 
 ### Via CrazyInstaller
 
-⚠️ Si votre Windows est en thème sombre la lisibilité de l'installeur sera peut-être réduite.
-
 1. Téléchargez l'installeur : **[CrazyLauncherInstaller.exe](https://github.com/Sayaka-Shen/CrazyLauncher/releases/latest/download/CrazyLauncherInstaller.exe)**
 2. Lancez l'exécutable et suivez les étapes de l'assistant d'installation
 3. Choisissez le dossier de destination souhaité
