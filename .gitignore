@@ -1,25 +1,8 @@
 # Dossier Visual Studio
 .vs/
 
-# Dossier de build x64
-/CrazyLauncher/x64/
-/x64/
+# Dossier de build
+build/
 
-# Fichiers de build et binaires
-*.o
-*.obj
-*.dll
-*.lib
-*.so
-*.dylib
-# Fichiers générés par Qt
-*.moc
-*.qrc.cpp
-*.ui.h
-*.ui.cpp
-
-# Fichiers de configuration spécifiques à l’utilisateur
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
+# Cmake
+CMakeUserPresets.json
