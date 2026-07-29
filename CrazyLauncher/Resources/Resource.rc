@@ -1,2 +1,2 @@
 #pragma once
-IDI_ICON1 ICON "LogoCrazyLauncher.ico"
+IDI_ICON1 ICON "assets/LogoCrazyLauncher.ico"

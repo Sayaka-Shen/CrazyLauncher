@@ -1,7 +1,7 @@
 #pragma once
 #include "QDialog"
-#include "../../Core/Project.h"
-#include "../WindowButtonView.h"
+#include "core/Project.h"
+#include "widget/WindowButtonView.h"
 
 class QLabel;
 class QLineEdit;

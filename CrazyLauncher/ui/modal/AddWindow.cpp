@@ -1,5 +1,5 @@
 #include "AddWindow.h"
-#include "../../Core/Project.h"
+#include "core/Project.h"
 
 #include <QLabel>
 #include <QLineEdit>
@@ -9,10 +9,9 @@
 
 namespace Cl
 {
-	AddWindow::AddWindow(QWidget* parent)
+	AddWindow::AddWindow(QWidget* parent) : UtilityWindow(parent)
 	{
 		SetButtonRegisterText("Register");
-		
 		connect(m_buttonView->GetRegisterBtn(), &QPushButton::pressed, this, &AddWindow::OnRegisterProject);
 	}
 

@@ -1,6 +1,6 @@
 #include "ProjectView.h"
 #include "ProjectWidgetItem.h"
-#include "../Core/Project.h"
+#include "core/Project.h"
 
 #include <QLineEdit>
 #include <QListWidget>
@@ -79,18 +79,13 @@ namespace Cl
 		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectsList->itemWidget(item));
 		if (widgetItem == nullptr) return;
 
-		if (widgetItem->GetProjectTitle() != project->name)
-		{
-			widgetItem->SetProjectTitle(project->name);
-		}
-		else if (widgetItem->GetProjectDescription() != project->description)
-		{
-			widgetItem->SetProjectDescription(project->description);
-		}
+		widgetItem->SetProjectTitle(project->name);
+		widgetItem->SetProjectDescription(project->description);
 	}
 
 	void ProjectView::RemoveProjectInView(int indexProject)
 	{
-		m_projectsList->takeItem(indexProject);
+		QListWidgetItem* item = m_projectsList->takeItem(indexProject);
+		delete item;
 	}
 }

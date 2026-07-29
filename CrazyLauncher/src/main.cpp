@@ -1,4 +1,4 @@
-#include "CrazyLauncher.h"
+#include "windows/CrazyLauncher.h"
 
 #include <QtWidgets/QApplication>
 #include <QSize>

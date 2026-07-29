@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="17.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -15,7 +16,8 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">
+      $(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -36,26 +38,32 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.10.2</QtInstall>
+    <QtInstall>Qt_6.10</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>6.10.2</QtInstall>
+    <QtInstall>Qt_6.10</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile"
+    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High"
+      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+      Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+      Label="LocalAppDataPlatform" />
     <Import Project="$(QtMsBuild)\Qt.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+      Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+      Label="LocalAppDataPlatform" />
     <Import Project="$(QtMsBuild)\Qt.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -63,7 +71,18 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)ui;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)ui;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'"
+    Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
@@ -75,7 +94,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'"
+    Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
@@ -92,57 +112,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Views\DescriptionView.cpp" />
-    <ClCompile Include="Views\Windows\EditWindow.cpp" />
-    <ClCompile Include="Core\ProjectManager.cpp" />
-    <ClCompile Include="Views\ProjectView.cpp" />
-    <ClCompile Include="Views\ProjectWidgetItem.cpp" />
-    <ClCompile Include="Views\SettingsView.cpp" />
-    <ClCompile Include="Views\Windows\AddWindow.cpp" />
-    <ClCompile Include="Views\Windows\UtilityWindow.cpp" />
-    <ClCompile Include="Views\WindowButtonView.cpp" />
-    <QtRcc Include="CrazyLauncher.qrc" />
+    <ClCompile Include="src\core\ProjectManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="ui\modal\AddWindow.cpp" />
+    <ClCompile Include="ui\modal\EditWindow.cpp" />
+    <ClCompile Include="ui\modal\UtilityWindow.cpp" />
+    <ClCompile Include="ui\widget\DescriptionView.cpp" />
+    <ClCompile Include="ui\widget\ProjectView.cpp" />
+    <ClCompile Include="ui\widget\ProjectWidgetItem.cpp" />
+    <ClCompile Include="ui\widget\SettingsView.cpp" />
+    <ClCompile Include="ui\widget\WindowButtonView.cpp" />
+    <ClCompile Include="ui\windows\CrazyLauncher.cpp" />
     <QtRcc Include="Resources\Resource.qrc" />
-    <QtUic Include="CrazyLauncher.ui" />
-    <QtMoc Include="CrazyLauncher.h" />
-    <ClCompile Include="CrazyLauncher.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Views\ProjectView.h" />
+    <ClInclude Include="src\core\Project.h" />
+    <ClInclude Include="src\core\ProjectType.h" />
+    <QtMoc Include="ui\modal\AddWindow.h" />
+    <QtMoc Include="ui\modal\EditWindow.h" />
+    <QtMoc Include="ui\modal\UtilityWindow.h" />
+    <QtMoc Include="ui\widget\DescriptionView.h" />
+    <QtMoc Include="ui\widget\ProjectView.h" />
+    <QtMoc Include="ui\widget\ProjectWidgetItem.h" />
+    <QtMoc Include="ui\widget\SettingsView.h" />
+    <QtMoc Include="ui\widget\WindowButtonView.h" />
+    <QtMoc Include="ui\windows\CrazyLauncher.h" />
+    <QtMoc Include="src\core\ProjectManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Views\DescriptionView.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Views\SettingsView.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Views\ProjectWidgetItem.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Core\ProjectType.h" />
-    <QtMoc Include="Views\WindowButtonView.h" />
-    <QtMoc Include="Views\Windows\UtilityWindow.h" />
-    <QtMoc Include="Views\Windows\EditWindow.h" />
-    <ClInclude Include="Core\Project.h" />
-    <QtMoc Include="Core\ProjectManager.h" />
-    <QtMoc Include="Views\Windows\AddWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="resources\Resource.aps" />
     <None Include="Resources\style.css" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Bin-Icon.png" />
-    <Image Include="Resources\Edit-Icon.png" />
-    <Image Include="Resources\folder-black-white.png" />
-    <Image Include="Resources\Folder-Icon.png" />
-    <Image Include="Resources\LogoCrazyLauncher.ico" />
-    <Image Include="Resources\LogoCrazyLauncher.png" />
-    <Image Include="Resources\Plus-Icon.png" />
+    <Image Include="resources\assets\Bin-Icon.png" />
+    <Image Include="resources\assets\Edit-Icon.png" />
+    <Image Include="resources\assets\folder-black-white.png" />
+    <Image Include="resources\assets\Folder-Icon.png" />
+    <Image Include="resources\assets\LogoCrazyLauncher.ico" />
+    <Image Include="resources\assets\LogoCrazyLauncher.png" />
+    <Image Include="resources\assets\Plus-Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="resources\CrazyLauncher.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

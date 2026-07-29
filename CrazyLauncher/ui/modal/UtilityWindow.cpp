@@ -1,6 +1,6 @@
 #include "UtilityWindow.h"
-#include "../../Core/ProjectManager.h"
-#include "../../Core/Project.h"
+#include "core/ProjectManager.h"
+#include "core/Project.h"
 
 #include <QCheckBox>
 #include <QHBoxLayout>

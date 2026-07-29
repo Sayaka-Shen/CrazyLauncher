@@ -1,5 +1,5 @@
 #include "EditWindow.h"
-#include "../../Core/Project.h"
+#include "core/Project.h"
 
 #include <QLabel>
 #include <QLineEdit>
@@ -9,7 +9,7 @@
 
 namespace Cl
 {
-	EditWindow::EditWindow(QWidget* parent, Project* project) : m_editProject(project)
+	EditWindow::EditWindow(QWidget* parent, Project* project) : m_editProject(project), UtilityWindow(parent)
 	{
 		SetButtonRegisterText("Edit");
 		SetEditModeDefaultValue();

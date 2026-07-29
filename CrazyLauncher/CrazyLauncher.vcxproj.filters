@@ -23,114 +23,109 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="CrazyLauncher.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtUic Include="CrazyLauncher.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtMoc Include="CrazyLauncher.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="CrazyLauncher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <QtRcc Include="Resources\Resource.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\ProjectView.cpp">
+    <ClCompile Include="src\core\ProjectManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\DescriptionView.cpp">
+    <ClCompile Include="ui\modal\AddWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\SettingsView.cpp">
+    <ClCompile Include="ui\modal\EditWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\ProjectWidgetItem.cpp">
+    <ClCompile Include="ui\modal\UtilityWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Windows\AddWindow.cpp">
+    <ClCompile Include="ui\widget\DescriptionView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\ProjectManager.cpp">
+    <ClCompile Include="ui\widget\ProjectView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Windows\EditWindow.cpp">
+    <ClCompile Include="ui\widget\ProjectWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Windows\UtilityWindow.cpp">
+    <ClCompile Include="ui\widget\SettingsView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Views\WindowButtonView.cpp">
+    <ClCompile Include="ui\widget\WindowButtonView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\windows\CrazyLauncher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Views\ProjectView.h">
+    <QtMoc Include="src\core\ProjectManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Views\DescriptionView.h">
+    <QtMoc Include="ui\windows\CrazyLauncher.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Views\SettingsView.h">
+    <QtMoc Include="ui\modal\UtilityWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Views\ProjectWidgetItem.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Core\ProjectManager.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Views\Windows\AddWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Views\Windows\EditWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Views\Windows\UtilityWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Views\WindowButtonView.h">
+    <QtMoc Include="ui\widget\WindowButtonView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Project.h">
+    <ClInclude Include="src\core\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\ProjectType.h">
+    <ClInclude Include="src\core\ProjectType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\modal\AddWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\modal\EditWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\widget\DescriptionView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\widget\ProjectView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\widget\ProjectWidgetItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\widget\SettingsView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\style.css" />
+    <None Include="resources\Resource.aps" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Folder-Icon.png">
+    <Image Include="resources\assets\Plus-Icon.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Bin-Icon.png">
+    <Image Include="resources\assets\Bin-Icon.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Edit-Icon.png">
+    <Image Include="resources\assets\Edit-Icon.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Plus-Icon.png">
+    <Image Include="resources\assets\folder-black-white.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\folder-black-white.png">
+    <Image Include="resources\assets\Folder-Icon.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\LogoCrazyLauncher.ico">
+    <Image Include="resources\assets\LogoCrazyLauncher.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\LogoCrazyLauncher.png">
+    <Image Include="resources\assets\LogoCrazyLauncher.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -138,5 +133,10 @@
     <ResourceCompile Include="Resources\Resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="resources\CrazyLauncher.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

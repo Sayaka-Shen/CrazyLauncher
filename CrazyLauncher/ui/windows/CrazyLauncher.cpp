@@ -1,14 +1,14 @@
 #include "CrazyLauncher.h"
-#include "Core/ProjectManager.h"
-#include "Core/Project.h"
+#include "core/ProjectManager.h"
+#include "core/Project.h"
 
-#include "Views/ProjectView.h"
-#include "Views/DescriptionView.h"
-#include "Views/SettingsView.h"
-#include "Views/ProjectWidgetItem.h"
+#include "widget/ProjectView.h"
+#include "widget/DescriptionView.h"
+#include "widget/SettingsView.h"
+#include "widget/ProjectWidgetItem.h"
 
-#include "Views/Windows/AddWindow.h"
-#include "Views/Windows/EditWindow.h"
+#include "modal/AddWindow.h"
+#include "modal/EditWindow.h"
 
 #include <QListWidget>
 #include <QVBoxLayout>

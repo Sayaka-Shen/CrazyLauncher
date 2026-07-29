@@ -1,11 +1,12 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>style.css</file>
-        <file>Folder-Icon.png</file>
-        <file>Bin-Icon.png</file>
-        <file>Edit-Icon.png</file>
-        <file>Plus-Icon.png</file>
-        <file>folder-black-white.png</file>
-        <file>LogoCrazyLauncher.ico</file>
+        <file>assets/Folder-Icon.png</file>
+        <file>assets/Bin-Icon.png</file>
+        <file>assets/Edit-Icon.png</file>
+        <file>assets/LogoCrazyLauncher.ico</file>
+        <file>assets/folder-black-white.png</file>
+        <file>assets/Plus-Icon.png</file>
+        <file>assets/LogoCrazyLauncher.png</file>
     </qresource>
 </RCC>
