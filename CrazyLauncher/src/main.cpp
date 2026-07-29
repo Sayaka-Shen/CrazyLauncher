@@ -18,8 +18,6 @@ int main(int argc, char *argv[])
     }
 
     Cl::CrazyLauncher window;
-    window.setMaximumSize(QSize(600, 380));
-    window.setMinimumSize(QSize(600, 380));
     window.show();
 
     return app.exec();
