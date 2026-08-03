@@ -1,5 +1,5 @@
 #include "UtilityWindow.h"
-#include "core/ProjectManager.h"
+#include "core/ProjectController.h"
 #include "core/Project.h"
 
 #include <QCheckBox>

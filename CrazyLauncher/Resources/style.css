@@ -1,7 +1,10 @@
 /* Main Window */
-QMainWindow 
-{
+QMainWindow {
     background-color: #1C212C;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(59, 59, 59);
+    border-radius: 8px;
 }
 
 /* --- ProjectView --- */
