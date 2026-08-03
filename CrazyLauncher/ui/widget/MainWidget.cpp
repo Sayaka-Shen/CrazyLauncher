@@ -1,7 +1,17 @@
 #include "MainWidget.h"
+
+#include "core/ProjectController.h"
 #include "ProjectWidgetItem.h"
+#include "CategoryWidget.h"
+#include "ProjectView.h"
+#include "DescriptionView.h"
+#include "modal/AddWindow.h"
+#include "modal/EditWindow.h"
 
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 
 namespace Cl {
@@ -19,22 +29,26 @@ namespace Cl {
 
 	void MainWidget::InitUI()
 	{
-		m_projectView = new ProjectView();
-		m_descView = new DescriptionView();
-		m_settingView = new SettingsView();
+		m_categoryWidget = new CategoryWidget();
+		m_projectWidget = new ProjectView();
+		m_descWidget = new DescriptionView();
 
-		m_mainLayout = new QVBoxLayout(this);
-		m_centralLayout = new QHBoxLayout();
-		m_footerLayout = new QHBoxLayout();
+		m_mainLayout = new QHBoxLayout(this);
+		m_categoryLayout = new QHBoxLayout();
+		m_projectLayout = new QHBoxLayout();
+		m_descLayout = new QVBoxLayout();
 
 		m_mainLayout->setContentsMargins(0, 0, 0, 0);
+		m_categoryWidget->setFixedWidth(220);
+		m_descWidget->setFixedWidth(300);
 
-		m_centralLayout->addWidget(m_projectView, 2);
-		m_centralLayout->addWidget(m_descView, 2);
-		m_footerLayout->addWidget(m_settingView);
+		m_categoryLayout->addWidget(m_categoryWidget);
+		m_projectLayout->addWidget(m_projectWidget);
+		m_descLayout->addWidget(m_descWidget);
 
-		m_mainLayout->addLayout(m_centralLayout);
-		m_mainLayout->addLayout(m_footerLayout);
+		m_mainLayout->addLayout(m_categoryLayout);
+		m_mainLayout->addLayout(m_projectLayout);
+		m_mainLayout->addLayout(m_descLayout);
 	}
 
 	void MainWidget::InitController()
@@ -45,38 +59,28 @@ namespace Cl {
 
 	void MainWidget::InitConnections()
 	{
-		// Create windows the user use to add project or edit project
-		connect(m_settingView, &SettingsView::E_CreateAddWindow, this, &MainWidget::CreateAddWindow);
-		connect(m_settingView, &SettingsView::E_CreateEditWindow, this, &MainWidget::CreateEditWindow);
-
 		// Manage to display project in views
-		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
-		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
-		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
+		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectWidget, &ProjectView::AddProjectInView);
+		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectWidget, &ProjectView::EditProjectInView);
+		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectWidget, &ProjectView::RemoveProjectInView);
 
-		connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, this, &MainWidget::GetSelectedProjectWidget);
-		connect(this, &MainWidget::E_DisplayProject, m_descView, &DescriptionView::OnSelectedProjectChanged);
-		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
-
-		// Launch / Remove Projects
-		connect(m_settingView, &SettingsView::E_LaunchProject, this, &MainWidget::LaunchProject);
-		connect(m_settingView, &SettingsView::E_RemoveProject, this, &MainWidget::OnRemoveProject);
+		connect(m_projectWidget->GetProjectList(), &QListWidget::currentItemChanged, this, &MainWidget::GetSelectedProjectWidget);
+		connect(this, &MainWidget::E_DisplayProject, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
+		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
 
 		// Load saves projects
 		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &MainWidget::ClearListWidget);
 		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &MainWidget::FillListWidget);
 
 		// Filter Projects
-		connect(m_projectView, &ProjectView::E_FilterProjects, this, &MainWidget::FilterProjects);
+		connect(m_projectWidget, &ProjectView::E_FilterProjects, this, &MainWidget::FilterProjects);
 	}
-
-
 
 	void MainWidget::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
 	{
 		if (current == nullptr) return;
 
-		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(current));
+		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectWidget->GetProjectList()->itemWidget(current));
 		if (itemWidget == nullptr) return;
 
 		for (Project& project : m_projectController->GetProjects())
@@ -91,7 +95,7 @@ namespace Cl {
 
 	int MainWidget::GetSelectedProjectWidgetIndex()
 	{
-		return m_projectView->GetProjectList()->currentRow();
+		return m_projectWidget->GetProjectList()->currentRow();
 	}
 
 	// SLOTS
@@ -144,20 +148,20 @@ namespace Cl {
 
 	void MainWidget::ClearListWidget()
 	{
-		m_projectView->GetProjectList()->clear();
+		m_projectWidget->GetProjectList()->clear();
 	}
 
 	void MainWidget::FillListWidget(Project& project)
 	{
-		m_projectView->AddProjectInView(project);
+		m_projectWidget->AddProjectInView(project);
 	}
 
 	void MainWidget::FilterProjects(const QString& text)
 	{
-		for (int i = 0; i < m_projectView->GetProjectList()->count(); ++i)
+		for (int i = 0; i < m_projectWidget->GetProjectList()->count(); ++i)
 		{
-			QListWidgetItem* item = m_projectView->GetProjectList()->item(i);
-			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(item));
+			QListWidgetItem* item = m_projectWidget->GetProjectList()->item(i);
+			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectWidget->GetProjectList()->itemWidget(item));
 
 			bool matches = widgetItem->GetProjectTitle().contains(text, Qt::CaseInsensitive);
 

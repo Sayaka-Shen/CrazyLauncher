@@ -1,12 +1,9 @@
 #pragma once
-#include <qboxlayout.h>
 #include "QWidget"
-#include "core/ProjectController.h"
-#include "widget/ProjectView.h"
-#include "widget/DescriptionView.h"
-#include "widget/SettingsView.h"
-#include "modal/AddWindow.h"
-#include "modal/EditWindow.h"
+
+class QListWidgetItem;
+class QVBoxLayout;
+class QHBoxLayout;
 
 namespace Cl
 {
@@ -14,6 +11,11 @@ namespace Cl
 	class AddWindow;
 	class EditWindow;
 	class ProjectWidgetItem;
+	class CategoryWidget;
+	class DescriptionView;
+	class ProjectView;
+	class ProjectController;
+	
 
 	class MainWidget : public QWidget
 	{
@@ -42,21 +44,21 @@ namespace Cl
 		ProjectController* m_projectController;
 		Project* m_currentProjectSelected;
 
+		// Main app layout
+		QHBoxLayout* m_mainLayout;
+		QHBoxLayout* m_projectLayout;
+		QHBoxLayout* m_categoryLayout;
+		QVBoxLayout* m_descLayout;
+
+		// Main app views
+		CategoryWidget* m_categoryWidget;
+		ProjectView* m_projectWidget;
+		DescriptionView* m_descWidget;
+
 		// Pop up Window for Add - Edit projects 
 		AddWindow* m_addWindow;
 		EditWindow* m_editWindow;
 
-		// Main app layout
-		QVBoxLayout* m_mainLayout;
-		QHBoxLayout* m_centralLayout;
-		QHBoxLayout* m_footerLayout;
-
-		// Main app views
-		ProjectView* m_projectView;
-		DescriptionView* m_descView;
-		SettingsView* m_settingView;
-
-		// Base Crazy Launcher functions
 		void InitUI();
 		void InitConnections();
 
