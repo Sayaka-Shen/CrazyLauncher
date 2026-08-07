@@ -103,12 +103,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\CategoryController.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="ui\modal\AddWindow.cpp" />
+    <ClCompile Include="ui\modal\CategoryModal.cpp" />
     <ClCompile Include="ui\modal\EditWindow.cpp" />
     <ClCompile Include="ui\modal\UtilityWindow.cpp" />
     <ClCompile Include="ui\widget\CategoryWidget.cpp" />
+    <ClCompile Include="ui\widget\CategoryWidgetItem.cpp" />
     <ClCompile Include="ui\widget\DescriptionView.cpp" />
     <ClCompile Include="ui\widget\MainWidget.cpp" />
     <ClCompile Include="ui\widget\ProjectView.cpp" />
@@ -119,8 +122,14 @@
     <QtRcc Include="Resources\Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ui\modal\CategoryModal.h" />
+    <QtMoc Include="src\core\CategoryController.h" />
+    <ClInclude Include="src\core\data\category.h" />
+    <ClInclude Include="src\core\data\Project.h" />
+    <ClInclude Include="src\core\data\ProjectType.h" />
     <ClInclude Include="src\core\Project.h" />
     <ClInclude Include="src\core\ProjectType.h" />
+    <QtMoc Include="ui\widget\CategoryWidgetItem.h" />
     <QtMoc Include="ui\widget\CategoryWidget.h" />
     <QtMoc Include="ui\widget\MainWidget.h" />
     <QtMoc Include="ui\modal\AddWindow.h" />

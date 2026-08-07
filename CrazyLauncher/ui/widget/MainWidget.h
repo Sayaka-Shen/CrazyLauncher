@@ -1,5 +1,6 @@
 #pragma once
 #include "QWidget"
+#include "core/CategoryController.h"
 
 class QListWidgetItem;
 class QVBoxLayout;
@@ -41,7 +42,7 @@ namespace Cl
 		void FilterProjects(const QString& text);
 
 	private:
-		ProjectController* m_projectController;
+		CategoryController* m_categoryController;
 		Project* m_currentProjectSelected;
 
 		// Main app layout
@@ -59,6 +60,7 @@ namespace Cl
 		AddWindow* m_addWindow;
 		EditWindow* m_editWindow;
 
+	private:
 		void InitUI();
 		void InitConnections();
 

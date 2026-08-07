@@ -1,5 +1,5 @@
 #include "ProjectController.h"
-#include "Project.h"
+#include "data/Project.h"
 
 #include <QString>
 #include <QProcess>
@@ -18,107 +18,101 @@
 
 namespace Cl
 {
-	ProjectController::ProjectController(QObject* parent) {}
+	ProjectController::ProjectController(QObject* parent) : QObject(parent) {}
 
-	void ProjectController::AddProject(const Project& project)
-	{
-		projects.append(project);
-		SaveProjects();
-		emit E_AddProjectToView(project);
-	}
+	ProjectController::~ProjectController() {}
 
-	void ProjectController::RemoveProjects(int indexProject)
+// 	void ProjectController::AddProject(const Project& project)
+// 	{
+// 		m_projects.append(project);
+// 		SaveProjects();
+// 		emit E_AddProjectToView(project);
+// 	}
+
+	/*void ProjectController::RemoveProjects(int indexProject)
 	{
-		projects.remove(indexProject);
+		m_projects.remove(indexProject);
 		SaveProjects();
 		emit E_RemoveProjectToView(indexProject);
-	}
+	}*/
 
-	void ProjectController::EditProjects(Project* baseProjectEdited)
-	{
-		emit E_EditProjectToView(baseProjectEdited);
-		SaveProjects();
-		emit E_EditProjectToDescriptionView(*baseProjectEdited);
-	}
+// 	void ProjectController::EditProjects(Project* baseProjectEdited)
+// 	{
+// 		emit E_EditProjectToView(baseProjectEdited);
+// 		SaveProjects();
+// 		emit E_EditProjectToDescriptionView(*baseProjectEdited);
+// 	}
 
-	void ProjectController::LaunchProjects(Project* project)
-	{
-		if (!project || project->path.isEmpty()) return;
+	//void ProjectController::LaunchProjects(Project* project)
+	//{
+	//	if (!project || project->path.isEmpty()) return;
 
-		QString cleanProjectPath = QDir::cleanPath(project->path);
-		QString cleanSoftwarePath = QDir::cleanPath(project->softwareExe);
+	//	QString cleanProjectPath = QDir::cleanPath(project->path);
 
-		if (!cleanSoftwarePath.isEmpty())
-		{
-			QProcess::startDetached(cleanSoftwarePath, { QDir::toNativeSeparators(cleanProjectPath) });
-			return;
-		}
+	///*	if (!cleanSoftwarePath.isEmpty())
+	//	{
+	//		QProcess::startDetached(cleanSoftwarePath, { QDir::toNativeSeparators(cleanProjectPath) });
+	//		return;
+	//	}*/
 
-		QDesktopServices::openUrl(QUrl::fromLocalFile(cleanProjectPath));
-	}
+	//	QDesktopServices::openUrl(QUrl::fromLocalFile(cleanProjectPath));
+	//}
 
-	QList<Project>& ProjectController::GetProjects()
-	{
-		return projects;
-	}
+	//QString ProjectController::GetProjectsFilePath() const
+	//{
+	//	QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
-	QString ProjectController::GetProjectsFilePath() const
-	{
-		QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+	//	// Create path if it does not exist
+	//	QDir().mkpath(savePath);
+	//	return savePath + "/crazy_projects.json";
+	//}
 
-		// Create path if it does not exist
-		QDir().mkpath(savePath);
-		return savePath + "/crazy_projects.json";
-	}
+	//void ProjectController::SaveProjects()
+	//{
+	//	//QFile file(GetProjectsFilePath());
 
-	void ProjectController::SaveProjects()
-	{
-		QFile file(GetProjectsFilePath());
+	//	//if (!file.open(QIODevice::WriteOnly)) return;
 
-		if (!file.open(QIODevice::WriteOnly)) return;
+	//	QJsonArray jsonArray;
 
-		QJsonArray jsonArray;
+	//	for (const Project& project : m_projects)
+	//	{
+	//		QJsonObject obj;
+	//		obj["name"] = project.name;
+	//		obj["description"] = project.description;
+	//		obj["type"] = static_cast<ProjectType>(project.type);
+	//		obj["path"] = project.path;
 
-		for (const Project& project : projects)
-		{
-			QJsonObject obj;
-			obj["name"] = project.name;
-			obj["description"] = project.description;
-			obj["type"] = static_cast<ProjectType>(project.type);
-			obj["path"] = project.path;
-			obj["isDir"] = project.isDirectory;
-			obj["softwareExe"] = project.softwareExe;
+	//		jsonArray.append(obj);
+	//	}
 
-			jsonArray.append(obj);
-		}
+	//	QJsonDocument doc(jsonArray);
+	//	//file.write(doc.toJson());
+	//	//file.close();
+	//}
 
-		QJsonDocument doc(jsonArray);
-		file.write(doc.toJson());
-		file.close();
-	}
+	//void ProjectController::LoadProjects()
+	//{
+	//	m_projects.clear();
+	//	//emit E_ClearProjectInListWidget();
 
-	void ProjectController::LoadProjects()
-	{
-		projects.clear();
-		emit E_ClearProjectInListWidget();
+	//	//QFile file(GetProjectsFilePath());
 
-		QFile file(GetProjectsFilePath());
+	//	//if (!file.open(QIODevice::ReadOnly)) return;
 
-		if (!file.open(QIODevice::ReadOnly)) return;
+	//	QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+	//	QJsonArray jsonArray = doc.array();
 
-		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-		QJsonArray jsonArray = doc.array();
+	//	for (const QJsonValue& value : jsonArray)
+	//	{
+	//		QJsonObject obj = value.toObject();
+	//		Project project(obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool(), obj["softwareExe"].toString());
 
-		for (const QJsonValue& value : jsonArray)
-		{
-			QJsonObject obj = value.toObject();
-			Project project(obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool(), obj["softwareExe"].toString());
-
-			projects.append(project);
-			emit E_FillProjectInListWidget(project);
-		}
-		
-		file.close();
-	}
+	//		m_projects.append(project);
+	//		//emit E_FillProjectInListWidget(project);
+	//	}
+	//	
+	//	file.close();
+	//}
 
 }

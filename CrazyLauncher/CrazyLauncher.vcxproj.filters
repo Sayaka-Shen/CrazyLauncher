@@ -67,6 +67,9 @@
     <ClCompile Include="ui\widget\CategoryWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ui\widget\CategoryWidgetItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\core\ProjectController.h">
@@ -105,12 +108,24 @@
     <QtMoc Include="ui\widget\CategoryWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ui\widget\CategoryWidgetItem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\core\ProjectType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\data\Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\data\ProjectType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\data\category.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Project.h"
+#include "data/Project.h"
 
 #include <QList>
 #include <QObject>
@@ -16,28 +16,30 @@ namespace Cl
 
 	public:
 		explicit ProjectController(QObject* parent = nullptr);
-		~ProjectController() = default;
+		~ProjectController();
+
+	public:
+		/*QList<Project>& GetProjects();
+		QString GetProjectFilePath() const;
 
 		void AddProject(const Project& project);
-		void RemoveProjects(int indexProject);
-		void EditProjects(Project* baseProjectEdited);
-		void LaunchProjects(Project* project);
-		QList<Project>& GetProjects();
+		void RemoveProject(int index);
+		void EditProject(int index, Project& project);
+		void LaunchProject(Project* project);
 
-		QString GetProjectsFilePath() const;
 		void SaveProjects();
-		void LoadProjects();
+		void LoadProjects();*/
 
 	private:
-		QList<Project> projects;
+		QList<Project> m_projects;
 
 	signals:
-		void E_AddProjectToView(const Project& project);
+		void E_addProject(const Project& project);
 		void E_EditProjectToView(Project* project);
 		void E_EditProjectToDescriptionView(Project& project);
-		void E_RemoveProjectToView(int indexProject);
+		void E_removeProject(int index);
 
-		void E_ClearProjectInListWidget();
-		void E_FillProjectInListWidget(Project& project);
+		void E_clearProject();
+		void E_fillProject(Project& project);
 	};
 }

@@ -1,6 +1,6 @@
 #include "UtilityWindow.h"
 #include "core/ProjectController.h"
-#include "core/Project.h"
+#include "core/data/Project.h"
 
 #include <QCheckBox>
 #include <QHBoxLayout>
@@ -48,7 +48,7 @@ namespace Cl
 
 	bool UtilityWindow::HasOneOfTheFieldChanged(const Project& project) 
 	{
-		return project.name != m_nameField->text() || project.description != m_descField->text() || project.path != m_pathField->text() || project.softwareExe != m_softwarePathField->text();
+		return project.name != m_nameField->text() || project.description != m_descField->text() || project.path != m_pathField->text();
 	}
 	
 	void UtilityWindow::ShowSoftwarePath()

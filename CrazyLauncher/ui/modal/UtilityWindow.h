@@ -1,6 +1,6 @@
 #pragma once
 #include "QDialog"
-#include "core/Project.h"
+#include "core/data/Project.h"
 #include "widget/WindowButtonView.h"
 
 class QLabel;

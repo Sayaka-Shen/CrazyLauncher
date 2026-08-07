@@ -1,5 +1,5 @@
 #include "EditWindow.h"
-#include "core/Project.h"
+#include "core/data/Project.h"
 
 #include <QLabel>
 #include <QLineEdit>
@@ -27,7 +27,6 @@ namespace Cl
 		m_editProject->name = m_nameField->text();
 		m_editProject->description = m_descField->text();
 		m_editProject->path = m_pathField->text();
-		m_editProject->softwareExe = m_softwarePathField->text();
 		
 		emit E_EditProject(m_editProject);
 		emit E_CloseWindow();
@@ -45,7 +44,7 @@ namespace Cl
 		
 		m_pathField->setText(m_editProject->path);
 
-		if (!m_editProject->softwareExe.isEmpty())
+		/*if (!m_editProject->softwareExe.isEmpty())
 		{
 			m_softwarePathField->setText(m_editProject->softwareExe);
 			ShowSoftwarePath();
@@ -53,6 +52,6 @@ namespace Cl
 		else
 		{
 			HideSoftwarePath();
-		}
+		}*/
 	}
 }

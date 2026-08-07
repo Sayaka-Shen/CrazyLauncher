@@ -21,8 +21,6 @@ namespace Cl {
 		InitUI();
 		InitController();
 		InitConnections();
-
-		m_projectController->LoadProjects();
 	}
 
 	MainWidget::~MainWidget() { }
@@ -53,30 +51,29 @@ namespace Cl {
 
 	void MainWidget::InitController()
 	{
-		m_projectController = new ProjectController(this);
+		m_categoryController = new CategoryController(this);
 	}
-
 
 	void MainWidget::InitConnections()
 	{
 		// Manage to display project in views
-		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectWidget, &ProjectView::AddProjectInView);
+	/*	connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectWidget, &ProjectView::AddProjectInView);
 		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectWidget, &ProjectView::EditProjectInView);
-		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectWidget, &ProjectView::RemoveProjectInView);
+		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectWidget, &ProjectView::RemoveProjectInView);*/
 
-		connect(m_projectWidget->GetProjectList(), &QListWidget::currentItemChanged, this, &MainWidget::GetSelectedProjectWidget);
+		//connect(m_projectWidget->GetProjectList(), &QListWidget::currentItemChanged, this, &MainWidget::GetSelectedProjectWidget);
 		connect(this, &MainWidget::E_DisplayProject, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
-		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
+		//connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
 
 		// Load saves projects
-		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &MainWidget::ClearListWidget);
-		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &MainWidget::FillListWidget);
+	/*	connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &MainWidget::ClearListWidget);
+		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &MainWidget::FillListWidget);*/
 
 		// Filter Projects
 		connect(m_projectWidget, &ProjectView::E_FilterProjects, this, &MainWidget::FilterProjects);
 	}
 
-	void MainWidget::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
+	/*void MainWidget::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
 	{
 		if (current == nullptr) return;
 
@@ -91,7 +88,7 @@ namespace Cl {
 				m_currentProjectSelected = &project;
 			}
 		}
-	}
+	}*/
 
 	int MainWidget::GetSelectedProjectWidgetIndex()
 	{
@@ -125,25 +122,25 @@ namespace Cl {
 
 	void MainWidget::OnProjectAdded(const Project& project)
 	{
-		m_projectController->AddProject(project);
+		//m_projectController->AddProject(project);
 	}
 
 	void MainWidget::OnProjectEdited(Project* baseProjectEdited)
 	{
-		m_projectController->EditProjects(baseProjectEdited);
+		//m_projectController->EditProjects(baseProjectEdited);
 	}
 
 	void MainWidget::OnRemoveProject()
 	{
 		if (GetSelectedProjectWidgetIndex() == -1) return;
 		int currentProjectSelectedIndex = GetSelectedProjectWidgetIndex();
-		m_projectController->RemoveProjects(currentProjectSelectedIndex);
+		//m_projectController->RemoveProjects(currentProjectSelectedIndex);
 	}
 
 	void MainWidget::LaunchProject()
 	{
 		if (m_currentProjectSelected == nullptr) return;
-		m_projectController->LaunchProjects(m_currentProjectSelected);
+		//m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
 	void MainWidget::ClearListWidget()

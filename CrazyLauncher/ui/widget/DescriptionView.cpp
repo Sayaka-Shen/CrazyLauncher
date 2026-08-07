@@ -1,6 +1,6 @@
 #include "DescriptionView.h"
 #include "ProjectWidgetItem.h"
-#include "core/Project.h"
+#include "core/data/Project.h"
 
 #include <QVBoxLayout>
 #include <QLabel>
@@ -103,13 +103,13 @@ namespace Cl
 
 	void DescriptionView::OnSelectedProjectChanged(Project& project)
 	{
-		if (project.IsEmpty())
+		/*if (project.IsEmpty())
 		{
 			SetDefaultValue();
 			return;
-		}
+		}*/
 
-		m_title->setText(project.name);
+		/*m_title->setText(project.name);
 		m_descriptionField->setText(project.description);
 		m_pathField->setText(project.path);
 
@@ -123,6 +123,6 @@ namespace Cl
 			m_pathSoftware->show();
 			m_pathSoftwareField->show();
 			m_pathSoftwareField->setText(project.softwareExe);
-		}
+		}*/
 	}
 }

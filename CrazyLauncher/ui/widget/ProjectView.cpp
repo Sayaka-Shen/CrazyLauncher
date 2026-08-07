@@ -1,6 +1,6 @@
 #include "ProjectView.h"
 #include "ProjectWidgetItem.h"
-#include "core/Project.h"
+#include "core/data/Project.h"
 
 #include <QLineEdit>
 #include <QListWidget>
