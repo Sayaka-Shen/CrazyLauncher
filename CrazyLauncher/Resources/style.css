@@ -1,24 +1,83 @@
-/* Main Window */
 QMainWindow {
-    background-color: #1C212C;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(59, 59, 59);
-    border-radius: 8px;
+    background-color: #101216;
 }
 
+QDialog {
+    background-color: #101216;
+}
+
+QLineEdit {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(33, 37, 42);
+    border-radius: 4px;
+    color: #fff;
+    background-color: #101216;
+    padding: 6px;
+}
+
+QPushButton {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(33, 37, 42);
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+QPushButton:checked {
+    border-color: rgb(75, 56, 168);
+}
+
+QPushButton:hover {
+    border-color: rgb(46, 51, 59);
+}
+
+QPushButton:hover:checked {
+    border-color: rgb(75, 56, 168);
+}
+
+/* Style of descriptions */
+#description {
+    font-size: 14px;
+}
+
+/* Validation buttons */
+#validationButtons {
+    border: none;
+    background-color: rgb(75, 56, 168);
+    font: #fff;
+}
+
+#validationButtons:hover {
+    background-color: rgb(73, 52, 181);
+}
+
+/* Specific addCategoryButton style */
+#addCategoryButton {
+    border: none;
+    padding: 0;
+}
+
+/* Style for the category panel border side */
+#categoryPanel {
+    border-right: 1px solid rgb(27, 33, 42);
+}
+
+/* Style for all the grey text */
+#grey {
+    color: rgb(168, 173, 181);
+}
+
+
+
 /* --- ProjectView --- */
-#ProjectView 
-{
+#ProjectView {
 }
 
 #SearchBar 
 {
     background-color: #262A35;
     border: 1px solid #333743;
-    border-radius: 2px;
-    padding: 8px;
-    color: #ffffff;
 }
 
 QListWidget 

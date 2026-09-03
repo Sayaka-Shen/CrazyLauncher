@@ -5,7 +5,7 @@ namespace Cl
 {
 	CrazyLauncher::CrazyLauncher(QWidget* parent) : QMainWindow(parent), m_mainWidget(InitMainWidget(this))
 	{
-		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+		setWindowIcon(QIcon(":/resources/LogoCrazyLauncher.ico"));
 		setMinimumSize(1600, 900);
 	}
 

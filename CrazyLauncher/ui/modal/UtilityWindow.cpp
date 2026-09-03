@@ -20,7 +20,7 @@ namespace Cl
 		setObjectName("UtilityWindow");
 		setAttribute(Qt::WA_StyledBackground, true);
 
-		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+		setWindowIcon(QIcon(":/resources/LogoCrazyLauncher.ico"));
 
 		CreateLayout();
 		CreateUI();

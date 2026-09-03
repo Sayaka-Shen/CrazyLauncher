@@ -70,6 +70,15 @@
     <ClCompile Include="ui\widget\CategoryWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\CategoryController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\modal\CategoryModal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\utils\Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\core\ProjectController.h">
@@ -111,6 +120,12 @@
     <QtMoc Include="ui\widget\CategoryWidgetItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ui\modal\CategoryModal.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\core\CategoryController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Project.h">
@@ -126,6 +141,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\core\data\category.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\utils\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\data\CategoryModalData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

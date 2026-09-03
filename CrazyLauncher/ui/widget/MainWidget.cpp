@@ -56,13 +56,20 @@ namespace Cl {
 
 	void MainWidget::InitConnections()
 	{
+		/* Get new category data created from Category Widget */
+		connect(m_categoryWidget, CategoryWidget::E_createCategory, this, MainWidget::OnCreateCategory);
+
+
+
+		connect(this, &MainWidget::E_DisplayProject, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
+		connect(m_projectWidget, &ProjectView::E_FilterProjects, this, &MainWidget::FilterProjects);
+
 		// Manage to display project in views
 	/*	connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectWidget, &ProjectView::AddProjectInView);
 		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectWidget, &ProjectView::EditProjectInView);
 		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectWidget, &ProjectView::RemoveProjectInView);*/
 
 		//connect(m_projectWidget->GetProjectList(), &QListWidget::currentItemChanged, this, &MainWidget::GetSelectedProjectWidget);
-		connect(this, &MainWidget::E_DisplayProject, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
 		//connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
 
 		// Load saves projects
@@ -70,32 +77,20 @@ namespace Cl {
 		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &MainWidget::FillListWidget);*/
 
 		// Filter Projects
-		connect(m_projectWidget, &ProjectView::E_FilterProjects, this, &MainWidget::FilterProjects);
 	}
 
-	/*void MainWidget::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
-	{
-		if (current == nullptr) return;
-
-		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectWidget->GetProjectList()->itemWidget(current));
-		if (itemWidget == nullptr) return;
-
-		for (Project& project : m_projectController->GetProjects())
-		{
-			if (project.name == itemWidget->GetProjectTitle())
-			{
-				emit E_DisplayProject(project);
-				m_currentProjectSelected = &project;
-			}
-		}
-	}*/
-
-	int MainWidget::GetSelectedProjectWidgetIndex()
-	{
-		return m_projectWidget->GetProjectList()->currentRow();
-	}
-
+	
+	
 	// SLOTS
+	void MainWidget::OnCreateCategory(const CategoryModalData& data)
+	{
+
+	}
+
+
+
+
+
 	void MainWidget::CreateAddWindow()
 	{
 		if (m_addWindow != nullptr) return;
@@ -177,5 +172,30 @@ namespace Cl {
 			m_editWindow = nullptr;
 		}
 	}
+
+
+
+	/*void MainWidget::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
+	{
+		if (current == nullptr) return;
+
+		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectWidget->GetProjectList()->itemWidget(current));
+		if (itemWidget == nullptr) return;
+
+		for (Project& project : m_projectController->GetProjects())
+		{
+			if (project.name == itemWidget->GetProjectTitle())
+			{
+				emit E_DisplayProject(project);
+				m_currentProjectSelected = &project;
+			}
+		}
+	}*/
+
+	int MainWidget::GetSelectedProjectWidgetIndex()
+	{
+		return m_projectWidget->GetProjectList()->currentRow();
+	}
+
 
 }

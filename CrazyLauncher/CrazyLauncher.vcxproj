@@ -110,6 +110,7 @@
     <ClCompile Include="ui\modal\CategoryModal.cpp" />
     <ClCompile Include="ui\modal\EditWindow.cpp" />
     <ClCompile Include="ui\modal\UtilityWindow.cpp" />
+    <ClCompile Include="ui\utils\Utils.cpp" />
     <ClCompile Include="ui\widget\CategoryWidget.cpp" />
     <ClCompile Include="ui\widget\CategoryWidgetItem.cpp" />
     <ClCompile Include="ui\widget\DescriptionView.cpp" />
@@ -122,6 +123,8 @@
     <QtRcc Include="Resources\Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ui\data\CategoryModalData.h" />
+    <ClInclude Include="ui\utils\Utils.h" />
     <QtMoc Include="ui\modal\CategoryModal.h" />
     <QtMoc Include="src\core\CategoryController.h" />
     <ClInclude Include="src\core\data\category.h" />

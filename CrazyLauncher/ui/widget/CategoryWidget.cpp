@@ -1,6 +1,8 @@
 #include "CategoryWidget.h"
 #include "CategoryWidgetItem.h"
 #include "modal/CategoryModal.h"
+#include <utils/Utils.h>
+#include <data/CategoryModalData.h>
 
 #include <QVBoxLayout>
 #include <QLabel>
@@ -11,6 +13,8 @@ namespace Cl
 {
 	CategoryWidget::CategoryWidget(QWidget* parent /*= nullptr*/) : QWidget(parent)
 	{
+		setObjectName("categoryPanel");
+		setAttribute(Qt::WA_StyledBackground, true);
 		InitUI();
 		InitConnections(); 
 	}
@@ -18,44 +22,69 @@ namespace Cl
 	void CategoryWidget::InitUI()
 	{
 		m_mainLayout = new QVBoxLayout(this);
-		m_titleLayout = new QHBoxLayout();
-		m_listingLayout = new QVBoxLayout();
-		m_settingsLayout = new QVBoxLayout();
+		m_mainLayout->setContentsMargins(8, 20, 8, 20);
 
-		m_mainLayout->setContentsMargins(8, 8, 8, 8);
+		// Title Name Section
+		auto* titleSection = new QHBoxLayout();
+		titleSection->setContentsMargins(8, 0, 10, 0);
+		m_titleWidget = new QLabel("CATEGORIES");
+		m_titleWidget->setObjectName("grey");
+		Cl::Utils::SetWidgetFont(600, m_titleWidget);
+		m_newCategory = new QPushButton();
+		m_newCategory->setObjectName("addCategoryButton");
+		m_newCategory->setIcon(QIcon(":/resources/assets/plus_grey_icon.png"));
+		m_newCategory->setIconSize(QSize(14, 14));
+		Cl::Utils::SetWidgetFont(100, m_newCategory);
+		titleSection->addWidget(m_titleWidget);
+		titleSection->addStretch();
+		titleSection->addWidget(m_newCategory);
 
-		// Title layout "Category   +"
-		m_titleWidget = new QLabel("Category");
-		m_newCategory = new QPushButton("+");
-		m_categoryModal = new CategoryModal();
-		m_titleLayout->addWidget(m_titleWidget);
-		m_titleLayout->addWidget(m_newCategory);
+		m_mainLayout->addLayout(titleSection);
 
-		// Listing category layout
+		// Listing Category Name Section
+		auto* categoryListSection = new QVBoxLayout();
 		m_categoryList = new QListWidget();
-		m_listingLayout->addWidget(m_categoryList);
+		categoryListSection->addWidget(m_categoryList);
+
+		m_mainLayout->addLayout(categoryListSection);
 
 		// Settings layout
-		m_backgroundStyleSettings = new QPushButton("");
-		m_settingsLayout->addWidget(m_backgroundStyleSettings);
+		auto* settingsSection = new QVBoxLayout();
+		settingsSection->setContentsMargins(8, 0, 10, 0);
+		m_backgroundStyleSettings = new QPushButton("Parametres");
+		settingsSection->addWidget(m_backgroundStyleSettings);
 
-		m_mainLayout->addLayout(m_titleLayout);
-		m_mainLayout->addLayout(m_listingLayout);
-		m_mainLayout->addLayout(m_settingsLayout);
+		m_mainLayout->addLayout(settingsSection);
 	}
 
 	void CategoryWidget::InitConnections()
 	{
-		connect(m_newCategory, &QPushButton::pressed, m_categoryModal, &CategoryModal::open);
+		connect(m_newCategory, &QPushButton::clicked, this, &CategoryWidget::OnCreateModalCategory);
 	}
 
-	void CategoryWidget::AddCategory()
+	void CategoryWidget::OnCreateModalCategory()
+	{
+		auto* modal = new CategoryModal(this);
+		modal->setFixedWidth(400);
+		modal->setMaximumHeight(600);
+		modal->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint, true);
+
+		connect(modal, &CategoryModal::E_validateAction, this, &CategoryWidget::OnCategoryValidated);
+		modal->exec();
+	}
+
+	void CategoryWidget::OnCategoryValidated(const CategoryModalData& data)
+	{
+		emit E_createCategory(data);
+		AddCategory(data);
+	}
+
+	void CategoryWidget::AddCategory(const CategoryModalData& data)
 	{
 		QListWidgetItem* item = new QListWidgetItem(m_categoryList);
 		item->setSizeHint(QSize(0, 65));
 		
-		CategoryWidgetItem* categoryWidgetItem = new CategoryWidgetItem("Blender", this);
+		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, this);
 		m_categoryList->setItemWidget(item, categoryWidgetItem);
 	}
-
 }

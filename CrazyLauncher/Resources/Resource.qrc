@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
+    <qresource prefix="/resources">
         <file>style.css</file>
         <file>assets/Folder-Icon.png</file>
         <file>assets/Bin-Icon.png</file>
@@ -8,5 +8,12 @@
         <file>assets/folder-black-white.png</file>
         <file>assets/Plus-Icon.png</file>
         <file>assets/LogoCrazyLauncher.png</file>
+        <file>assets/unityIcon.png</file>
+        <file>assets/ueIcon.png</file>
+        <file>assets/photoshopIcon.png</file>
+        <file>assets/blenderIcon.png</file>
+        <file>assets/visualStudioIcon.png</file>
+        <file>assets/folderCategoryIcon.png</file>
+        <file>assets/plus_grey_icon.png</file>
     </qresource>
 </RCC>

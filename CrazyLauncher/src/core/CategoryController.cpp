@@ -10,7 +10,7 @@ namespace Cl
 		return m_categories;
 	}
 
-	void CategoryController::AddCategory(const Category& category)
+	void CategoryController::AddCategory(const CategoryModalData& category)
 	{
 		m_categories.append(category);
 		emit E_addCategory(category);

@@ -1,6 +1,7 @@
 #pragma once
 #include "QWidget"
 #include "core/CategoryController.h"
+#include "data/CategoryModalData.h"
 
 class QListWidgetItem;
 class QVBoxLayout;
@@ -73,5 +74,7 @@ namespace Cl
 	signals:
 		void E_DisplayProject(Project& project);
 
+	private slots:
+		void OnCreateCategory(const CategoryModalData& data);
 	};
 }

@@ -10,6 +10,7 @@ class QFrame;
 
 namespace Cl
 {
+	struct CategoryModalData;
 	class CategoryModal;
 
 	class CategoryWidget : public QWidget
@@ -20,13 +21,9 @@ namespace Cl
 		explicit CategoryWidget(QWidget* parent = nullptr);
 		~CategoryWidget() = default;
 
-		void AddCategory();
 
 	private:
 		QVBoxLayout* m_mainLayout;
-		QHBoxLayout* m_titleLayout;
-		QVBoxLayout* m_listingLayout;
-		QVBoxLayout* m_settingsLayout;
 
 		QLabel* m_titleWidget;
 		QPushButton* m_newCategory; 
@@ -39,6 +36,14 @@ namespace Cl
 	private:
 		void InitUI();
 		void InitConnections();
+		void AddCategory(const CategoryModalData& data);
+
+	signals:
+		void E_createCategory(const CategoryModalData& data);
+
+	private slots: 
+		void OnCreateModalCategory();
+		void OnCategoryValidated(const CategoryModalData& data);
 		
 	}; 
 }
