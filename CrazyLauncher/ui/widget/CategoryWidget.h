@@ -39,6 +39,7 @@ namespace Cl
 
 	signals:
 		void E_createCategory(const CategoryModalData& data);
+		int E_getNumberOfProject(QString categoryName);
 
 	private slots: 
 		void OnCreateModalCategory();

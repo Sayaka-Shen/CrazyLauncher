@@ -84,7 +84,7 @@ namespace Cl
 		QListWidgetItem* item = new QListWidgetItem(m_categoryList);
 		item->setSizeHint(QSize(0, 65));
 		
-		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, this);
+		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, E_getNumberOfProject(data.name), data.iconPath, this);
 		m_categoryList->setItemWidget(item, categoryWidgetItem);
 	}
 }

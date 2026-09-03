@@ -6,21 +6,22 @@
 
 namespace Cl
 {
-	CategoryWidgetItem::CategoryWidgetItem(QString name, QWidget* parent) : QWidget(parent)
+	CategoryWidgetItem::CategoryWidgetItem(QString name, int projectNb, QString iconPath, QWidget* parent /*= nullptr*/) : 
+		QWidget(parent), m_categoryName(name), m_projectNb(projectNb), m_iconPath(iconPath)
 	{
-		InitUI(name);
+		InitUI();
 	}
 
-	void CategoryWidgetItem::InitUI(QString name)
+	void CategoryWidgetItem::InitUI()
 	{
 		m_mainLayout = new QHBoxLayout(this);
-		m_infoLayout = new QVBoxLayout();
 		
-		m_categoryName = new QLabel(name);
-		m_categoryProjectNumber = new QLabel("12 projets");
-		m_infoLayout->addWidget(m_categoryName);
-		m_infoLayout->addWidget(m_categoryProjectNumber);
+		auto* infoLayout = new QVBoxLayout();
+		m_categoryNameLabel = new QLabel(m_categoryName);
+		m_categoryProjectNumber = new QLabel(QString::number(m_projectNb) + " projets");
+		infoLayout->addWidget(m_categoryNameLabel);
+		infoLayout->addWidget(m_categoryProjectNumber);
 
-		m_mainLayout->addLayout(m_infoLayout);
+		m_mainLayout->addLayout(infoLayout);
 	}
 }

@@ -149,7 +149,7 @@ namespace Cl
 		}
 	}
 
-	QPushButton* CategoryModal::AddIconButtons(const QString& filepath, const QString& iconName /* "" */)
+	QPushButton* CategoryModal::AddIconButtons(const QString& filepath, const QString& iconName /*="" */)
 	{
 		QString displayName = iconName.isEmpty() ? QFileInfo(filepath).baseName() : iconName;
 

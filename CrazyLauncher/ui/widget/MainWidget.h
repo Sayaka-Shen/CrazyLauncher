@@ -75,5 +75,6 @@ namespace Cl
 
 	private slots:
 		void OnCreateCategory(const CategoryModalData& data);
+		int OnGetNumberOfProjects(QString categoryName);
 	};
 }

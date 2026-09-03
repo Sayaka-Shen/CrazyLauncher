@@ -61,6 +61,9 @@ namespace Cl {
 		/* Get new category data created from Category Widget */
 		connect(m_categoryWidget, &CategoryWidget::E_createCategory, this, &MainWidget::OnCreateCategory);
 
+		/* Get dynamically a number of project in a category by name */
+		connect(m_categoryWidget, &CategoryWidget::E_getNumberOfProject, this, &MainWidget::OnGetNumberOfProjects);
+
 
 
 		connect(this, &MainWidget::E_DisplayProject, m_descWidget, &DescriptionView::OnSelectedProjectChanged);
@@ -81,10 +84,24 @@ namespace Cl {
 		// Filter Projects
 	}
 
+	/* Categories */
 	void MainWidget::OnCreateCategory(const CategoryModalData& data)
 	{
 		Category category = Category(data.iconPath, data.name, data.softwarePath);
 		m_categoryController->AddCategory(category);
+	}
+
+	int MainWidget::OnGetNumberOfProjects(QString categoryName)
+	{
+		for (Category category : m_categoryController->GetCategories())
+		{
+			if (category.name == categoryName)
+			{
+				return category.projects.size();
+			}
+		}
+
+		return -1;
 	}
 
 

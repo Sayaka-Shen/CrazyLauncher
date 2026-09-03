@@ -1,5 +1,7 @@
 #include "CategoryController.h"
 
+#include <QDebug>
+
 namespace Cl
 {
 	CategoryController::CategoryController(QObject* parent /* nullptr */) : QObject(parent) { }
@@ -12,6 +14,8 @@ namespace Cl
 	void CategoryController::AddCategory(const Category& category)
 	{
 		m_categories.append(category);
+		qDebug() << m_categories.length();
+		qDebug() << m_categories[0].name;
 	}
 
 	void CategoryController::RemoveCategory(size_t index)

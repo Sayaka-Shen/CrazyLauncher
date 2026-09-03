@@ -13,18 +13,21 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		explicit CategoryWidgetItem(QString name, QWidget* parent);
+		explicit CategoryWidgetItem(QString name, int projectNb, QString iconPath, QWidget* parent = nullptr);
 		~CategoryWidgetItem() = default;
 
 	private:
 		QHBoxLayout* m_mainLayout;
-		QVBoxLayout* m_infoLayout;
 
-		QLabel* m_categoryName;
+		QString m_categoryName;
+		int m_projectNb;
+		QString m_iconPath;
+
+		QLabel* m_categoryNameLabel;
 		QLabel* m_categoryProjectNumber;
 
 	private: 
-		void InitUI(QString name);
+		void InitUI();
 
 	};
 }
