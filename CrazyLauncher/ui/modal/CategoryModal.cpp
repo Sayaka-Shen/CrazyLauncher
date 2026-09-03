@@ -110,6 +110,7 @@ namespace Cl
 		connect(m_cancelBtn, &QPushButton::clicked, this, &CategoryModal::OnCancelAction);
 		connect(m_validateBtn, &QPushButton::clicked, this, &CategoryModal::OnValidateAction);
 		connect(m_addIconBtn, &QPushButton::clicked, this, &CategoryModal::OnAddIcons);
+		connect(m_browseSoftwareBtn, &QPushButton::clicked, this, &CategoryModal::OnBrowseSoftware);
 	}
 
 	void CategoryModal::LoadDefaultIcons()
@@ -209,5 +210,10 @@ namespace Cl
 			QPushButton* btn = AddIconButtons(destpath);
 			btn->setChecked(true);
 		}
+	}
+
+	void CategoryModal::OnBrowseSoftware()
+	{
+		m_defaultSoftwareInput->setText(QFileDialog::getOpenFileName(this, "Choisir un logiciel", QString(), "Logiciel (*.exe)"));
 	}
 }

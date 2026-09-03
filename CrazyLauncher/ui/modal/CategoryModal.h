@@ -57,6 +57,7 @@ namespace Cl
 		void OnCancelAction();
 		void OnValidateAction();
 		void OnAddIcons();
+		void OnBrowseSoftware();
 
 	signals:
 		void E_validateAction(const CategoryModalData& data);
