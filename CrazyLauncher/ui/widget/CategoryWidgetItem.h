@@ -23,6 +23,7 @@ namespace Cl
 		int m_projectNb;
 		QString m_iconPath;
 
+		QLabel* m_categoryIconLabel;
 		QLabel* m_categoryNameLabel;
 		QLabel* m_categoryProjectNumber;
 

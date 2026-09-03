@@ -43,6 +43,7 @@ namespace Cl
 
 		// Listing Category Name Section
 		auto* categoryListSection = new QVBoxLayout();
+		categoryListSection->setContentsMargins(5, 12, 5, 12);
 		m_categoryList = new QListWidget();
 		categoryListSection->addWidget(m_categoryList);
 
@@ -85,6 +86,7 @@ namespace Cl
 		item->setSizeHint(QSize(0, 65));
 		
 		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, E_getNumberOfProject(data.name), data.iconPath, this);
+		categoryWidgetItem->setFixedHeight(70);
 		m_categoryList->setItemWidget(item, categoryWidgetItem);
 	}
 }
