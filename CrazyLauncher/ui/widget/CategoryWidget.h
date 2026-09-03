@@ -19,8 +19,7 @@ namespace Cl
 
 	public:
 		explicit CategoryWidget(QWidget* parent = nullptr);
-		~CategoryWidget() = default;
-
+		~CategoryWidget() override = default;
 
 	private:
 		QVBoxLayout* m_mainLayout;

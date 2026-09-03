@@ -10,7 +10,7 @@ namespace Cl
 
 	public:
 		explicit CategoryController(QObject* parent = nullptr);
-		~CategoryController();
+		~CategoryController() = default;
 
 	public:
 		const QList<Category>& GetCategories() const;
@@ -26,7 +26,6 @@ namespace Cl
 		QList<Category> m_categories;
 
 	signals:
-		void E_addCategory(const Category& category);
 		void E_editCategory(size_t index, Category& category);
 		void E_removeCategory(size_t index);
 

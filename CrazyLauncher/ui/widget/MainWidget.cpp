@@ -1,6 +1,7 @@
 #include "MainWidget.h"
 
 #include "core/ProjectController.h"
+#include "core/data/category.h"
 #include "ProjectWidgetItem.h"
 #include "CategoryWidget.h"
 #include "ProjectView.h"
@@ -23,30 +24,31 @@ namespace Cl {
 		InitConnections();
 	}
 
-	MainWidget::~MainWidget() { }
-
 	void MainWidget::InitUI()
 	{
-		m_categoryWidget = new CategoryWidget();
-		m_projectWidget = new ProjectView();
-		m_descWidget = new DescriptionView();
-
 		m_mainLayout = new QHBoxLayout(this);
-		m_categoryLayout = new QHBoxLayout();
-		m_projectLayout = new QHBoxLayout();
-		m_descLayout = new QVBoxLayout();
-
 		m_mainLayout->setContentsMargins(0, 0, 0, 0);
+
+		m_categoryWidget = new CategoryWidget();
 		m_categoryWidget->setFixedWidth(220);
+
+		m_mainLayout->addWidget(m_categoryWidget);
+
+		m_projectWidget = new ProjectView();
+
+		m_mainLayout->addWidget(m_projectWidget);
+
+		m_descWidget = new DescriptionView();
 		m_descWidget->setFixedWidth(300);
 
-		m_categoryLayout->addWidget(m_categoryWidget);
-		m_projectLayout->addWidget(m_projectWidget);
-		m_descLayout->addWidget(m_descWidget);
+		m_mainLayout->addWidget(m_descWidget);
 
-		m_mainLayout->addLayout(m_categoryLayout);
+		/*m_projectLayout = new QHBoxLayout();
+		m_descLayout = new QVBoxLayout();
 		m_mainLayout->addLayout(m_projectLayout);
 		m_mainLayout->addLayout(m_descLayout);
+		m_projectLayout->addWidget(m_projectWidget);
+		m_descLayout->addWidget(m_descWidget);*/
 	}
 
 	void MainWidget::InitController()
@@ -57,7 +59,7 @@ namespace Cl {
 	void MainWidget::InitConnections()
 	{
 		/* Get new category data created from Category Widget */
-		connect(m_categoryWidget, CategoryWidget::E_createCategory, this, MainWidget::OnCreateCategory);
+		connect(m_categoryWidget, &CategoryWidget::E_createCategory, this, &MainWidget::OnCreateCategory);
 
 
 
@@ -79,12 +81,10 @@ namespace Cl {
 		// Filter Projects
 	}
 
-	
-	
-	// SLOTS
 	void MainWidget::OnCreateCategory(const CategoryModalData& data)
 	{
-
+		Category category = Category(data.iconPath, data.name, data.softwarePath);
+		m_categoryController->AddCategory(category);
 	}
 
 

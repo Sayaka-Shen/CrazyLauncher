@@ -25,7 +25,7 @@ namespace Cl
 
 	public:
 		explicit MainWidget(QWidget* parent = nullptr);
-		~MainWidget();
+		~MainWidget() override = default;
 
 		void CreateAddWindow();
 		void CreateEditWindow();
@@ -46,11 +46,10 @@ namespace Cl
 		CategoryController* m_categoryController;
 		Project* m_currentProjectSelected;
 
-		// Main app layout
+		//// Main app layout
 		QHBoxLayout* m_mainLayout;
-		QHBoxLayout* m_projectLayout;
-		QHBoxLayout* m_categoryLayout;
-		QVBoxLayout* m_descLayout;
+		//QHBoxLayout* m_projectLayout;
+		//QVBoxLayout* m_descLayout;
 
 		// Main app views
 		CategoryWidget* m_categoryWidget;
@@ -67,7 +66,7 @@ namespace Cl
 
 		// Get  Set
 		void InitController();
-		void GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous);
+		//void GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous);
 		int GetSelectedProjectWidgetIndex();
 
 

@@ -3,17 +3,15 @@
 namespace Cl
 {
 	CategoryController::CategoryController(QObject* parent /* nullptr */) : QObject(parent) { }
-	CategoryController::~CategoryController() {}
 
 	const QList<Category>& CategoryController::GetCategories() const
 	{
 		return m_categories;
 	}
 
-	void CategoryController::AddCategory(const CategoryModalData& category)
+	void CategoryController::AddCategory(const Category& category)
 	{
 		m_categories.append(category);
-		emit E_addCategory(category);
 	}
 
 	void CategoryController::RemoveCategory(size_t index)
