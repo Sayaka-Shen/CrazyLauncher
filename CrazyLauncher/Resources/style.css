@@ -43,6 +43,7 @@ QListWidget {
 
 QListWidget::item {
     background: transparent;
+    border-radius: 5px;
     border: none;
 }
 
@@ -52,8 +53,8 @@ QListWidget::item:hover {
 }
 
 QListWidget::item:selected {
-    background: transparent;
-    border: none;
+    background-color: rgba(56, 48, 110, 0.35);
+    border-left: 2px solid rgb(75, 65, 150);
 }
 
 /* Style of descriptions */
@@ -90,10 +91,16 @@ QListWidget::item:selected {
 
 /* Style for all the category card */
 #categoryCard {
-    background-color: rgba(56, 48, 110, 0.35);
-    border-left: 2px solid rgb(75, 65, 150);
-    border-radius: 5px;
+    
 }
+
+#categoryCard:selected
+{
+    
+}
+
+
+
 
 
 

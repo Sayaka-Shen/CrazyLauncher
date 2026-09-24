@@ -18,7 +18,7 @@ namespace Cl
 	void CategoryWidgetItem::InitUI()
 	{
 		m_mainLayout = new QHBoxLayout(this);
-		
+
 		m_categoryIconLabel = new QLabel();
 		m_categoryIconLabel->setContentsMargins(10, 0, 10, 0);
 		QPixmap pixmap(m_iconPath);

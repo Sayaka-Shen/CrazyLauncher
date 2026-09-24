@@ -43,10 +43,10 @@ namespace Cl
 
 		// Listing Category Name Section
 		auto* categoryListSection = new QVBoxLayout();
-		categoryListSection->setContentsMargins(5, 12, 5, 12);
+		categoryListSection->setContentsMargins(3, 12, 3, 12);
 		m_categoryList = new QListWidget();
+		m_categoryList->setSpacing(2);
 		categoryListSection->addWidget(m_categoryList);
-
 		m_mainLayout->addLayout(categoryListSection);
 
 		// Settings layout
@@ -82,11 +82,13 @@ namespace Cl
 
 	void CategoryWidget::AddCategory(const CategoryModalData& data)
 	{
+		int itemHeight = 70;
+
 		QListWidgetItem* item = new QListWidgetItem(m_categoryList);
-		item->setSizeHint(QSize(0, 65));
+		item->setSizeHint(QSize(0, itemHeight));
 		
 		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, E_getNumberOfProject(data.name), data.iconPath, this);
-		categoryWidgetItem->setFixedHeight(70);
+		categoryWidgetItem->setFixedHeight(itemHeight);
 		m_categoryList->setItemWidget(item, categoryWidgetItem);
 	}
 }
