@@ -1,5 +1,7 @@
 #pragma once
 #include <QWidget>
+#include "core/data/category.h"
+#include "core/data/project.h"
 
 class QLineEdit;
 class QListWidget;
@@ -7,32 +9,24 @@ class QVBoxLayout;
 
 namespace Cl
 {
-	struct Project;
-
-	class ProjectView : public QWidget
+	class ProjectListWidget : public QWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit ProjectView(QWidget* parent = nullptr);
-		~ProjectView();
+		explicit ProjectListWidget(Category currentCategory, QWidget* parent = nullptr);
+		~ProjectListWidget() override = default;	
 
 		QListWidget* GetProjectList();
 
 	private:
-		QVBoxLayout* m_projectViewLayout;
-		QLineEdit* m_searchBar;
+		QVBoxLayout* m_projectListWidgetLayout;
 		QListWidget* m_projectsList;
+		Category m_currentCategory;
 
-		void CreateLayout();
-		void CreateUI();
+	private:
+		void InitUI();
 		void SetupLayout();
-		void SetupConnections();
-
-		void OnProjetFilter(const QString& text);
-
-	signals:
-		void E_FilterProjects(const QString& text);
 
 	public slots:
 		void AddProjectInView(const Project& project);

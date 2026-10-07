@@ -22,8 +22,12 @@ namespace Cl
 		void EditProject(int index, int categoryId, Project& newProject);
 		void DeleteProject(int index, int categoryId);
 
+		const Category& GetCategorySelected();
+		void SetCategorySelected(Category newCategory);
+
 	private:
 		QList<Category> m_categories;
+		Category m_categorySelected;
 
 	signals:
 		void E_editCategory(size_t index, Category& category);

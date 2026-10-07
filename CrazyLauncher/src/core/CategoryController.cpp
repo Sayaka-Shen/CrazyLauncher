@@ -4,7 +4,9 @@
 
 namespace Cl
 {
-	CategoryController::CategoryController(QObject* parent /* nullptr */) : QObject(parent) { }
+	CategoryController::CategoryController(QObject* parent /* nullptr */) : QObject(parent), m_categorySelected(Category{})
+	{
+	}
 
 	const QList<Category>& CategoryController::GetCategories() const
 	{
@@ -14,8 +16,6 @@ namespace Cl
 	void CategoryController::AddCategory(const Category& category)
 	{
 		m_categories.append(category);
-		qDebug() << m_categories.length();
-		qDebug() << m_categories[0].name;
 	}
 
 	void CategoryController::RemoveCategory(size_t index)
@@ -55,4 +55,13 @@ namespace Cl
 		emit E_deleteProject(index, categoryId);
 	}
 
+	const Category& CategoryController::GetCategorySelected()
+	{
+		return m_categorySelected;
+	}
+
+	void CategoryController::SetCategorySelected(Category newCategory)
+	{
+		m_categorySelected = newCategory;
+	}
 }

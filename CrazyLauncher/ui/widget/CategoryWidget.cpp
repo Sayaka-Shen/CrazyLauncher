@@ -90,5 +90,6 @@ namespace Cl
 		auto* categoryWidgetItem = new CategoryWidgetItem(data.name, E_getNumberOfProject(data.name), data.iconPath, this);
 		categoryWidgetItem->setFixedHeight(itemHeight);
 		m_categoryList->setItemWidget(item, categoryWidgetItem);
+		m_categoryList->setCurrentItem(item);
 	}
 }

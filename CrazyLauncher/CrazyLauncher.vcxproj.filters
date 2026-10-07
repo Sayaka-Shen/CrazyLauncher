@@ -46,9 +46,6 @@
     <ClCompile Include="ui\widget\DescriptionView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\widget\ProjectView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ui\widget\ProjectWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,6 +76,12 @@
     <ClCompile Include="ui\utils\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ui\widget\ProjectListWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\widget\ProjectTopWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\core\ProjectController.h">
@@ -102,9 +105,6 @@
     <QtMoc Include="ui\widget\DescriptionView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ui\widget\ProjectView.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="ui\widget\ProjectWidgetItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -124,6 +124,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\core\CategoryController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\widget\ProjectListWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\widget\ProjectTopWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -174,6 +180,27 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="resources\assets\LogoCrazyLauncher.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\blenderIcon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\folderCategoryIcon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\plus_grey_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\photoshopIcon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\ueIcon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\unityIcon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\assets\visualStudioIcon.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

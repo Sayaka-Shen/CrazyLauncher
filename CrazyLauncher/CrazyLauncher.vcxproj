@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ui\widget\ProjectTopWidget.cpp" />
     <ClCompile Include="src\core\CategoryController.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -115,7 +116,7 @@
     <ClCompile Include="ui\widget\CategoryWidgetItem.cpp" />
     <ClCompile Include="ui\widget\DescriptionView.cpp" />
     <ClCompile Include="ui\widget\MainWidget.cpp" />
-    <ClCompile Include="ui\widget\ProjectView.cpp" />
+    <ClCompile Include="ui\widget\ProjectListWidget.cpp" />
     <ClCompile Include="ui\widget\ProjectWidgetItem.cpp" />
     <ClCompile Include="ui\widget\SettingsView.cpp" />
     <ClCompile Include="ui\widget\WindowButtonView.cpp" />
@@ -123,8 +124,10 @@
     <QtRcc Include="Resources\Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ui\widget\ProjectTopWidget.h" />
     <ClInclude Include="ui\data\CategoryModalData.h" />
     <ClInclude Include="ui\utils\Utils.h" />
+    <QtMoc Include="ui\widget\ProjectListWidget.h" />
     <QtMoc Include="ui\modal\CategoryModal.h" />
     <QtMoc Include="src\core\CategoryController.h" />
     <ClInclude Include="src\core\data\category.h" />
@@ -139,7 +142,6 @@
     <QtMoc Include="ui\modal\EditWindow.h" />
     <QtMoc Include="ui\modal\UtilityWindow.h" />
     <QtMoc Include="ui\widget\DescriptionView.h" />
-    <QtMoc Include="ui\widget\ProjectView.h" />
     <QtMoc Include="ui\widget\ProjectWidgetItem.h" />
     <QtMoc Include="ui\widget\SettingsView.h" />
     <QtMoc Include="ui\widget\WindowButtonView.h" />
@@ -152,12 +154,19 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\assets\Bin-Icon.png" />
+    <Image Include="resources\assets\blenderIcon.png" />
     <Image Include="resources\assets\Edit-Icon.png" />
     <Image Include="resources\assets\folder-black-white.png" />
     <Image Include="resources\assets\Folder-Icon.png" />
+    <Image Include="resources\assets\folderCategoryIcon.png" />
     <Image Include="resources\assets\LogoCrazyLauncher.ico" />
     <Image Include="resources\assets\LogoCrazyLauncher.png" />
+    <Image Include="resources\assets\photoshopIcon.png" />
     <Image Include="resources\assets\Plus-Icon.png" />
+    <Image Include="resources\assets\plus_grey_icon.png" />
+    <Image Include="resources\assets\ueIcon.png" />
+    <Image Include="resources\assets\unityIcon.png" />
+    <Image Include="resources\assets\visualStudioIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Resource.rc" />

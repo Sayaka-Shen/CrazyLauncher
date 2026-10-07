@@ -17,7 +17,8 @@ namespace Cl
 	class DescriptionView;
 	class ProjectView;
 	class ProjectController;
-	
+	class ProjectListWidget;
+	class ProjectTopWidget;
 
 	class MainWidget : public QWidget
 	{
@@ -48,12 +49,11 @@ namespace Cl
 
 		//// Main app layout
 		QHBoxLayout* m_mainLayout;
-		//QHBoxLayout* m_projectLayout;
-		//QVBoxLayout* m_descLayout;
 
 		// Main app views
 		CategoryWidget* m_categoryWidget;
-		ProjectView* m_projectWidget;
+		ProjectTopWidget* m_projectTopWidget;
+		ProjectListWidget* m_projectListWidget;
 		DescriptionView* m_descWidget;
 
 		// Pop up Window for Add - Edit projects 

@@ -8,11 +8,14 @@ namespace Cl
 {
 	struct Category
 	{
-		QString iconPath;
-		QString name;
-		QList<Project> projects;
-		QString software;
+		QString iconPath = "";
+		QString name = "";
+		QList<Project> projects = QList<Project>();
+		QString software = "";
 
-		Category(QString iconPath, QString name, QString software) : iconPath(iconPath), name(name), software(software) {}
+		bool IsEmpty() const
+		{
+			return iconPath.isEmpty() && name.isEmpty() && projects.isEmpty() && software.isEmpty();
+		}
 	};
 }
