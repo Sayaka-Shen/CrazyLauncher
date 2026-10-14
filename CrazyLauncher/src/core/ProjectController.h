@@ -10,13 +10,13 @@ Q_DECLARE_METATYPE(Cl::ProjectType)
 
 namespace Cl
 {
-	class ProjectManager : public QObject
+	class ProjectController : public QObject
 	{
 		Q_OBJECT
 
 	public:
-		explicit ProjectManager(QObject* parent = nullptr);
-		~ProjectManager() = default;
+		explicit ProjectController(QObject* parent = nullptr);
+		~ProjectController() = default;
 
 		void AddProject(const Project& project);
 		void RemoveProjects(int indexProject);

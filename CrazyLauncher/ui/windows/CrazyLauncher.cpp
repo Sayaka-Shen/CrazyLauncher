@@ -1,5 +1,5 @@
 #include "CrazyLauncher.h"
-#include "core/ProjectManager.h"
+#include "core/ProjectController.h"
 #include "core/Project.h"
 
 #include "widget/ProjectView.h"
@@ -16,80 +16,66 @@
 
 namespace Cl
 {
-	CrazyLauncher::CrazyLauncher(QWidget* parent)
-		: QMainWindow(parent)
+	CrazyLauncher::CrazyLauncher(QWidget* parent) : QMainWindow(parent)
 	{
-		// Parent for all widgets
-		m_centralWidget = new QWidget(this);
-		setCentralWidget(m_centralWidget);
-
 		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
 
-		CreateLayout();
-		CreateUI();
-		CreateController();
-		SetupLayout();
-		SetupConnections();
+		InitController();
+		InitUI();
+		InitConnections();
 
-		m_projectManager->LoadProjects();
+		m_projectController->LoadProjects();
 	}
 
 	CrazyLauncher::~CrazyLauncher() {}
 
-	void CrazyLauncher::CreateController()
+	void CrazyLauncher::InitController()
 	{
-		m_projectManager = new ProjectManager(this);
+		m_projectController = new ProjectController(this);
 	}
 
-	void CrazyLauncher::CreateLayout()
+	void CrazyLauncher::InitUI()
 	{
-		m_mainLayout = new QVBoxLayout(m_centralWidget);
-		m_centralLayout = new QHBoxLayout();
-		m_footerLayout = new QHBoxLayout();
+		m_centralWidget = new QWidget(this);
+		m_appLayout = new QVBoxLayout(m_centralWidget);
+		m_appLayout->setContentsMargins(0, 0, 0, 0);
+		m_appLayout->setSpacing(0);
 
-		m_mainLayout->setContentsMargins(0, 0, 0, 0);
-		m_mainLayout->setSpacing(0);
-	}
-
-	void CrazyLauncher::CreateUI()
-	{
+		auto* centralLayout = new QHBoxLayout();
 		m_projectView = new ProjectView(m_centralWidget);
 		m_descView = new DescriptionView(m_centralWidget);
+		centralLayout->addWidget(m_projectView, 2);
+		centralLayout->addWidget(m_descView, 2);
+
+		auto* footerLayout = new QHBoxLayout();
 		m_settingView = new SettingsView(m_centralWidget);
+		footerLayout->addWidget(m_settingView);
+
+		m_appLayout->addLayout(centralLayout);
+		m_appLayout->addLayout(footerLayout);
 	}
 
-	void CrazyLauncher::SetupLayout()
-	{
-		m_centralLayout->addWidget(m_projectView, 2);
-		m_centralLayout->addWidget(m_descView, 2);
-		m_footerLayout->addWidget(m_settingView);
-
-		m_mainLayout->addLayout(m_centralLayout);
-		m_mainLayout->addLayout(m_footerLayout);
-	}
-
-	void CrazyLauncher::SetupConnections()
+	void CrazyLauncher::InitConnections()
 	{
 		// Create windows the user use to add project or edit project
 		connect(m_settingView, &SettingsView::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
 		connect(m_settingView, &SettingsView::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);
 
 		// Manage to display project in views
-		connect(m_projectManager, &ProjectManager::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
-		connect(m_projectManager, &ProjectManager::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
-		connect(m_projectManager, &ProjectManager::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
+		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
+		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
+		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
 
 		connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
 		connect(this, &CrazyLauncher::E_DisplayProject, m_descView, &DescriptionView::OnSelectedProjectChanged);
-		connect(m_projectManager, &ProjectManager::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
-
+		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
 		// Launch / Remove Projects
 		connect(m_settingView, &SettingsView::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
 		connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
 
 		// Load saves projects
-		connect(m_projectManager, &ProjectManager::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
-		connect(m_projectManager, &ProjectManager::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
+		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
+		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
 
 		// Filter Projects
 		connect(m_projectView, &ProjectView::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
@@ -102,7 +88,7 @@ namespace Cl
 		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(current));
 		if (itemWidget == nullptr) return;
 
-		for (Project& project : m_projectManager->GetProjects())
+		for (Project& project : m_projectController->GetProjects())
 		{
 			if (project.name == itemWidget->GetProjectTitle())
 			{
@@ -144,25 +130,25 @@ namespace Cl
 
 	void CrazyLauncher::OnProjectAdded(const Project& project)
 	{
-		m_projectManager->AddProject(project);
+		m_projectController->AddProject(project);
 	}
 
 	void CrazyLauncher::OnProjectEdited(Project* baseProjectEdited)
 	{
-		m_projectManager->EditProjects(baseProjectEdited);
+		m_projectController->EditProjects(baseProjectEdited);
 	}
 
 	void CrazyLauncher::OnRemoveProject()
 	{
 		if (GetSelectedProjectWidgetIndex() == -1) return;
 		int currentProjectSelectedIndex = GetSelectedProjectWidgetIndex();
-		m_projectManager->RemoveProjects(currentProjectSelectedIndex);
+		m_projectController->RemoveProjects(currentProjectSelectedIndex);
 	}
 
 	void CrazyLauncher::LaunchProject()
 	{
 		if (m_currentProjectSelected == nullptr) return;
-		m_projectManager->LaunchProjects(m_currentProjectSelected);
+		m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
 	void CrazyLauncher::ClearListWidget()

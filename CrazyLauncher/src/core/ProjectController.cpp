@@ -1,4 +1,4 @@
-#include "ProjectManager.h"
+#include "ProjectController.h"
 #include "Project.h"
 
 #include <QString>
@@ -18,30 +18,30 @@
 
 namespace Cl
 {
-	ProjectManager::ProjectManager(QObject* parent) {}
+	ProjectController::ProjectController(QObject* parent) {}
 
-	void ProjectManager::AddProject(const Project& project)
+	void ProjectController::AddProject(const Project& project)
 	{
 		projects.append(project);
 		SaveProjects();
 		emit E_AddProjectToView(project);
 	}
 
-	void ProjectManager::RemoveProjects(int indexProject)
+	void ProjectController::RemoveProjects(int indexProject)
 	{
 		projects.remove(indexProject);
 		SaveProjects();
 		emit E_RemoveProjectToView(indexProject);
 	}
 
-	void ProjectManager::EditProjects(Project* baseProjectEdited)
+	void ProjectController::EditProjects(Project* baseProjectEdited)
 	{
 		emit E_EditProjectToView(baseProjectEdited);
 		SaveProjects();
 		emit E_EditProjectToDescriptionView(*baseProjectEdited);
 	}
 
-	void ProjectManager::LaunchProjects(Project* project)
+	void ProjectController::LaunchProjects(Project* project)
 	{
 		if (!project || project->path.isEmpty()) return;
 
@@ -57,12 +57,12 @@ namespace Cl
 		QDesktopServices::openUrl(QUrl::fromLocalFile(cleanProjectPath));
 	}
 
-	QList<Project>& ProjectManager::GetProjects()
+	QList<Project>& ProjectController::GetProjects()
 	{
 		return projects;
 	}
 
-	QString ProjectManager::GetProjectsFilePath() const
+	QString ProjectController::GetProjectsFilePath() const
 	{
 		QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
@@ -71,7 +71,7 @@ namespace Cl
 		return savePath + "/crazy_projects.json";
 	}
 
-	void ProjectManager::SaveProjects()
+	void ProjectController::SaveProjects()
 	{
 		QFile file(GetProjectsFilePath());
 
@@ -97,7 +97,7 @@ namespace Cl
 		file.close();
 	}
 
-	void ProjectManager::LoadProjects()
+	void ProjectController::LoadProjects()
 	{
 		projects.clear();
 		emit E_ClearProjectInListWidget();

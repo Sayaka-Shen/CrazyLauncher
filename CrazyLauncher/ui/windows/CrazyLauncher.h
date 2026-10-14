@@ -3,7 +3,6 @@
 
 class QWidget;
 class QVBoxLayout;
-class QHBoxLayout;
 class QPushButton;
 class QString;
 class QListWidgetItem;
@@ -16,7 +15,7 @@ namespace Cl
 	struct Project;
 	class AddWindow;
 	class EditWindow;
-	class ProjectManager;
+	class ProjectController;
 	class ProjectWidgetItem;
 
 	class CrazyLauncher : public QMainWindow
@@ -28,30 +27,27 @@ namespace Cl
 		~CrazyLauncher();
 
 	private:
-		QWidget* m_centralWidget;
-		ProjectManager* m_projectManager;
+		// Controller 
+		ProjectController* m_projectController;
+
+		// Project
 		Project* m_currentProjectSelected;
+
+		QVBoxLayout* m_appLayout;
+		QWidget* m_centralWidget;
+
+		ProjectView* m_projectView;
+		DescriptionView* m_descView;
+		SettingsView* m_settingView;
 
 		// Pop up Window for Add - Edit projects 
 		AddWindow* m_addWindow;
 		EditWindow* m_editWindow;
 
-		// Main app layout
-		QVBoxLayout* m_mainLayout;
-		QHBoxLayout* m_centralLayout;
-		QHBoxLayout* m_footerLayout;
-
-		// Main app views
-		ProjectView* m_projectView;
-		DescriptionView* m_descView;
-		SettingsView* m_settingView;
-		
-		// Base Crazy Launcher functions
-		void CreateController();
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
-		void SetupConnections();
+	private:
+		void InitController();
+		void InitUI();
+		void InitConnections();
 
 		// Get  Set
 		void GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous);
