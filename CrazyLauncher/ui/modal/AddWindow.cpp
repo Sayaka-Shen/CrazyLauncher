@@ -25,7 +25,7 @@ namespace Cl
 		QFileInfo info(path);
 		bool isDir = info.exists() && info.isDir();
 
-		Project project(m_nameField->text(), m_descField->text(), m_projectTypeDP->currentData().value<ProjectType>(), m_pathField->text(), isDir, m_softwarePathField->text());
+		Project project{m_nameField->text(), m_descField->text(), m_projectTypeDP->currentData().value<ProjectType>(), m_pathField->text(), isDir, m_softwarePathField->text()};
 
 		emit E_AddProject(project);
 		emit E_CloseWindow();
