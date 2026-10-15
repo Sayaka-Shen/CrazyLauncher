@@ -18,7 +18,7 @@
 
 namespace Cl
 {
-	ProjectController::ProjectController(QObject* parent) {}
+	ProjectController::ProjectController(QObject* parent) : QObject(parent) {}
 
 	void ProjectController::AddProject(const Project& project)
 	{

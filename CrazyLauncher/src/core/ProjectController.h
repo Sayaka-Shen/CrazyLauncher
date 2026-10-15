@@ -16,8 +16,9 @@ namespace Cl
 
 	public:
 		explicit ProjectController(QObject* parent = nullptr);
-		~ProjectController() = default;
+		~ProjectController() override = default;
 
+	public:
 		void AddProject(const Project& project);
 		void RemoveProjects(int indexProject);
 		void EditProjects(Project* baseProjectEdited);
