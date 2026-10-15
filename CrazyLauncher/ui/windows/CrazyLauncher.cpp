@@ -43,17 +43,15 @@ namespace Cl
 
 		auto* centralLayout = new QHBoxLayout();
 		m_projectExplorer = new ProjectExplorer();
-		m_projectDetailsView = new ProjectDetailsView();
 		centralLayout->addWidget(m_projectExplorer);
+		m_projectDetailsView = new ProjectDetailsView();
 		centralLayout->addWidget(m_projectDetailsView);
 
 		m_appLayout->addLayout(centralLayout);
 
-		auto* footerLayout = new QHBoxLayout();
 		m_projectActionBar = new ProjectActionBar();
-		footerLayout->addWidget(m_projectActionBar);
 
-		m_appLayout->addLayout(footerLayout);
+		m_appLayout->addWidget(m_projectActionBar);
 	}
 
 	void CrazyLauncher::InitConnections()
