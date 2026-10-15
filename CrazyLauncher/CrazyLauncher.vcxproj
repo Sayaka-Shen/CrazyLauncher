@@ -108,10 +108,10 @@
     <ClCompile Include="ui\modal\AddWindow.cpp" />
     <ClCompile Include="ui\modal\EditWindow.cpp" />
     <ClCompile Include="ui\modal\UtilityWindow.cpp" />
-    <ClCompile Include="ui\widget\DescriptionView.cpp" />
-    <ClCompile Include="ui\widget\ProjectView.cpp" />
+    <ClCompile Include="ui\widget\ProjectDetailsView.cpp" />
+    <ClCompile Include="ui\widget\ProjectExplorer.cpp" />
     <ClCompile Include="ui\widget\ProjectWidgetItem.cpp" />
-    <ClCompile Include="ui\widget\SettingsView.cpp" />
+    <ClCompile Include="ui\widget\ProjectActionBar.cpp" />
     <ClCompile Include="ui\widget\WindowButtonView.cpp" />
     <ClCompile Include="ui\windows\CrazyLauncher.cpp" />
     <QtRcc Include="Resources\Resource.qrc" />
@@ -122,10 +122,10 @@
     <QtMoc Include="ui\modal\AddWindow.h" />
     <QtMoc Include="ui\modal\EditWindow.h" />
     <QtMoc Include="ui\modal\UtilityWindow.h" />
-    <QtMoc Include="ui\widget\DescriptionView.h" />
-    <QtMoc Include="ui\widget\ProjectView.h" />
+    <QtMoc Include="ui\widget\ProjectDetailsView.h" />
+    <QtMoc Include="ui\widget\ProjectExplorer.h" />
     <QtMoc Include="ui\widget\ProjectWidgetItem.h" />
-    <QtMoc Include="ui\widget\SettingsView.h" />
+    <QtMoc Include="ui\widget\ProjectActionBar.h" />
     <QtMoc Include="ui\widget\WindowButtonView.h" />
     <QtMoc Include="ui\windows\CrazyLauncher.h" />
     <QtMoc Include="src\core\ProjectController.h" />

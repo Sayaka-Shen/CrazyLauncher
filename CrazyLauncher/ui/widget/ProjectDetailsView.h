@@ -10,13 +10,13 @@ namespace Cl
 {
 	struct Project;
 
-	class DescriptionView : public QWidget
+	class ProjectDetailsView : public QWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit DescriptionView(QWidget* parent = nullptr);
-		~DescriptionView();
+		explicit ProjectDetailsView(QWidget* parent = nullptr);
+		~ProjectDetailsView() override = default;
 
 	private:
 		QVBoxLayout* m_descViewLayout;
@@ -32,13 +32,9 @@ namespace Cl
 		QLabel* m_pathSoftware;
 		QLabel* m_pathSoftwareField;
 
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
-		void SetupConnections();
-
-		void SetDefaultValue();
-		void SetupStyle();
+	private:
+		void InitUI();
+		void InitConnections();
 
 	public slots:
 		void OnSelectedProjectChanged(Project& project);

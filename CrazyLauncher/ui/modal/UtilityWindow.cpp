@@ -1,5 +1,5 @@
 #include "UtilityWindow.h"
-#include "core/ProjectManager.h"
+#include "core/ProjectController.h"
 #include "core/Project.h"
 
 #include <QCheckBox>
@@ -20,14 +20,14 @@ namespace Cl
 		setObjectName("UtilityWindow");
 		setAttribute(Qt::WA_StyledBackground, true);
 
-		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+		setWindowIcon(QIcon(":/new/prefix1/assets/LogoCrazyLauncher.ico"));
 
 		CreateLayout();
 		CreateUI();
 		SetupLayout();
 
 		SetupProjectTypeDP();
-		SetupConnections();
+		InitConnections();
 
 		CheckProjectType(m_projectTypeDP->currentIndex());
 	}
@@ -100,7 +100,7 @@ namespace Cl
 
 		// Button QSS and Icon
 		m_projectExplorer->setObjectName("ExplorerBtn");
-		m_projectExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
+		m_projectExplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
 
 		m_softwareExe = new QLabel("Software Used :", this);
 
@@ -114,7 +114,7 @@ namespace Cl
 
 		// Button QSS and Icon
 		m_softwareExplorer->setObjectName("ExplorerBtn");
-		m_softwareExplorer->setIcon(QIcon(":/new/prefix1/folder-black-white.png"));
+		m_softwareExplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
 
 		HideSoftwarePath();
 
@@ -155,7 +155,7 @@ namespace Cl
 		m_windowLayout->addWidget(m_buttonView);
 	}
 
-	void UtilityWindow::SetupConnections()
+	void UtilityWindow::InitConnections()
 	{
 		connect(m_buttonView->GetCancelBtn(), &QPushButton::pressed, this, &UtilityWindow::OnCancelClicked);
 

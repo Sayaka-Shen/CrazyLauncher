@@ -2,9 +2,9 @@
 #include "core/ProjectController.h"
 #include "core/Project.h"
 
-#include "widget/ProjectView.h"
-#include "widget/DescriptionView.h"
-#include "widget/SettingsView.h"
+#include "widget/ProjectExplorer.h"
+#include "widget/ProjectDetailsView.h"
+#include "widget/ProjectActionBar.h"
 #include "widget/ProjectWidgetItem.h"
 
 #include "modal/AddWindow.h"
@@ -18,7 +18,7 @@ namespace Cl
 {
 	CrazyLauncher::CrazyLauncher(QWidget* parent) : QMainWindow(parent)
 	{
-		setWindowIcon(QIcon(":/new/prefix1/LogoCrazyLauncher.ico"));
+		setWindowIcon(QIcon(":/new/prefix1/assets/LogoCrazyLauncher.ico"));
 
 		InitController();
 		InitUI();
@@ -26,8 +26,6 @@ namespace Cl
 
 		m_projectController->LoadProjects();
 	}
-
-	CrazyLauncher::~CrazyLauncher() {}
 
 	void CrazyLauncher::InitController()
 	{
@@ -37,55 +35,58 @@ namespace Cl
 	void CrazyLauncher::InitUI()
 	{
 		m_centralWidget = new QWidget(this);
+		setCentralWidget(m_centralWidget);
+
 		m_appLayout = new QVBoxLayout(m_centralWidget);
 		m_appLayout->setContentsMargins(0, 0, 0, 0);
 		m_appLayout->setSpacing(0);
 
 		auto* centralLayout = new QHBoxLayout();
-		m_projectView = new ProjectView(m_centralWidget);
-		m_descView = new DescriptionView(m_centralWidget);
-		centralLayout->addWidget(m_projectView, 2);
-		centralLayout->addWidget(m_descView, 2);
-
-		auto* footerLayout = new QHBoxLayout();
-		m_settingView = new SettingsView(m_centralWidget);
-		footerLayout->addWidget(m_settingView);
+		m_projectExplorer = new ProjectExplorer();
+		m_projectDetailsView = new ProjectDetailsView();
+		centralLayout->addWidget(m_projectExplorer);
+		centralLayout->addWidget(m_projectDetailsView);
 
 		m_appLayout->addLayout(centralLayout);
+
+		auto* footerLayout = new QHBoxLayout();
+		m_projectActionBar = new ProjectActionBar();
+		footerLayout->addWidget(m_projectActionBar);
+
 		m_appLayout->addLayout(footerLayout);
 	}
 
 	void CrazyLauncher::InitConnections()
 	{
 		// Create windows the user use to add project or edit project
-		connect(m_settingView, &SettingsView::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
-		connect(m_settingView, &SettingsView::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);
+		connect(m_projectActionBar, &ProjectActionBar::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
+		connect(m_projectActionBar, &ProjectActionBar::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);
 
 		// Manage to display project in views
-		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectView, &ProjectView::AddProjectInView);
-		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectView, &ProjectView::EditProjectInView);
-		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectView, &ProjectView::RemoveProjectInView);
+		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectExplorer, &ProjectExplorer::AddProjectInView);
+		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectExplorer, &ProjectExplorer::EditProjectInView);
+		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectExplorer, &ProjectExplorer::RemoveProjectInView);
 
-		connect(m_projectView->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
-		connect(this, &CrazyLauncher::E_DisplayProject, m_descView, &DescriptionView::OnSelectedProjectChanged);
-		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_descView, &DescriptionView::OnSelectedProjectChanged);
+		connect(m_projectExplorer->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
+		connect(this, &CrazyLauncher::E_DisplayProject, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
+		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
 		// Launch / Remove Projects
-		connect(m_settingView, &SettingsView::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
-		connect(m_settingView, &SettingsView::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
+		connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
+		connect(m_projectActionBar, &ProjectActionBar::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
 
 		// Load saves projects
 		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
 		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
 
 		// Filter Projects
-		connect(m_projectView, &ProjectView::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
+		connect(m_projectExplorer, &ProjectExplorer::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
 	}
 
 	void CrazyLauncher::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
 	{
 		if (current == nullptr) return;
 
-		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(current));
+		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectExplorer->GetProjectList()->itemWidget(current));
 		if (itemWidget == nullptr) return;
 
 		for (Project& project : m_projectController->GetProjects())
@@ -100,7 +101,7 @@ namespace Cl
 
 	int CrazyLauncher::GetSelectedProjectWidgetIndex()
 	{
-		return m_projectView->GetProjectList()->currentRow();
+		return m_projectExplorer->GetProjectList()->currentRow();
 	}
 
 	// SLOTS
@@ -153,20 +154,20 @@ namespace Cl
 
 	void CrazyLauncher::ClearListWidget()
 	{
-		m_projectView->GetProjectList()->clear();
+		m_projectExplorer->GetProjectList()->clear();
 	}
 
 	void CrazyLauncher::FillListWidget(Project& project)
 	{
-		m_projectView->AddProjectInView(project);
+		m_projectExplorer->AddProjectInView(project);
 	}
 
 	void CrazyLauncher::FilterProjects(const QString& text)
 	{
-		for (int i = 0; i < m_projectView->GetProjectList()->count(); ++i)
+		for (int i = 0; i < m_projectExplorer->GetProjectList()->count(); ++i)
 		{
-			QListWidgetItem* item = m_projectView->GetProjectList()->item(i);
-			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectView->GetProjectList()->itemWidget(item));
+			QListWidgetItem* item = m_projectExplorer->GetProjectList()->item(i);
+			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectExplorer->GetProjectList()->itemWidget(item));
 
 			bool matches = widgetItem->GetProjectTitle().contains(text, Qt::CaseInsensitive);
 			

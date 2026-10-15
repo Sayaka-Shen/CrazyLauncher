@@ -9,9 +9,9 @@ class QListWidgetItem;
 
 namespace Cl
 {
-	class ProjectView;
-	class DescriptionView;
-	class SettingsView;
+	class ProjectExplorer;
+	class ProjectDetailsView;
+	class ProjectActionBar;
 	struct Project;
 	class AddWindow;
 	class EditWindow;
@@ -24,7 +24,7 @@ namespace Cl
 
 	public:
 		CrazyLauncher(QWidget* parent = nullptr);
-		~CrazyLauncher();
+		~CrazyLauncher() override = default;
 
 	private:
 		// Controller 
@@ -36,9 +36,9 @@ namespace Cl
 		QVBoxLayout* m_appLayout;
 		QWidget* m_centralWidget;
 
-		ProjectView* m_projectView;
-		DescriptionView* m_descView;
-		SettingsView* m_settingView;
+		ProjectExplorer* m_projectExplorer;
+		ProjectDetailsView* m_projectDetailsView;
+		ProjectActionBar* m_projectActionBar;
 
 		// Pop up Window for Add - Edit projects 
 		AddWindow* m_addWindow;

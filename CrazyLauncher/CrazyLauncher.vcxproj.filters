@@ -43,16 +43,16 @@
     <ClCompile Include="ui\modal\UtilityWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\widget\DescriptionView.cpp">
+    <ClCompile Include="ui\widget\ProjectDetailsView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\widget\ProjectView.cpp">
+    <ClCompile Include="ui\widget\ProjectExplorer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ui\widget\ProjectWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\widget\SettingsView.cpp">
+    <ClCompile Include="ui\widget\ProjectActionBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ui\widget\WindowButtonView.cpp">
@@ -81,16 +81,16 @@
     <QtMoc Include="ui\modal\EditWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ui\widget\DescriptionView.h">
+    <QtMoc Include="ui\widget\ProjectDetailsView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ui\widget\ProjectView.h">
+    <QtMoc Include="ui\widget\ProjectExplorer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ui\widget\ProjectWidgetItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ui\widget\SettingsView.h">
+    <QtMoc Include="ui\widget\ProjectActionBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

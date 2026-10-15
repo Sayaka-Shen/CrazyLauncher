@@ -112,7 +112,7 @@ namespace Cl
 		for (const QJsonValue& value : jsonArray)
 		{
 			QJsonObject obj = value.toObject();
-			Project project(obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool(), obj["softwareExe"].toString());
+			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool(), obj["softwareExe"].toString()};
 
 			projects.append(project);
 			emit E_FillProjectInListWidget(project);

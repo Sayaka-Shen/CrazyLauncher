@@ -7,26 +7,22 @@ class QDialog;
 
 namespace Cl
 {
-	class SettingsView : public QWidget
+	class ProjectActionBar : public QWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit SettingsView(QWidget* parent = nullptr);
-		~SettingsView();
+		explicit ProjectActionBar(QWidget* parent = nullptr);
+		~ProjectActionBar() override = default;
 
+	public:
 		void OnAddWindowClicked();
 		void OnEditWindowClicked();
 		void OnRemoveProjectClicked();
 		void OnLaunchProjectClicked();
 
 	private:
-		void CreateUI();
-		void CreateLayout();
-		void SetupLayout();
-		void SetupConnections();
-
-		QHBoxLayout* m_settingsLayout;
+		QHBoxLayout* m_actionBarLayout;
 
 		QPushButton* m_addBtn;
 		QPushButton* m_editBtn;
@@ -35,6 +31,10 @@ namespace Cl
 
 		QDialog* m_addBtnWindow;
 		QDialog* m_editBtnWindow;
+
+	private:
+		void InitUI();
+		void InitConnections();
 
 	signals:
 		void E_CreateAddWindow();

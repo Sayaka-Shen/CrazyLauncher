@@ -5,7 +5,7 @@ QMainWindow
 }
 
 /* --- ProjectView --- */
-#ProjectView 
+#ProjectExplorer 
 {
 }
 
@@ -60,7 +60,7 @@ QWidget#ProjectWidgetItem #Desc
 }
 
 /* --- DescriptionView --- */
-#DescriptionView 
+#ProjectDetailsView 
 {
     margin: 10px 8px 10px 0;
     background-color: #282D3A;
@@ -102,35 +102,30 @@ QWidget#ProjectWidgetItem #Desc
 }
 
 /* --- SettingsView --- */  
-#SettingsView 
+#ProjectActionBar 
 {
     padding: 15px;
     border-top: 1px solid #333743;
 }
 
-QWidget#SettingsView #LaunchBtn 
-{
+QWidget#ProjectActionBar #LaunchBtn {
     background-color: #3768B3;
     border: 1px solid #3768B3;
 }
 
-QWidget#SettingsView #LaunchBtn:hover 
-{
+QWidget#ProjectActionBar #LaunchBtn:hover {
     background-color: #3d74c6;
 }
 
-QWidget#SettingsView QPushButton
-{
+QWidget#ProjectActionBar QPushButton {
     background-color: #2a2f3b;
     border: 1px solid #3d4455;
     color: #ffffff;
-
     border-radius: 2px;
     padding: 5px 30px;
 }
 
-QWidget#SettingsView QPushButton:hover 
-{
+QWidget#ProjectActionBar QPushButton:hover {
     background-color: #353b4a;
 }
 

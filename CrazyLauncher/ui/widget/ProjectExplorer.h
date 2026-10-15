@@ -9,14 +9,15 @@ namespace Cl
 {
 	struct Project;
 
-	class ProjectView : public QWidget
+	class ProjectExplorer : public QWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit ProjectView(QWidget* parent = nullptr);
-		~ProjectView();
+		explicit ProjectExplorer(QWidget* parent = nullptr);
+		~ProjectExplorer() override = default;
 
+	public:
 		QListWidget* GetProjectList();
 
 	private:
@@ -24,11 +25,9 @@ namespace Cl
 		QLineEdit* m_searchBar;
 		QListWidget* m_projectsList;
 
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
-		void SetupConnections();
-
+	private:
+		void InitUI();
+		void InitConnections();
 		void OnProjetFilter(const QString& text);
 
 	signals:

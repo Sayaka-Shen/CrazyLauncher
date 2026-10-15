@@ -1,4 +1,4 @@
-#include "ProjectView.h"
+#include "ProjectExplorer.h"
 #include "ProjectWidgetItem.h"
 #include "core/Project.h"
 
@@ -10,58 +10,46 @@
 
 namespace Cl
 {
-	ProjectView::ProjectView(QWidget* parent)
+	ProjectExplorer::ProjectExplorer(QWidget* parent) : QWidget(parent)
 	{
-		// Style for the whole widget
-		setObjectName("ProjectView");
+		setObjectName("ProjectExplorer");
 		setAttribute(Qt::WA_StyledBackground, true);
 
-		CreateLayout();
-		CreateUI();
-		SetupLayout();
-		SetupConnections();
-
-		m_projectsList->setSelectionMode(QAbstractItemView::SingleSelection);
+		InitUI();
+		InitConnections();
 	}
 
-	ProjectView::~ProjectView() {}
-
-	QListWidget* ProjectView::GetProjectList()
+	QListWidget* ProjectExplorer::GetProjectList()
 	{
 		return m_projectsList;
 	}
 
-	void ProjectView::CreateLayout()
+	void ProjectExplorer::InitUI()
 	{
 		m_projectViewLayout = new QVBoxLayout(this);
-	}
 
-	void ProjectView::CreateUI()
-	{
-		m_searchBar = new QLineEdit(this);
+		m_searchBar = new QLineEdit();
 		m_searchBar->setPlaceholderText("Search....");
 		m_searchBar->setObjectName("SearchBar");
 
-		m_projectsList = new QListWidget(this);
-	}
+		m_projectsList = new QListWidget();
+		m_projectsList->setSelectionMode(QAbstractItemView::SingleSelection);
 
-	void ProjectView::SetupLayout()
-	{
 		m_projectViewLayout->addWidget(m_searchBar);
 		m_projectViewLayout->addWidget(m_projectsList);
 	}
 
-	void ProjectView::SetupConnections()
+	void ProjectExplorer::InitConnections()
 	{
-		connect(m_searchBar, &QLineEdit::textChanged, this, &ProjectView::OnProjetFilter);
+		connect(m_searchBar, &QLineEdit::textChanged, this, &ProjectExplorer::OnProjetFilter);
 	}
 
-	void ProjectView::OnProjetFilter(const QString& text)
+	void ProjectExplorer::OnProjetFilter(const QString& text)
 	{
 		emit E_FilterProjects(text);
 	}
 
-	void ProjectView::AddProjectInView(const Project& project)
+	void ProjectExplorer::AddProjectInView(const Project& project)
 	{
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 		item->setSizeHint(QSize(0, 65));
@@ -71,7 +59,7 @@ namespace Cl
 		m_projectsList->setItemWidget(item, widgetItem);
 	}
 
-	void ProjectView::EditProjectInView(Project* project)
+	void ProjectExplorer::EditProjectInView(Project* project)
 	{
 		QListWidgetItem* item = m_projectsList->currentItem();
 		if (item == nullptr) return;
@@ -83,7 +71,7 @@ namespace Cl
 		widgetItem->SetProjectDescription(project->description);
 	}
 
-	void ProjectView::RemoveProjectInView(int indexProject)
+	void ProjectExplorer::RemoveProjectInView(int indexProject)
 	{
 		QListWidgetItem* item = m_projectsList->takeItem(indexProject);
 		delete item;

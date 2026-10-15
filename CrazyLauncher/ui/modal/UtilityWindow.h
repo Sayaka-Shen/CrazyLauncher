@@ -74,7 +74,7 @@ namespace Cl
 		void CreateLayout();
 		void CreateUI();
 		void SetupLayout();
-		void SetupConnections();
+		void InitConnections();
 
 		void SetupProjectTypeDP();
 
