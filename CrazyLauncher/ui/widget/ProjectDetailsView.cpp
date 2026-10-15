@@ -22,8 +22,6 @@ namespace Cl
 	void ProjectDetailsView::InitUI()
 	{
 		m_descViewLayout = new QVBoxLayout(this);
-		m_descViewLayout->setContentsMargins(0, 0, 0, 0);
-		m_descViewLayout->setSpacing(0);
 
 		m_title = new QLabel("Project");
 		m_title->setObjectName("ProjectTitle");

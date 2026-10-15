@@ -1,4 +1,5 @@
 #include "ProjectActionBar.h"
+#include "utils/Utils.h"
 
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -20,24 +21,34 @@ namespace Cl
 	{
 		m_actionBarLayout = new QHBoxLayout(this);
 
+		auto* crudLayout = new QHBoxLayout();
+
 		m_addBtn = new QPushButton("Add");
 		m_addBtn->setIcon(QIcon(":/new/prefix1/assets/Plus-Icon.png"));
 
-		m_actionBarLayout->addWidget(m_addBtn);
+		Cl::ApplyShadowEffect(m_addBtn);
+		crudLayout->addWidget(m_addBtn);
 
 		m_editBtn = new QPushButton("Edit");
 		m_editBtn->setIcon(QIcon(":/new/prefix1/assets/Edit-Icon.png"));
 
-		m_actionBarLayout->addWidget(m_editBtn);
+		Cl::ApplyShadowEffect(m_editBtn);
+		crudLayout->addWidget(m_editBtn);
 
 		m_deleteBtn = new QPushButton("Delete");
 		m_deleteBtn->setIcon(QIcon(":/new/prefix1/assets/Bin-Icon.png"));
 
-		m_actionBarLayout->addWidget(m_deleteBtn);
+		Cl::ApplyShadowEffect(m_deleteBtn);
+		crudLayout->addWidget(m_deleteBtn);
 
 		m_launchBtn = new QPushButton("Launch");
 		m_launchBtn->setObjectName("LaunchBtn");
 
+		m_actionBarLayout->addStretch();
+		m_actionBarLayout->addLayout(crudLayout);
+		m_actionBarLayout->addStretch();
+
+		Cl::ApplyShadowEffect(m_launchBtn);
 		m_actionBarLayout->addWidget(m_launchBtn);
 	}
 

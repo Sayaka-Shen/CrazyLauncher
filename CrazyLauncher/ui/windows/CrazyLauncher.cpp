@@ -43,9 +43,9 @@ namespace Cl
 
 		auto* centralLayout = new QHBoxLayout();
 		m_projectExplorer = new ProjectExplorer();
-		centralLayout->addWidget(m_projectExplorer);
+		centralLayout->addWidget(m_projectExplorer, 2);
 		m_projectDetailsView = new ProjectDetailsView();
-		centralLayout->addWidget(m_projectDetailsView);
+		centralLayout->addWidget(m_projectDetailsView, 1);
 
 		m_appLayout->addLayout(centralLayout);
 

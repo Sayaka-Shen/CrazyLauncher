@@ -4,6 +4,7 @@
 #include <QSize>
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     }
 
     Cl::CrazyLauncher window;
+    window.setMinimumSize(QSize(800, 600));
     window.show();
 
     return app.exec();

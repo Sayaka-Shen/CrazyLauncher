@@ -1,10 +1,26 @@
-/* Main Window */
-QMainWindow 
-{
+/* Main window styling */
+QMainWindow {
     background-color: #1C212C;
 }
 
-/* --- ProjectView --- */
+/* App buttons styling */
+QPushButton {
+    background-color: #2a2f3b;
+    border: 1px solid #3d4455;
+    color: #ffffff;
+    border-radius: 3px;
+    padding: 5px 30px;
+}
+
+QPushButton:hover {
+    background-color: #353b4a;
+}
+
+
+
+
+
+/* Potentiellement à refaire */
 #ProjectExplorer 
 {
 }
@@ -116,7 +132,7 @@ QWidget#ProjectActionBar #LaunchBtn {
 QWidget#ProjectActionBar #LaunchBtn:hover {
     background-color: #3d74c6;
 }
-
+/*
 QWidget#ProjectActionBar QPushButton {
     background-color: #2a2f3b;
     border: 1px solid #3d4455;
@@ -128,7 +144,7 @@ QWidget#ProjectActionBar QPushButton {
 QWidget#ProjectActionBar QPushButton:hover {
     background-color: #353b4a;
 }
-
+*/
 /* --- Utility Window --- */
 #UtilityWindow
 {
@@ -193,7 +209,7 @@ QWidget#WindowButtonView #RegisterBtn
     background-color: #3768B3;
     border: 1px solid #3768B3;
 }
-
+/*
 QWidget#WindowButtonView QPushButton
 {
     background-color: #2a2f3b;
@@ -207,14 +223,14 @@ QWidget#WindowButtonView QPushButton
 QWidget#WindowButtonView QPushButton:hover 
 {
     background-color: #353b4a;
-}
+}*/
 
 QWidget#WindowButtonView #RegisterBtn:hover 
 {
     background-color: #3d74c6;
 }
 
-QPushButton#ExplorerBtn 
+/*QPushButton#ExplorerBtn 
 {
     background-color: #272C38;
     border: 1px solid #333743;
@@ -237,7 +253,7 @@ QPushButton#ExplorerBtn:hover
 {
     background-color: #313745;
     color: white;
-}
+}*/
 
 QLineEdit#PathField, QLineEdit#SoftwarePathField 
 {
