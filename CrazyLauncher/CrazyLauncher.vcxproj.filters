@@ -61,7 +61,10 @@
     <ClCompile Include="ui\windows\CrazyLauncher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\utils\Utils.cpp">
+    <ClCompile Include="ui\utils\ViewUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\CoreUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +107,10 @@
     <ClInclude Include="src\core\ProjectType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ui\utils\Utils.h">
+    <ClInclude Include="ui\utils\ViewUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\CoreUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

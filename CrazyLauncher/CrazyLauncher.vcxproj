@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\utils\CoreUtils.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="ui\modal\AddWindow.cpp" />
@@ -114,13 +115,14 @@
     <ClCompile Include="ui\widget\ProjectActionBar.cpp" />
     <ClCompile Include="ui\widget\WindowButtonView.cpp" />
     <ClCompile Include="ui\windows\CrazyLauncher.cpp" />
-    <ClCompile Include="ui\utils\Utils.cpp" />
+    <ClCompile Include="ui\utils\ViewUtils.cpp" />
     <QtRcc Include="Resources\Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\utils\CoreUtils.h" />
     <ClInclude Include="src\core\Project.h" />
     <ClInclude Include="src\core\ProjectType.h" />
-    <ClInclude Include="ui\utils\Utils.h" />
+    <ClInclude Include="ui\utils\ViewUtils.h" />
     <QtMoc Include="ui\modal\AddWindow.h" />
     <QtMoc Include="ui\modal\EditWindow.h" />
     <QtMoc Include="ui\modal\UtilityWindow.h" />
