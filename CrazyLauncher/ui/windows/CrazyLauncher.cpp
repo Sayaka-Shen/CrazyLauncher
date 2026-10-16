@@ -7,9 +7,6 @@
 #include "widget/ProjectActionBar.h"
 #include "widget/ProjectWidgetItem.h"
 
-#include "modal/AddWindow.h"
-#include "modal/EditWindow.h"
-
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QSettings>
@@ -57,8 +54,8 @@ namespace Cl
 	void CrazyLauncher::InitConnections()
 	{
 		// Create windows the user use to add project or edit project
-		connect(m_projectActionBar, &ProjectActionBar::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
-		connect(m_projectActionBar, &ProjectActionBar::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);
+		/*connect(m_projectActionBar, &ProjectActionBar::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
+		connect(m_projectActionBar, &ProjectActionBar::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);*/
 
 		// Manage to display project in views
 		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectExplorer, &ProjectExplorer::AddProjectInView);
@@ -69,8 +66,8 @@ namespace Cl
 		connect(this, &CrazyLauncher::E_DisplayProject, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
 		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
 		// Launch / Remove Projects
-		connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
-		connect(m_projectActionBar, &ProjectActionBar::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);
+		/*connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
+		connect(m_projectActionBar, &ProjectActionBar::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);*/
 
 		// Load saves projects
 		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
@@ -102,30 +99,6 @@ namespace Cl
 		return m_projectExplorer->GetProjectList()->currentRow();
 	}
 
-	// SLOTS
-	void CrazyLauncher::CreateAddWindow()
-	{
-		if (m_addWindow != nullptr) return;
-
-		m_addWindow = new AddWindow(this);
-		m_addWindow->setFixedWidth(600);
-		m_addWindow->show();
-
-		connect(m_addWindow, &AddWindow::E_AddProject, this, &CrazyLauncher::OnProjectAdded);
-		connect(m_addWindow, &AddWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
-	}
-
-	void CrazyLauncher::CreateEditWindow()
-	{
-		if (m_editWindow != nullptr || m_currentProjectSelected == nullptr) return;
-
-		m_editWindow = new EditWindow(this, m_currentProjectSelected);
-		m_editWindow->setFixedWidth(600);
-		m_editWindow->show();
-
-		connect(m_editWindow, &EditWindow::E_EditProject, this, &CrazyLauncher::OnProjectEdited);
-		connect(m_editWindow, &EditWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
-	}
 
 	void CrazyLauncher::OnProjectAdded(const Project& project)
 	{
@@ -173,7 +146,7 @@ namespace Cl
 		}
 	}
 
-	void CrazyLauncher::OnCloseUtilityWindow()
+	/*void CrazyLauncher::OnCloseUtilityWindow()
 	{
 		if (m_addWindow != nullptr)
 		{
@@ -183,5 +156,5 @@ namespace Cl
 		{
 			m_editWindow = nullptr;
 		}
-	}
+	}*/
 }

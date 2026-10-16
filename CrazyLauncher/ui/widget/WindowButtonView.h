@@ -12,20 +12,20 @@ namespace Cl
 
 	public:
 		WindowButtonView(QWidget* parent = nullptr);
-		~WindowButtonView();
-
-		// Getter - Setter
-		QPushButton* GetRegisterBtn();
-		QPushButton* GetCancelBtn();
+		~WindowButtonView() override = default;
 
 	private:
 		QHBoxLayout* m_buttonLayout;
 		QPushButton* m_cancelBtn;
 		QPushButton* m_registerBtn;
 
-		void CreateLayout();
-		void CreateUI();
-		void SetupLayout();
+	private:
+		void InitUI();
+		void InitConnections();
+
+	signals:
+		void onAcceptModal();
+		void onCancelModal();
 	};
 }
 

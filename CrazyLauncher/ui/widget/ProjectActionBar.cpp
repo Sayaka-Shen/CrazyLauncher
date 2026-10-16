@@ -1,9 +1,11 @@
 #include "ProjectActionBar.h"
 #include "utils/ViewUtils.h"
+#include "modal/AddModal.h"
 
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QDialog>
+#include <QDebug>
 
 namespace Cl
 {
@@ -55,28 +57,42 @@ namespace Cl
 	void ProjectActionBar::InitConnections()
 	{
 		connect(m_addBtn, &QPushButton::pressed, this, &ProjectActionBar::OnAddWindowClicked);
-		connect(m_editBtn, &QPushButton::pressed, this, &ProjectActionBar::OnEditWindowClicked);
+		//connect(m_editBtn, &QPushButton::pressed, this, &ProjectActionBar::OnEditWindowClicked);
 		connect(m_deleteBtn, &QPushButton::pressed, this, &ProjectActionBar::OnRemoveProjectClicked);
 		connect(m_launchBtn, &QPushButton::pressed, this, &ProjectActionBar::OnLaunchProjectClicked);
 	}
 
 	void ProjectActionBar::OnAddWindowClicked()
 	{
-		emit E_CreateAddWindow();
+		if (m_addWindow != nullptr) return;
+
+		m_addWindow = new AddModal(this);
+		m_addWindow->show();
+
+		connect(m_addWindow, &AddModal::addProject, this, &ProjectActionBar::addProject);
+		connect(m_addWindow, &AddModal::rejectModal, this, [this]() { m_addWindow = nullptr; });
 	}
 
-	void ProjectActionBar::OnEditWindowClicked()
+
+	/*void ProjectActionBar::OnEditWindowClicked()
 	{
-		emit E_CreateEditWindow();
-	}
+		if (m_editWindow != nullptr || m_currentProjectSelected == nullptr) return;
+
+		m_editWindow = new EditWindow(this, m_currentProjectSelected);
+		m_editWindow->setFixedWidth(600);
+		m_editWindow->show();
+
+		connect(m_editWindow, &EditWindow::E_EditProject, this, &CrazyLauncher::OnProjectEdited);
+		connect(m_editWindow, &EditWindow::E_CloseWindow, this, &CrazyLauncher::OnCloseUtilityWindow);
+	}*/
 
 	void ProjectActionBar::OnRemoveProjectClicked()
 	{
-		emit E_RemoveProject();
+		//emit E_RemoveProject();
 	}
 
 	void ProjectActionBar::OnLaunchProjectClicked()
 	{
-		emit E_LaunchProject();
+		//emit E_LaunchProject();
 	}
 }

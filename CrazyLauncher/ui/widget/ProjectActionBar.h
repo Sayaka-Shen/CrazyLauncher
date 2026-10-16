@@ -7,6 +7,9 @@ class QDialog;
 
 namespace Cl
 {
+	class AddModal;
+	class EditWindow;
+
 	class ProjectActionBar : public QWidget
 	{
 		Q_OBJECT
@@ -17,7 +20,7 @@ namespace Cl
 
 	public:
 		void OnAddWindowClicked();
-		void OnEditWindowClicked();
+		//void OnEditWindowClicked();
 		void OnRemoveProjectClicked();
 		void OnLaunchProjectClicked();
 
@@ -32,15 +35,19 @@ namespace Cl
 		QDialog* m_addBtnWindow;
 		QDialog* m_editBtnWindow;
 
+		// Pop up Window for Add - Edit projects 
+		AddModal* m_addWindow;
+		EditWindow* m_editWindow;
+
 	private:
 		void InitUI();
 		void InitConnections();
 
 	signals:
-		void E_CreateAddWindow();
-		void E_CreateEditWindow();
-		void E_RemoveProject();
-		void E_LaunchProject();
+		void addProject();
+
+		/*void E_RemoveProject();
+		void E_LaunchProject();*/
 
 	};
 }

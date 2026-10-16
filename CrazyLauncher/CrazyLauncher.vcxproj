@@ -106,7 +106,7 @@
     <ClCompile Include="src\utils\CoreUtils.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="ui\modal\AddWindow.cpp" />
+    <ClCompile Include="ui\modal\AddModal.cpp" />
     <ClCompile Include="ui\modal\EditWindow.cpp" />
     <ClCompile Include="ui\modal\UtilityWindow.cpp" />
     <ClCompile Include="ui\widget\ProjectDetailsView.cpp" />
@@ -123,9 +123,9 @@
     <ClInclude Include="src\core\Project.h" />
     <ClInclude Include="src\core\ProjectType.h" />
     <ClInclude Include="ui\utils\ViewUtils.h" />
-    <QtMoc Include="ui\modal\AddWindow.h" />
-    <QtMoc Include="ui\modal\EditWindow.h" />
-    <QtMoc Include="ui\modal\UtilityWindow.h" />
+    <QtMoc Include="ui\modal\AddModal.h" />
+    <ClInclude Include="ui\modal\EditWindow.h" />
+    <ClInclude Include="ui\modal\UtilityWindow.h" />
     <QtMoc Include="ui\widget\ProjectDetailsView.h" />
     <QtMoc Include="ui\widget\ProjectExplorer.h" />
     <QtMoc Include="ui\widget\ProjectWidgetItem.h" />

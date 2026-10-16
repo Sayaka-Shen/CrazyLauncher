@@ -13,7 +13,7 @@ namespace Cl
 	class ProjectDetailsView;
 	class ProjectActionBar;
 	struct Project;
-	class AddWindow;
+	class AddModal;
 	class EditWindow;
 	class ProjectController;
 	class ProjectWidgetItem;
@@ -40,10 +40,6 @@ namespace Cl
 		ProjectDetailsView* m_projectDetailsView;
 		ProjectActionBar* m_projectActionBar;
 
-		// Pop up Window for Add - Edit projects 
-		AddWindow* m_addWindow;
-		EditWindow* m_editWindow;
-
 	private:
 		void InitController();
 		void InitUI();
@@ -58,9 +54,7 @@ namespace Cl
 		void E_DisplayProject(Project& project);
 
 	public slots:
-		void CreateAddWindow();
-		void CreateEditWindow();
-		void OnCloseUtilityWindow();
+		//void OnCloseUtilityWindow();
 
 		void OnProjectAdded(const Project& project);
 		void OnProjectEdited(Project* baseProjectEdited);
