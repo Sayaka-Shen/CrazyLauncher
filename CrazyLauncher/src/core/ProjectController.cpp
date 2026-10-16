@@ -1,5 +1,6 @@
 #include "ProjectController.h"
 #include "Project.h"
+#include <utils/CoreUtils.h>
 
 #include <QString>
 #include <QProcess>
@@ -62,18 +63,9 @@ namespace Cl
 		return projects;
 	}
 
-	QString ProjectController::GetProjectsFilePath() const
-	{
-		QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-		// Create path if it does not exist
-		QDir().mkpath(savePath);
-		return savePath + "/crazy_projects.json";
-	}
-
 	void ProjectController::SaveProjects()
 	{
-		QFile file(GetProjectsFilePath());
+		QFile file(Cl::CoreUtils::GetProjectsFilePath());
 
 		if (!file.open(QIODevice::WriteOnly)) return;
 
@@ -102,7 +94,7 @@ namespace Cl
 		projects.clear();
 		emit E_ClearProjectInListWidget();
 
-		QFile file(GetProjectsFilePath());
+		QFile file(Cl::CoreUtils::GetProjectsFilePath());
 
 		if (!file.open(QIODevice::ReadOnly)) return;
 

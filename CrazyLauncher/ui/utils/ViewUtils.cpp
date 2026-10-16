@@ -2,7 +2,7 @@
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 
-namespace Cl
+namespace Cl::ViewUtils
 {
 	void ApplyShadowEffect(QWidget* widget, int blurRadius /*= 15*/, int offsetX /*= 0*/, int offsetY /*= 1*/, QColor color /*= QColor(0, 0, 0, 80)*/)
 	{

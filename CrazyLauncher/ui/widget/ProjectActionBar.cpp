@@ -26,19 +26,19 @@ namespace Cl
 		m_addBtn = new QPushButton("Add");
 		m_addBtn->setIcon(QIcon(":/new/prefix1/assets/Plus-Icon.png"));
 
-		Cl::ApplyShadowEffect(m_addBtn);
+		Cl::ViewUtils::ApplyShadowEffect(m_addBtn);
 		crudLayout->addWidget(m_addBtn);
 
 		m_editBtn = new QPushButton("Edit");
 		m_editBtn->setIcon(QIcon(":/new/prefix1/assets/Edit-Icon.png"));
 
-		Cl::ApplyShadowEffect(m_editBtn);
+		Cl::ViewUtils::ApplyShadowEffect(m_editBtn);
 		crudLayout->addWidget(m_editBtn);
 
 		m_deleteBtn = new QPushButton("Delete");
 		m_deleteBtn->setIcon(QIcon(":/new/prefix1/assets/Bin-Icon.png"));
 
-		Cl::ApplyShadowEffect(m_deleteBtn);
+		Cl::ViewUtils::ApplyShadowEffect(m_deleteBtn);
 		crudLayout->addWidget(m_deleteBtn);
 
 		m_launchBtn = new QPushButton("Launch");
@@ -48,7 +48,7 @@ namespace Cl
 		m_actionBarLayout->addLayout(crudLayout);
 		m_actionBarLayout->addStretch();
 
-		Cl::ApplyShadowEffect(m_launchBtn);
+		Cl::ViewUtils::ApplyShadowEffect(m_launchBtn);
 		m_actionBarLayout->addWidget(m_launchBtn);
 	}
 

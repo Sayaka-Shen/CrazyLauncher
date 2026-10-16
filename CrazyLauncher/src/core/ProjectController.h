@@ -25,7 +25,6 @@ namespace Cl
 		void LaunchProjects(Project* project);
 		QList<Project>& GetProjects();
 
-		QString GetProjectsFilePath() const;
 		void SaveProjects();
 		void LoadProjects();
 

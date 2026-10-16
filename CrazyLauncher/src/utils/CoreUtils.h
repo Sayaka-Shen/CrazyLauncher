@@ -1,8 +1,9 @@
 #pragma once
+#include <QString>
 
-namespace Cl
+namespace Cl::CoreUtils
 {
-	void SoftwarePathScan();
+	QString GetProjectsFilePath();
 }
 
 
