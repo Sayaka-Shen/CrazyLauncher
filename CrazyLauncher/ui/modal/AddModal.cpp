@@ -14,10 +14,11 @@
 #include <QIcon>
 #include <QStandardPaths>
 #include <QCheckBox>
+#include <QButtonGroup>
 
 namespace Cl
 {
-	AddModal::AddModal(QWidget* parent) : QDialog(parent)
+	AddModal::AddModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
 		setFixedSize(600, 400);
@@ -53,13 +54,11 @@ namespace Cl
 
 		m_modalLayout->addLayout(descLayout);
 
-		auto* projectTypeLayout = new QVBoxLayout();
+		auto* projectTypeLayout = new QHBoxLayout();
 		m_projectType = new QLabel("Project Type :");
 		projectTypeLayout->addWidget(m_projectType);
 
-		m_projectTypeComboBox = new QComboBox();
-		InitProjectType();
-		projectTypeLayout->addWidget(m_projectTypeComboBox);
+		m_projectTypeButtonGroup = InitProjectType(projectTypeLayout);
 
 		m_modalLayout->addLayout(projectTypeLayout);
 
@@ -95,14 +94,19 @@ namespace Cl
 		connect(m_projectExplorer, &QPushButton::pressed, this, &AddModal::FindProject);
 	}
 
-	void AddModal::InitProjectType()
+	QButtonGroup* AddModal::InitProjectType(QHBoxLayout* projectTypeLayout)
 	{
-		m_projectTypeComboBox->addItem("Script", QVariant::fromValue(ProjectType::Script));
-		m_projectTypeComboBox->addItem("Unreal", QVariant::fromValue(ProjectType::Unreal));
-		m_projectTypeComboBox->addItem("Unity", QVariant::fromValue(ProjectType::Unity));
-		m_projectTypeComboBox->addItem("Blender", QVariant::fromValue(ProjectType::Blender));
-		m_projectTypeComboBox->addItem("Photoshop", QVariant::fromValue(ProjectType::Photoshop));
-		m_projectTypeComboBox->addItem("Zbrush", QVariant::fromValue(ProjectType::Zbrush));
+		QButtonGroup* buttonGroup = new QButtonGroup(this);
+		buttonGroup->setExclusive(true);
+
+		for(ProjectTypeInfo projectTypeInfo : m_projectTypeRegistry.GetProjectTypes())
+		{
+			QCheckBox* checkbox = new QCheckBox(projectTypeInfo.name);
+			buttonGroup->addButton(checkbox);
+			projectTypeLayout->addWidget(checkbox);
+		}
+
+		return buttonGroup;
 	}
 
 	// SLOTS
@@ -113,8 +117,16 @@ namespace Cl
 		QString path = m_pathField->text();
 		QFileInfo info(path);
 		bool isDir = info.exists() && info.isDir();
-
-		Project project{m_nameField->text(), m_descField->text(), m_projectTypeComboBox->currentData().value<ProjectType>(), m_pathField->text(), isDir, m_softwarePathField->text()};
+		
+		Project project 
+		{
+			m_nameField->text(), 
+			m_descField->text(), 
+			m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())), 
+			m_pathField->text(), 
+			isDir, 
+			m_softwarePathField->text()
+		};
 
 		emit addProject(project);
 
@@ -137,13 +149,13 @@ namespace Cl
 	{
 		QString path;
 
-		if (m_projectTypeComboBox->currentData().value<ProjectType>() == ProjectType::Unity)
+		if (m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())) == ProjectType::Unity)
 		{
 			path = QFileDialog::getExistingDirectory(this, tr("Open Directory"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 		}
 		else
 		{
-			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), projectTypeToFilter[m_projectTypeComboBox->currentData().value<ProjectType>()]);
+			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), m_projectTypeRegistry.GetFilterTypeByName((m_projectTypeButtonGroup->checkedButton()->text())));
 		}
 
 		if (!path.isEmpty())

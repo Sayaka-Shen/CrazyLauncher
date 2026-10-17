@@ -67,6 +67,9 @@
     <ClCompile Include="src\utils\CoreUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\ProjectTypeRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\core\ProjectController.h">
@@ -98,7 +101,7 @@
     <ClInclude Include="src\core\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\ProjectType.h">
+    <ClInclude Include="src\core\ProjectTypeRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ui\utils\ViewUtils.h">

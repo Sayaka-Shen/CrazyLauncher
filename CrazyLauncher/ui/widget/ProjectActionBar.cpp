@@ -9,7 +9,7 @@
 
 namespace Cl
 {
-	ProjectActionBar::ProjectActionBar(QWidget* parent) : QWidget(parent)
+	ProjectActionBar::ProjectActionBar(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QWidget(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		// Style for the whole widget
 		setObjectName("ProjectActionBar");
@@ -66,7 +66,7 @@ namespace Cl
 	{
 		if (m_addWindow != nullptr) return;
 
-		m_addWindow = new AddModal(this);
+		m_addWindow = new AddModal(m_projectTypeRegistry, this);
 		m_addWindow->show();
 
 		connect(m_addWindow, &AddModal::addProject, this, &ProjectActionBar::addProject);

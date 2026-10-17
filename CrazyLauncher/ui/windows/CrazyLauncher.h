@@ -1,5 +1,6 @@
 #pragma once
 #include <QtWidgets/QMainWindow>
+#include "core/ProjectTypeRegistry.h"
 
 class QWidget;
 class QVBoxLayout;
@@ -29,6 +30,7 @@ namespace Cl
 	private:
 		// Controller 
 		ProjectController* m_projectController;
+		ProjectTypeRegistry m_projectTypeRegistry;
 
 		// Project
 		Project* m_currentProjectSelected;

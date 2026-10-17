@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\ProjectTypeRegistry.cpp" />
     <ClCompile Include="src\utils\CoreUtils.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -121,7 +122,7 @@
   <ItemGroup>
     <ClInclude Include="src\utils\CoreUtils.h" />
     <ClInclude Include="src\core\Project.h" />
-    <ClInclude Include="src\core\ProjectType.h" />
+    <ClInclude Include="src\core\ProjectTypeRegistry.h" />
     <ClInclude Include="ui\utils\ViewUtils.h" />
     <QtMoc Include="ui\modal\AddModal.h" />
     <ClInclude Include="ui\modal\EditWindow.h" />

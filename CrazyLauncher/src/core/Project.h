@@ -1,5 +1,5 @@
 #pragma once
-#include "ProjectType.h"
+#include "ProjectTypeRegistry.h"
 
 #include <QString>
 #include <QMetaType>

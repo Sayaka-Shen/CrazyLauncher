@@ -2,6 +2,7 @@
 #include "core/Project.h"
 
 #include <QDialog>
+#include "core/ProjectTypeRegistry.h"
 
 class QLabel;
 class QLineEdit;
@@ -10,8 +11,6 @@ class QCheckBox;
 class QVBoxLayout;
 class QHBoxLayout;
 class QButtonGroup;
-class QCheckBox;
-class QComboBox;
 
 namespace Cl
 {
@@ -22,12 +21,12 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		explicit AddModal(QWidget* parent = nullptr);
+		explicit AddModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~AddModal() override = default;
 
-		
-
 	private:
+		ProjectTypeRegistry& m_projectTypeRegistry;
+
 		QVBoxLayout* m_modalLayout;
 
 		QLabel* m_name;
@@ -37,7 +36,7 @@ namespace Cl
 		QLineEdit* m_descField;
 
 		QLabel* m_projectType;
-		QComboBox* m_projectTypeComboBox;
+		QButtonGroup* m_projectTypeButtonGroup;
 
 		QLabel* m_path;
 		QLineEdit* m_pathField;
@@ -49,20 +48,10 @@ namespace Cl
 
 		WindowButtonView* m_buttonView;
 
-		std::map<ProjectType, QString> projectTypeToFilter =
-		{
-			{ Script, "*.sln" },
-			{ Unreal, "*.uproject" },
-			{ Unity, "" },
-			{ Blender, "*.blend" },
-			{ Photoshop, "*.psd" },
-			{ Zbrush, "*.zpr" },
-		};
-
 	private:
 		void InitUI();
 		void InitConnections();
-		void InitProjectType();
+		QButtonGroup* InitProjectType(QHBoxLayout* projectTypeLayout);
 
 		// Utilities
 		bool IsOneOfTheFieldEmpty();

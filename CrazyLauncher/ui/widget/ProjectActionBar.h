@@ -1,5 +1,6 @@
 #pragma once
 #include <QWidget>
+#include <core/ProjectTypeRegistry.h>
 
 class QHBoxLayout;
 class QPushButton;
@@ -15,7 +16,7 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		explicit ProjectActionBar(QWidget* parent = nullptr);
+		explicit ProjectActionBar(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~ProjectActionBar() override = default;
 
 	public:
@@ -25,6 +26,8 @@ namespace Cl
 		void OnLaunchProjectClicked();
 
 	private:
+		ProjectTypeRegistry& m_projectTypeRegistry;
+
 		QHBoxLayout* m_actionBarLayout;
 
 		QPushButton* m_addBtn;

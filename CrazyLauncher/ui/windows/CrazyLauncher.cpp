@@ -1,5 +1,6 @@
 #include "CrazyLauncher.h"
 #include "core/ProjectController.h"
+#include "core/ProjectTypeRegistry.h"
 #include "core/Project.h"
 
 #include "widget/ProjectExplorer.h"
@@ -27,6 +28,7 @@ namespace Cl
 	void CrazyLauncher::InitController()
 	{
 		m_projectController = new ProjectController(this);
+		m_projectTypeRegistry = ProjectTypeRegistry();
 	}
 
 	void CrazyLauncher::InitUI()
@@ -46,7 +48,7 @@ namespace Cl
 
 		m_appLayout->addLayout(centralLayout);
 
-		m_projectActionBar = new ProjectActionBar();
+		m_projectActionBar = new ProjectActionBar(m_projectTypeRegistry);
 
 		m_appLayout->addWidget(m_projectActionBar);
 	}
