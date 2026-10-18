@@ -15,6 +15,8 @@
 #include <QStandardPaths>
 #include <QCheckBox>
 #include <QButtonGroup>
+#include <QRadioButton>
+#include <QGridLayout>
 
 namespace Cl
 {
@@ -31,12 +33,13 @@ namespace Cl
 	void AddModal::InitUI()
 	{
 		m_modalLayout = new QVBoxLayout(this);
+		m_modalLayout->setAlignment(Qt::AlignLeft);
 		m_modalLayout->setContentsMargins(0, 0, 0, 0);
-		m_modalLayout->setSpacing(0);
+		m_modalLayout->setSpacing(10);
 
 		auto* nameLayout = new QVBoxLayout();
+		nameLayout->setContentsMargins(15, 10, 15, 0);
 		m_name = new QLabel("Project Name :");
-		m_name->setObjectName("ProjectName");
 		nameLayout->addWidget(m_name);
 
 		m_nameField = new QLineEdit();
@@ -45,6 +48,8 @@ namespace Cl
 		m_modalLayout->addLayout(nameLayout);
 
 		auto* descLayout = new QVBoxLayout();
+		descLayout->setContentsMargins(15, 0, 15, 0);
+
 		m_desc = new QLabel("Description :");
 		descLayout->addWidget(m_desc);
 
@@ -54,29 +59,32 @@ namespace Cl
 
 		m_modalLayout->addLayout(descLayout);
 
-		auto* projectTypeLayout = new QHBoxLayout();
+		auto* projectTypeLayout = new QVBoxLayout();
+		projectTypeLayout->setContentsMargins(15, 0, 15, 0);
 		m_projectType = new QLabel("Project Type :");
 		projectTypeLayout->addWidget(m_projectType);
 
-		m_projectTypeButtonGroup = InitProjectType(projectTypeLayout);
+		auto* projectCheckBoxLayout = new QGridLayout();
+		projectCheckBoxLayout->setAlignment(Qt::AlignLeft);
+		projectCheckBoxLayout->setVerticalSpacing(10);
+		m_projectTypeButtonGroup = InitProjectType(projectCheckBoxLayout);
 
+		projectTypeLayout->addLayout(projectCheckBoxLayout);
 		m_modalLayout->addLayout(projectTypeLayout);
 
 		auto* projectPathLayout = new QVBoxLayout();
+		projectPathLayout->setContentsMargins(15, 0, 15, 10);
 		m_path = new QLabel("Project Path :", this);
 		projectPathLayout->addWidget(m_path);
 
 		auto* pathFieldLayout = new QHBoxLayout();
 		m_pathField = new QLineEdit();
-		m_pathField->setObjectName("PathField");
-		pathFieldLayout->addWidget(m_pathField);
+		pathFieldLayout->addWidget(m_pathField, 2);
 
 		m_projectExplorer = new QPushButton();
 		m_projectExplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
 		m_projectExplorer->setDefault(false);
 		m_projectExplorer->setAutoDefault(false);
-		m_projectExplorer->setObjectName("ExplorerBtn");
-
 		pathFieldLayout->addWidget(m_projectExplorer);
 
 		projectPathLayout->addLayout(pathFieldLayout);
@@ -84,6 +92,7 @@ namespace Cl
 		m_modalLayout->addLayout(projectPathLayout);
 
 		m_buttonView = new WindowButtonView();
+
 		m_modalLayout->addWidget(m_buttonView);
 	}
 
@@ -94,16 +103,26 @@ namespace Cl
 		connect(m_projectExplorer, &QPushButton::pressed, this, &AddModal::FindProject);
 	}
 
-	QButtonGroup* AddModal::InitProjectType(QHBoxLayout* projectTypeLayout)
+	QButtonGroup* AddModal::InitProjectType(QGridLayout* projectTypeLayout)
 	{
 		QButtonGroup* buttonGroup = new QButtonGroup(this);
 		buttonGroup->setExclusive(true);
 
-		for(ProjectTypeInfo projectTypeInfo : m_projectTypeRegistry.GetProjectTypes())
+		int columnLength = 3;
+
+		for(int i = 0; i < m_projectTypeRegistry.GetProjectTypes().length(); ++i)
 		{
-			QCheckBox* checkbox = new QCheckBox(projectTypeInfo.name);
-			buttonGroup->addButton(checkbox);
-			projectTypeLayout->addWidget(checkbox);
+			ProjectTypeInfo projectTypeInfo = m_projectTypeRegistry.GetProjectTypes()[i];
+
+			int column = i % columnLength;
+			int row = i / columnLength;
+
+			QPushButton* btn = new QPushButton(projectTypeInfo.name);
+			btn->setCheckable(true);
+			btn->setCursor(Qt::PointingHandCursor);
+			btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+			buttonGroup->addButton(btn);
+			projectTypeLayout->addWidget(btn, row, column);
 		}
 
 		return buttonGroup;

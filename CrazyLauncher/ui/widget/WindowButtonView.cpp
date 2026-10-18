@@ -9,6 +9,7 @@ namespace Cl
 	{
 		setObjectName("WindowButtonView");
 		setAttribute(Qt::WA_StyledBackground, true);
+		setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
 		InitUI();
 		InitConnections();
@@ -17,6 +18,8 @@ namespace Cl
 	void WindowButtonView::InitUI()
 	{
 		m_buttonLayout = new QHBoxLayout(this);
+
+		m_buttonLayout->addStretch();
 
 		m_cancelBtn = new QPushButton("Cancel");
 		m_cancelBtn->setDefault(false);

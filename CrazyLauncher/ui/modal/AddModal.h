@@ -11,6 +11,7 @@ class QCheckBox;
 class QVBoxLayout;
 class QHBoxLayout;
 class QButtonGroup;
+class QGridLayout;
 
 namespace Cl
 {
@@ -51,7 +52,7 @@ namespace Cl
 	private:
 		void InitUI();
 		void InitConnections();
-		QButtonGroup* InitProjectType(QHBoxLayout* projectTypeLayout);
+		QButtonGroup* InitProjectType(QGridLayout* projectTypeLayout);
 
 		// Utilities
 		bool IsOneOfTheFieldEmpty();
