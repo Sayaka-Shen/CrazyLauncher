@@ -1,6 +1,7 @@
 #pragma once
 #include <QWidget>
 #include <core/ProjectTypeRegistry.h>
+#include <core/Project.h>
 
 class QHBoxLayout;
 class QPushButton;
@@ -8,8 +9,7 @@ class QDialog;
 
 namespace Cl
 {
-	class AddModal;
-	class EditWindow;
+	class ProjectModal;
 
 	class ProjectActionBar : public QWidget
 	{
@@ -19,9 +19,9 @@ namespace Cl
 		explicit ProjectActionBar(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~ProjectActionBar() override = default;
 
-	public:
+	private:
 		void OnAddWindowClicked();
-		//void OnEditWindowClicked();
+		void OnEditWindowClicked();
 		void OnRemoveProjectClicked();
 		void OnLaunchProjectClicked();
 
@@ -39,15 +39,16 @@ namespace Cl
 		QDialog* m_editBtnWindow;
 
 		// Pop up Window for Add - Edit projects 
-		AddModal* m_addWindow;
-		EditWindow* m_editWindow;
+		ProjectModal* m_addModal;
+		ProjectModal* m_editModal;
 
 	private:
 		void InitUI();
 		void InitConnections();
 
 	signals:
-		void addProject();
+		void addProject(const Project& project);
+		void editProject(const Project& project);
 
 		/*void E_RemoveProject();
 		void E_LaunchProject();*/

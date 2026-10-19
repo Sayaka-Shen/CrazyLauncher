@@ -14,7 +14,7 @@ namespace Cl
 	class ProjectDetailsView;
 	class ProjectActionBar;
 	struct Project;
-	class AddModal;
+	class ProjectModal;
 	class EditWindow;
 	class ProjectController;
 	class ProjectWidgetItem;
@@ -56,10 +56,9 @@ namespace Cl
 		void E_DisplayProject(Project& project);
 
 	public slots:
-		//void OnCloseUtilityWindow();
+		void OnAddProject(const Project& project);
+		void OnEditProject(const Project& project);
 
-		void OnProjectAdded(const Project& project);
-		void OnProjectEdited(Project* baseProjectEdited);
 		void OnRemoveProject();
 		void LaunchProject();
 
@@ -68,6 +67,7 @@ namespace Cl
 		void FillListWidget(Project& project);
 
 		void FilterProjects(const QString& text);
+
 	};
 }
 

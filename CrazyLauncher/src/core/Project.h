@@ -13,11 +13,10 @@ namespace Cl
 		ProjectType type;
 		QString path;
 		bool isDirectory;
-		QString softwareExe;
 
 		bool IsEmpty()
 		{
-			return name.isEmpty() && description.isEmpty() && path.isEmpty() && softwareExe.isEmpty();
+			return name.isEmpty() && description.isEmpty() && path.isEmpty();
 		}
 	};
 }

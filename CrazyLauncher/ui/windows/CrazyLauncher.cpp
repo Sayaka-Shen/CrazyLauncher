@@ -55,14 +55,14 @@ namespace Cl
 
 	void CrazyLauncher::InitConnections()
 	{
-		// Create windows the user use to add project or edit project
-		/*connect(m_projectActionBar, &ProjectActionBar::E_CreateAddWindow, this, &CrazyLauncher::CreateAddWindow);
-		connect(m_projectActionBar, &ProjectActionBar::E_CreateEditWindow, this, &CrazyLauncher::CreateEditWindow);*/
+		// Link add/edit actionBar button to projectController
+		connect(m_projectActionBar, &ProjectActionBar::addProject, this, &CrazyLauncher::OnAddProject);
+		connect(m_projectActionBar, &ProjectActionBar::editProject, this, &CrazyLauncher::OnEditProject);
 
 		// Manage to display project in views
-		connect(m_projectController, &ProjectController::E_AddProjectToView, m_projectExplorer, &ProjectExplorer::AddProjectInView);
-		connect(m_projectController, &ProjectController::E_EditProjectToView, m_projectExplorer, &ProjectExplorer::EditProjectInView);
-		connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_projectExplorer, &ProjectExplorer::RemoveProjectInView);
+		//connect(m_projectController, &ProjectController::E_AddProjectToView, m_btnplorer, &ProjectExplorer::AddProjectInView);
+		//connect(m_projectController, &ProjectController::E_EditProjectToView, m_btnplorer, &ProjectExplorer::EditProjectInView);
+		//connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_btnplorer, &ProjectExplorer::RemoveProjectInView);
 
 		connect(m_projectExplorer->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
 		connect(this, &CrazyLauncher::E_DisplayProject, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
@@ -101,15 +101,16 @@ namespace Cl
 		return m_projectExplorer->GetProjectList()->currentRow();
 	}
 
-
-	void CrazyLauncher::OnProjectAdded(const Project& project)
+	void CrazyLauncher::OnAddProject(const Project& project)
 	{
 		m_projectController->AddProject(project);
+		m_projectExplorer->AddProjectInView(project);
 	}
 
-	void CrazyLauncher::OnProjectEdited(Project* baseProjectEdited)
+	void CrazyLauncher::OnEditProject(const Project& project)
 	{
-		m_projectController->EditProjects(baseProjectEdited);
+		m_projectController->EditProject(project);
+		m_projectExplorer->EditProjectInView(project);
 	}
 
 	void CrazyLauncher::OnRemoveProject()

@@ -20,7 +20,7 @@ namespace Cl
 	public:
 		void AddProject(const Project& project);
 		void RemoveProjects(int indexProject);
-		void EditProjects(Project* baseProjectEdited);
+		void EditProject(const Project& project);
 		void LaunchProjects(Project* project);
 		QList<Project>& GetProjects();
 
@@ -31,9 +31,7 @@ namespace Cl
 		QList<Project> projects;
 
 	signals:
-		void E_AddProjectToView(const Project& project);
-		void E_EditProjectToView(Project* project);
-		void E_EditProjectToDescriptionView(Project& project);
+		void E_EditProjectToDescriptionView(const Project& project);
 		void E_RemoveProjectToView(int indexProject);
 
 		void E_ClearProjectInListWidget();

@@ -22,13 +22,14 @@ namespace Cl
 		m_buttonLayout->addStretch();
 
 		m_cancelBtn = new QPushButton("Cancel");
+		m_cancelBtn->setObjectName("ApplicationButton");
 		m_cancelBtn->setDefault(false);
 
 		m_buttonLayout->addWidget(m_cancelBtn);
 
 		m_registerBtn = new QPushButton("Add");
+		m_registerBtn->setObjectName("HighlightButton");
 		m_registerBtn->setDefault(true);
-		m_registerBtn->setObjectName("RegisterBtn");
 
 		m_buttonLayout->addWidget(m_registerBtn);
 	}

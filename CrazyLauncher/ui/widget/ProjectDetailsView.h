@@ -37,7 +37,7 @@ namespace Cl
 		void InitConnections();
 
 	public slots:
-		void OnSelectedProjectChanged(Project& project);
+		void OnSelectedProjectChanged(const Project& project);
 	};
 }
 

@@ -34,13 +34,7 @@
     <ClCompile Include="src\core\ProjectController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ui\modal\AddModal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\modal\EditWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\modal\UtilityWindow.cpp">
+    <ClCompile Include="ui\modal\ProjectModal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ui\widget\ProjectDetailsView.cpp">
@@ -81,7 +75,7 @@
     <QtMoc Include="ui\widget\WindowButtonView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ui\modal\AddModal.h">
+    <QtMoc Include="ui\modal\ProjectModal.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ui\widget\ProjectDetailsView.h">
@@ -108,12 +102,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\CoreUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\modal\UtilityWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\modal\EditWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

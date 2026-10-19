@@ -21,13 +21,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -67,6 +67,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)ui;</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -78,7 +80,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -107,9 +109,7 @@
     <ClCompile Include="src\utils\CoreUtils.cpp" />
     <ClCompile Include="src\core\ProjectController.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="ui\modal\AddModal.cpp" />
-    <ClCompile Include="ui\modal\EditWindow.cpp" />
-    <ClCompile Include="ui\modal\UtilityWindow.cpp" />
+    <ClCompile Include="ui\modal\ProjectModal.cpp" />
     <ClCompile Include="ui\widget\ProjectDetailsView.cpp" />
     <ClCompile Include="ui\widget\ProjectExplorer.cpp" />
     <ClCompile Include="ui\widget\ProjectWidgetItem.cpp" />
@@ -124,9 +124,7 @@
     <ClInclude Include="src\core\Project.h" />
     <ClInclude Include="src\core\ProjectTypeRegistry.h" />
     <ClInclude Include="ui\utils\ViewUtils.h" />
-    <QtMoc Include="ui\modal\AddModal.h" />
-    <ClInclude Include="ui\modal\EditWindow.h" />
-    <ClInclude Include="ui\modal\UtilityWindow.h" />
+    <QtMoc Include="ui\modal\ProjectModal.h" />
     <QtMoc Include="ui\widget\ProjectDetailsView.h" />
     <QtMoc Include="ui\widget\ProjectExplorer.h" />
     <QtMoc Include="ui\widget\ProjectWidgetItem.h" />

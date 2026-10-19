@@ -1,26 +1,19 @@
-#include "AddModal.h"
+#include "ProjectModal.h"
 #include "core/Project.h"
 #include "ui/widget/WindowButtonView.h"
 
 #include <QLabel>
 #include <QLineEdit>
 #include <QFileDialog>
-#include <QComboBox>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QCloseEvent>
-#include <QFileInfo>
-#include <QIcon>
 #include <QStandardPaths>
-#include <QCheckBox>
+#include <QAbstractButton>
 #include <QButtonGroup>
-#include <QRadioButton>
-#include <QGridLayout>
 
 namespace Cl
 {
-	AddModal::AddModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
+	ProjectModal::ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
 		setFixedSize(600, 400);
@@ -30,7 +23,41 @@ namespace Cl
 		InitConnections();
 	}
 
-	void AddModal::InitUI()
+	ProjectModal::ProjectModal(Project* existedProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent /*= nullptr*/) : m_currentProject(existedProject), QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
+	{
+		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+		setFixedSize(600, 400);
+		setObjectName("Modal");
+
+		InitUI();
+		SetFieldDefaultValue();
+		InitConnections();
+	}
+
+	void ProjectModal::closeEvent(QCloseEvent* event)
+	{
+		reject();
+	}
+
+	Project ProjectModal::GetProject() const
+	{
+		QString path = m_pathField->text();
+		QFileInfo info(path);
+		bool isDir = info.exists() && info.isDir();
+
+		Project project
+		{
+			m_nameField->text(),
+			m_descField->text(),
+			m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())),
+			m_pathField->text(),
+			isDir
+		};
+
+		return project;
+	}
+
+	void ProjectModal::InitUI()
 	{
 		m_modalLayout = new QVBoxLayout(this);
 		m_modalLayout->setAlignment(Qt::AlignLeft);
@@ -78,14 +105,15 @@ namespace Cl
 		projectPathLayout->addWidget(m_path);
 
 		auto* pathFieldLayout = new QHBoxLayout();
+		pathFieldLayout->setSpacing(2);
 		m_pathField = new QLineEdit();
 		pathFieldLayout->addWidget(m_pathField, 2);
 
-		m_projectExplorer = new QPushButton();
-		m_projectExplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
-		m_projectExplorer->setDefault(false);
-		m_projectExplorer->setAutoDefault(false);
-		pathFieldLayout->addWidget(m_projectExplorer);
+		m_btnplorer = new QPushButton();
+		m_btnplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
+		m_btnplorer->setObjectName("ExplorerButton");
+		m_btnplorer->setDefault(false);
+		pathFieldLayout->addWidget(m_btnplorer);
 
 		projectPathLayout->addLayout(pathFieldLayout);
 
@@ -96,14 +124,14 @@ namespace Cl
 		m_modalLayout->addWidget(m_buttonView);
 	}
 
-	void AddModal::InitConnections()
+	void ProjectModal::InitConnections()
 	{
-		connect(m_buttonView, &WindowButtonView::onAcceptModal, this, &AddModal::OnAcceptModal);
-		connect(m_buttonView, &WindowButtonView::onCancelModal, this, &AddModal::OnRejectModal);
-		connect(m_projectExplorer, &QPushButton::pressed, this, &AddModal::FindProject);
+		connect(m_buttonView, &WindowButtonView::onAcceptModal, this, &ProjectModal::OnAcceptModal);
+		connect(m_buttonView, &WindowButtonView::onCancelModal, this, &ProjectModal::OnRejectModal);
+		connect(m_btnplorer, &QPushButton::pressed, this, &ProjectModal::FindProject);
 	}
 
-	QButtonGroup* AddModal::InitProjectType(QGridLayout* projectTypeLayout)
+	QButtonGroup* ProjectModal::InitProjectType(QGridLayout* projectTypeLayout)
 	{
 		QButtonGroup* buttonGroup = new QButtonGroup(this);
 		buttonGroup->setExclusive(true);
@@ -118,9 +146,9 @@ namespace Cl
 			int row = i / columnLength;
 
 			QPushButton* btn = new QPushButton(projectTypeInfo.name);
+			btn->setObjectName("TypeButton");
 			btn->setCheckable(true);
 			btn->setCursor(Qt::PointingHandCursor);
-			btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 			buttonGroup->addButton(btn);
 			projectTypeLayout->addWidget(btn, row, column);
 		}
@@ -128,43 +156,45 @@ namespace Cl
 		return buttonGroup;
 	}
 
+	// if modal is construct with the second constructor
+	void ProjectModal::SetFieldDefaultValue()
+	{
+		m_nameField->setText(m_currentProject->name);
+		m_descField->setText(m_currentProject->description);
+
+		// Set current project type to edit
+		for (QAbstractButton* btn : m_projectTypeButtonGroup->buttons())
+		{
+			auto buttonType = m_projectTypeRegistry.GetProjectTypeByName(btn->text());
+			if (buttonType == m_currentProject->type)
+			{
+				btn->setChecked(true);
+				break;
+			}
+		}
+
+		m_pathField->setText(m_currentProject->path);
+	}
+
 	// SLOTS
-	void AddModal::OnAcceptModal()
+	void ProjectModal::OnAcceptModal()
 	{
 		if (IsOneOfTheFieldEmpty()) return;
-
-		QString path = m_pathField->text();
-		QFileInfo info(path);
-		bool isDir = info.exists() && info.isDir();
-		
-		Project project 
-		{
-			m_nameField->text(), 
-			m_descField->text(), 
-			m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())), 
-			m_pathField->text(), 
-			isDir, 
-			m_softwarePathField->text()
-		};
-
-		emit addProject(project);
-
 		accept();
 	}
 
-	void AddModal::OnRejectModal()
+	void ProjectModal::OnRejectModal()
 	{
-		emit rejectModal();
 		reject();
 	}
 
 	// Utilities
-	bool AddModal::IsOneOfTheFieldEmpty()
+	bool ProjectModal::IsOneOfTheFieldEmpty()
 	{
 		return m_nameField->text().isEmpty() || m_descField->text().isEmpty() || m_pathField->text().isEmpty();
 	}
 
-	void AddModal::FindProject()
+	void ProjectModal::FindProject()
 	{
 		QString path;
 

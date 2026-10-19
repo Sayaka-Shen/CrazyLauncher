@@ -4,6 +4,7 @@
 class QLineEdit;
 class QListWidget;
 class QVBoxLayout;
+class QListWidgetItem;
 
 namespace Cl
 {
@@ -20,7 +21,13 @@ namespace Cl
 	public:
 		QListWidget* GetProjectList();
 
+		void AddProjectInView(const Project& project);
+		void EditProjectInView(const Project& project);
+		void RemoveProjectInView(int indexProject);
+
 	private:
+		Project m_currentProject;
+
 		QVBoxLayout* m_projectViewLayout;
 		QLineEdit* m_searchBar;
 		QListWidget* m_projectsList;
@@ -34,9 +41,6 @@ namespace Cl
 		void E_FilterProjects(const QString& text);
 
 	public slots:
-		void AddProjectInView(const Project& project);
-		void EditProjectInView(Project* project);
-		void RemoveProjectInView(int indexProject);
-
+		void OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous);
 	};
 }

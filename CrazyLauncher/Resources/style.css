@@ -4,7 +4,7 @@ QMainWindow {
 }
 
 /* App buttons styling */
-QPushButton {
+#ApplicationButton {
     background-color: #2a2f3b;
     border: 1px solid #3d4455;
     color: #ffffff;
@@ -12,8 +12,20 @@ QPushButton {
     padding: 5px 30px;
 }
 
-QPushButton:hover {
+#ApplicationButton:hover {
     background-color: #353b4a;
+}
+
+#HighlightButton {
+    background-color: #3768B3;
+    border: 1px solid #3768B3;
+    color: #ffffff;
+    border-radius: 3px;
+    padding: 5px 30px;
+}
+
+#HighlightButton:hover {
+    background-color: #3d74c6;
 }
 
 /* Add/Edit Modal */
@@ -31,34 +43,54 @@ QPushButton:hover {
     border: 1px solid #333743;
     border-radius: 2px;
     color: white;
-    padding: 5px 0;
+    padding: 5px 2px;
 }
 
-/* QRadioButton from modal */
-#Modal QPushButton {
-    background: #202636;
-    border: 1px solid #323a4d;
-    border-radius: 6px;
-    color: #d8dce5;
+/* Button to search for a project in Modals */
+#ExplorerButton {
+    background-color: #272C38;
+    border: 1px solid #333743;
+    border-radius: 2px;
+    color: #3768B3;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 6px 10px;
 }
 
-#Modal QPushButton:hover {
-    border-color: #4d5a73;
-    background: #252c3d;
-}
-
-#Modal QPushButton:checked {
-    border-color: #4d84ff;
-    background: #293347;
+#ExplorerButton:hover {
+    background-color: #313745;
     color: white;
 }
 
-
-/* Potentiellement à refaire */
-#ProjectExplorer 
-{
+/* TypeButton from modal */
+#TypeButton {
+    background-color: #202636;
+    border: 1px solid #323a4d;
+    border-radius: 6px;
+    color: #d8dce5;
+    padding: 5px 20px;
 }
 
+#TypeButton:hover {
+    border-color: #4d5a73;
+    background-color: #252c3d;
+}
+
+#TypeButton:checked {
+    border-color: #4d84ff;
+    background-color: #293347;
+    color: white;
+}
+
+/* WindowButtonView */
+#WindowButtonView {
+    border-top: 1px solid #333743;
+}
+
+
+
+
+/* Potentiellement à refaire */
 #SearchBar 
 {
     background-color: #262A35;
@@ -133,16 +165,6 @@ QWidget#ProjectWidgetItem #Desc
     border-bottom: 2px solid #333743;
 }
 
-#DescriptionLabel, #PathLabel, #SoftwareLabel 
-{
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    margin: 0 12px 0 12px;
-
-    padding-bottom: 8px;
-}
-
 #DescriptionField, #PathField, #SoftwareField 
 {
     color: white;
@@ -158,89 +180,4 @@ QWidget#ProjectWidgetItem #Desc
     border-top: 1px solid #333743;
 }
 
-QWidget#ProjectActionBar #LaunchBtn {
-    background-color: #3768B3;
-    border: 1px solid #3768B3;
-}
 
-QWidget#ProjectActionBar #LaunchBtn:hover {
-    background-color: #3d74c6;
-}
-/*
-QWidget#ProjectActionBar QPushButton {
-    background-color: #2a2f3b;
-    border: 1px solid #3d4455;
-    color: #ffffff;
-    border-radius: 2px;
-    padding: 5px 30px;
-}
-
-QWidget#ProjectActionBar QPushButton:hover {
-    background-color: #353b4a;
-}
-*/
-/* --- Utility Window --- */
-
-
-/* --- WindowButtonView --- */
-#WindowButtonView
-{
-    border-top: 1px solid #333743;
-}
-
-QWidget#WindowButtonView #RegisterBtn
-{
-    background-color: #3768B3;
-    border: 1px solid #3768B3;
-}
-/*
-QWidget#WindowButtonView QPushButton
-{
-    background-color: #2a2f3b;
-    border: 1px solid #3d4455;
-    color: #ffffff;
-    border-radius: 2px;
-    margin-top: 10px;
-    padding: 5px 50px;
-}
-
-QWidget#WindowButtonView QPushButton:hover 
-{
-    background-color: #353b4a;
-}*/
-
-QWidget#WindowButtonView #RegisterBtn:hover 
-{
-    background-color: #3d74c6;
-}
-
-/*QPushButton#ExplorerBtn 
-{
-    background-color: #272C38;
-    border: 1px solid #333743;
-    border-radius: 2px;
-    color: #3768B3;
-    font-weight: bold;
-    font-size: 18px;
-
-    min-width: 40px;
-    max-width: 40px;
-    min-height: 30px;
-    max-height: 30px;
-
-    margin-left: 0;
-    margin-right: 15px;
-    margin-top: 5px;
-}
-
-QPushButton#ExplorerBtn:hover 
-{
-    background-color: #313745;
-    color: white;
-}*/
-
-/*QLineEdit#PathField, QLineEdit#SoftwarePathField 
-{
-    margin-right: 5px;
-    color: white;
-}*/

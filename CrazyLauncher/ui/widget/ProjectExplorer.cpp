@@ -6,7 +6,6 @@
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QListWidgetItem>
-#include <QSize>
 
 namespace Cl
 {
@@ -42,11 +41,16 @@ namespace Cl
 	void ProjectExplorer::InitConnections()
 	{
 		connect(m_searchBar, &QLineEdit::textChanged, this, &ProjectExplorer::OnProjetFilter);
+		connect(m_projectsList, &QListWidget::currentItemChanged, this, &ProjectExplorer::OnProjectSelected);
 	}
 
 	void ProjectExplorer::OnProjetFilter(const QString& text)
 	{
 		emit E_FilterProjects(text);
+	}
+
+	void ProjectExplorer::OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous)
+	{
 	}
 
 	void ProjectExplorer::AddProjectInView(const Project& project)
@@ -59,7 +63,7 @@ namespace Cl
 		m_projectsList->setItemWidget(item, widgetItem);
 	}
 
-	void ProjectExplorer::EditProjectInView(Project* project)
+	void ProjectExplorer::EditProjectInView(const Project& project)
 	{
 		QListWidgetItem* item = m_projectsList->currentItem();
 		if (item == nullptr) return;
@@ -67,8 +71,8 @@ namespace Cl
 		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectsList->itemWidget(item));
 		if (widgetItem == nullptr) return;
 
-		widgetItem->SetProjectTitle(project->name);
-		widgetItem->SetProjectDescription(project->description);
+		widgetItem->SetProjectTitle(project.name);
+		widgetItem->SetProjectDescription(project.description);
 	}
 
 	void ProjectExplorer::RemoveProjectInView(int indexProject)

@@ -12,20 +12,27 @@ class QVBoxLayout;
 class QHBoxLayout;
 class QButtonGroup;
 class QGridLayout;
+class QCloseEvent;
 
 namespace Cl
 {
 	class WindowButtonView;
 
-	class AddModal : public QDialog
+	class ProjectModal : public QDialog
 	{
 		Q_OBJECT
 
 	public:
-		explicit AddModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
-		~AddModal() override = default;
+		explicit ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
+		explicit ProjectModal(Project* existedProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
+		~ProjectModal() override = default;
+
+		void closeEvent(QCloseEvent* event) override;
+		Project GetProject() const;
 
 	private:
+		Project* m_currentProject;
+
 		ProjectTypeRegistry& m_projectTypeRegistry;
 
 		QVBoxLayout* m_modalLayout;
@@ -41,11 +48,7 @@ namespace Cl
 
 		QLabel* m_path;
 		QLineEdit* m_pathField;
-		QPushButton* m_projectExplorer;
-
-		QLabel* m_softwareExe;
-		QLineEdit* m_softwarePathField;
-		QPushButton* m_softwareExplorer;
+		QPushButton* m_btnplorer;
 
 		WindowButtonView* m_buttonView;
 
@@ -53,14 +56,13 @@ namespace Cl
 		void InitUI();
 		void InitConnections();
 		QButtonGroup* InitProjectType(QGridLayout* projectTypeLayout);
+		void SetFieldDefaultValue();
 
 		// Utilities
 		bool IsOneOfTheFieldEmpty();
 		void FindProject();
 
 	signals:
-		void addProject(const Project project);
-		void rejectModal();
 
 	public slots:
 		void OnAcceptModal();

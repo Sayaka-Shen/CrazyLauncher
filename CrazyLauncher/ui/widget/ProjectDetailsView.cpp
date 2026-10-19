@@ -67,22 +67,22 @@ namespace Cl
 
 	void ProjectDetailsView::InitConnections() {}
 
-	void ProjectDetailsView::OnSelectedProjectChanged(Project& project)
+	void ProjectDetailsView::OnSelectedProjectChanged(const Project& project)
 	{
 		m_title->setText(project.name);
 		m_descriptionField->setText(project.description);
 		m_pathField->setText(project.path);
 
-		if (project.softwareExe == "")
-		{
-			m_pathSoftware->hide();
-			m_pathSoftwareField->hide();
-		}
-		else
-		{
-			m_pathSoftware->show();
-			m_pathSoftwareField->show();
-			m_pathSoftwareField->setText(project.softwareExe);
-		}
+		//if (project.softwareExe == "")
+		//{
+		//	m_pathSoftware->hide();
+		//	m_pathSoftwareField->hide();
+		//}
+		//else
+		//{
+		//	m_pathSoftware->show();
+		//	m_pathSoftwareField->show();
+		//	m_pathSoftwareField->setText(project.softwareExe);
+		//}
 	}
 }
