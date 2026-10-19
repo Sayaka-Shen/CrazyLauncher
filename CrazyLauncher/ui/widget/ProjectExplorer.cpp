@@ -1,6 +1,5 @@
 #include "ProjectExplorer.h"
 #include "ProjectWidgetItem.h"
-#include "core/Project.h"
 
 #include <QLineEdit>
 #include <QListWidget>
@@ -51,6 +50,13 @@ namespace Cl
 
 	void ProjectExplorer::OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous)
 	{
+		QWidget* item = m_projectsList->itemWidget(current);
+		if (item == nullptr) return;
+
+		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(item);
+		if (widgetItem == nullptr) return;
+		
+		emit currentProjectChange(widgetItem->GetProjectInfo());
 	}
 
 	void ProjectExplorer::AddProjectInView(const Project& project)
@@ -58,7 +64,8 @@ namespace Cl
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
 		item->setSizeHint(QSize(0, 65));
 
-		ProjectWidgetItem* widgetItem = new ProjectWidgetItem(project.name, project.description, this);
+		ProjectWidgetItem* widgetItem = new ProjectWidgetItem();
+		widgetItem->SetProjectInfo(project.name, project.description);
 
 		m_projectsList->setItemWidget(item, widgetItem);
 	}
@@ -71,13 +78,13 @@ namespace Cl
 		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectsList->itemWidget(item));
 		if (widgetItem == nullptr) return;
 
-		widgetItem->SetProjectTitle(project.name);
-		widgetItem->SetProjectDescription(project.description);
+		widgetItem->SetProjectInfo(project.name, project.description);
 	}
 
 	void ProjectExplorer::RemoveProjectInView(int indexProject)
 	{
 		QListWidgetItem* item = m_projectsList->takeItem(indexProject);
+		m_projectsList->setCurrentItem(nullptr);
 		delete item;
 	}
 }

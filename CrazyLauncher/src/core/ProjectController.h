@@ -18,17 +18,21 @@ namespace Cl
 		~ProjectController() override = default;
 
 	public:
+		QList<Project>& GetProjects();
+		const Project* GetProjectByName(QString name);
+
 		void AddProject(const Project& project);
 		void RemoveProjects(int indexProject);
 		void EditProject(const Project& project);
 		void LaunchProjects(Project* project);
-		QList<Project>& GetProjects();
 
-		void SaveProjects();
 		void LoadProjects();
 
 	private:
-		QList<Project> projects;
+		QList<Project> m_projects;
+
+	private:
+		void SaveProjects();
 
 	signals:
 		void E_EditProjectToDescriptionView(const Project& project);

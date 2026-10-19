@@ -24,7 +24,7 @@ namespace Cl
 
 	public:
 		explicit ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
-		explicit ProjectModal(Project* existedProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
+		explicit ProjectModal(Project* currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~ProjectModal() override = default;
 
 		void closeEvent(QCloseEvent* event) override;

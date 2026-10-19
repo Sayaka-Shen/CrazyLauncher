@@ -18,6 +18,9 @@ namespace Cl
 		explicit ProjectDetailsView(QWidget* parent = nullptr);
 		~ProjectDetailsView() override = default;
 
+	public:
+		void SetCurrentProject(const Project& project);
+
 	private:
 		QVBoxLayout* m_descViewLayout;
 
@@ -34,10 +37,7 @@ namespace Cl
 
 	private:
 		void InitUI();
-		void InitConnections();
 
-	public slots:
-		void OnSelectedProjectChanged(const Project& project);
 	};
 }
 

@@ -23,7 +23,7 @@ namespace Cl
 		InitConnections();
 	}
 
-	ProjectModal::ProjectModal(Project* existedProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent /*= nullptr*/) : m_currentProject(existedProject), QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
+	ProjectModal::ProjectModal(Project* currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent /*= nullptr*/) : m_currentProject(currentProject), QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
 		setFixedSize(600, 400);

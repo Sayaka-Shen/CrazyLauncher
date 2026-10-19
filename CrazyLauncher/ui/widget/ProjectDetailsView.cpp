@@ -16,7 +16,13 @@ namespace Cl
 		setAttribute(Qt::WA_StyledBackground, true);
 
 		InitUI();
-		InitConnections();
+	}
+
+	void ProjectDetailsView::SetCurrentProject(const Project& project)
+	{
+		m_title->setText(project.name);
+		m_descriptionField->setText(project.description);
+		m_pathField->setText(project.path);
 	}
 
 	void ProjectDetailsView::InitUI()
@@ -63,26 +69,5 @@ namespace Cl
 		m_descViewLayout->addWidget(m_pathSoftwareField);
 
 		m_descViewLayout->addStretch(1);
-	}
-
-	void ProjectDetailsView::InitConnections() {}
-
-	void ProjectDetailsView::OnSelectedProjectChanged(const Project& project)
-	{
-		m_title->setText(project.name);
-		m_descriptionField->setText(project.description);
-		m_pathField->setText(project.path);
-
-		//if (project.softwareExe == "")
-		//{
-		//	m_pathSoftware->hide();
-		//	m_pathSoftwareField->hide();
-		//}
-		//else
-		//{
-		//	m_pathSoftware->show();
-		//	m_pathSoftwareField->show();
-		//	m_pathSoftwareField->setText(project.softwareExe);
-		//}
 	}
 }

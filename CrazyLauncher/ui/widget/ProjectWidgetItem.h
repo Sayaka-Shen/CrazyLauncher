@@ -7,31 +7,34 @@ class QLabel;
 
 namespace Cl
 {
+	struct ProjectItem
+	{
+		QString name;
+		QString desc;
+	};
+
 	class ProjectWidgetItem : public QWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit ProjectWidgetItem(QString title, QString description, QWidget* parent = nullptr);
-		~ProjectWidgetItem();
+		explicit ProjectWidgetItem(QWidget* parent = nullptr);
+		~ProjectWidgetItem() override = default;
 
-		QString GetProjectTitle();
-		QString GetProjectDescription();
-
-		void SetProjectTitle(QString newTitle);
-		void SetProjectDescription(QString newDescription);
+		const ProjectItem& GetProjectInfo() const;
+		void SetProjectInfo(QString name, QString desc);
 
 	private:
-		void CreateUI();
-		void CreateLayout();
-		void SetupLayout();
-
 		QHBoxLayout* m_itemLayout;
-		QVBoxLayout* m_textItemLayout;
 
 		QLabel* m_projectIcon;
 		QLabel* m_projectTitle;
 		QLabel* m_projectDesc;
+
+		ProjectItem m_projectItem;
+
+	private:
+		void InitUI();
 
 	};
 }

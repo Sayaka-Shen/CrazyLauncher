@@ -19,13 +19,13 @@ namespace Cl
 
 	void ProjectController::AddProject(const Project& project)
 	{
-		projects.append(project);
+		m_projects.append(project);
 		SaveProjects();
 	}
 
 	void ProjectController::RemoveProjects(int indexProject)
 	{
-		projects.remove(indexProject);
+		m_projects.remove(indexProject);
 		SaveProjects();
 		emit E_RemoveProjectToView(indexProject);
 	}
@@ -54,7 +54,20 @@ namespace Cl
 
 	QList<Project>& ProjectController::GetProjects()
 	{
-		return projects;
+		return m_projects;
+	}
+
+	const Project* ProjectController::GetProjectByName(QString name)
+	{
+		for (const auto& project : m_projects)
+		{
+			if (project.name == name)
+			{
+				return &project;
+			}
+		}
+
+		return nullptr;
 	}
 
 	void ProjectController::SaveProjects()
@@ -65,7 +78,7 @@ namespace Cl
 
 		QJsonArray jsonArray;
 
-		for (const Project& project : projects)
+		for (const Project& project : m_projects)
 		{
 			QJsonObject obj;
 			obj["name"] = project.name;
@@ -84,7 +97,7 @@ namespace Cl
 
 	void ProjectController::LoadProjects()
 	{
-		projects.clear();
+		m_projects.clear();
 		emit E_ClearProjectInListWidget();
 
 		QFile file(Cl::CoreUtils::GetProjectsFilePath());
@@ -99,7 +112,7 @@ namespace Cl
 			QJsonObject obj = value.toObject();
 			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool()};
 
-			projects.append(project);
+			m_projects.append(project);
 			emit E_FillProjectInListWidget(project);
 		}
 		

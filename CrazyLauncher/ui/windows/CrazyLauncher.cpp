@@ -6,7 +6,6 @@
 #include "widget/ProjectExplorer.h"
 #include "widget/ProjectDetailsView.h"
 #include "widget/ProjectActionBar.h"
-#include "widget/ProjectWidgetItem.h"
 
 #include <QListWidget>
 #include <QVBoxLayout>
@@ -59,14 +58,14 @@ namespace Cl
 		connect(m_projectActionBar, &ProjectActionBar::addProject, this, &CrazyLauncher::OnAddProject);
 		connect(m_projectActionBar, &ProjectActionBar::editProject, this, &CrazyLauncher::OnEditProject);
 
-		// Manage to display project in views
-		//connect(m_projectController, &ProjectController::E_AddProjectToView, m_btnplorer, &ProjectExplorer::AddProjectInView);
-		//connect(m_projectController, &ProjectController::E_EditProjectToView, m_btnplorer, &ProjectExplorer::EditProjectInView);
-		//connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_btnplorer, &ProjectExplorer::RemoveProjectInView);
+		// Display in project detail view the current selected project
+		connect(m_projectExplorer, &ProjectExplorer::currentProjectChange, this, &CrazyLauncher::OnChangeProjectSeleceted);
 
-		connect(m_projectExplorer->GetProjectList(), &QListWidget::currentItemChanged, this, &CrazyLauncher::GetSelectedProjectWidget);
-		connect(this, &CrazyLauncher::E_DisplayProject, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
-		connect(m_projectController, &ProjectController::E_EditProjectToDescriptionView, m_projectDetailsView, &ProjectDetailsView::OnSelectedProjectChanged);
+
+
+		// Potentiellement à changer
+		//connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_btnplorer, &ProjectExplorer::RemoveProjectInView);
+		
 		// Launch / Remove Projects
 		/*connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
 		connect(m_projectActionBar, &ProjectActionBar::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);*/
@@ -77,23 +76,6 @@ namespace Cl
 
 		// Filter Projects
 		connect(m_projectExplorer, &ProjectExplorer::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
-	}
-
-	void CrazyLauncher::GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous)
-	{
-		if (current == nullptr) return;
-
-		ProjectWidgetItem* itemWidget = static_cast<ProjectWidgetItem*>(m_projectExplorer->GetProjectList()->itemWidget(current));
-		if (itemWidget == nullptr) return;
-
-		for (Project& project : m_projectController->GetProjects())
-		{
-			if (project.name == itemWidget->GetProjectTitle())
-			{
-				emit E_DisplayProject(project);
-				m_currentProjectSelected = &project; 
-			}
-		}
 	}
 
 	int CrazyLauncher::GetSelectedProjectWidgetIndex()
@@ -126,6 +108,12 @@ namespace Cl
 		m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
+	void CrazyLauncher::OnChangeProjectSeleceted(ProjectItem projectItem)
+	{
+		m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectItem.name));
+		m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectItem.name));
+	}
+
 	void CrazyLauncher::ClearListWidget()
 	{
 		m_projectExplorer->GetProjectList()->clear();
@@ -143,21 +131,9 @@ namespace Cl
 			QListWidgetItem* item = m_projectExplorer->GetProjectList()->item(i);
 			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectExplorer->GetProjectList()->itemWidget(item));
 
-			bool matches = widgetItem->GetProjectTitle().contains(text, Qt::CaseInsensitive);
+			bool matches = widgetItem->GetProjectInfo().name.contains(text, Qt::CaseInsensitive);
 			
 			item->setHidden(!matches);
 		}
 	}
-
-	/*void CrazyLauncher::OnCloseUtilityWindow()
-	{
-		if (m_addWindow != nullptr)
-		{
-			m_addWindow = nullptr;
-		}
-		else
-		{
-			m_editWindow = nullptr;
-		}
-	}*/
 }

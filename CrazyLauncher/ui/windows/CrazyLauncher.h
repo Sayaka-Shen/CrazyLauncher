@@ -1,6 +1,7 @@
 #pragma once
 #include <QtWidgets/QMainWindow>
 #include "core/ProjectTypeRegistry.h"
+#include "widget/ProjectWidgetItem.h"
 
 class QWidget;
 class QVBoxLayout;
@@ -47,10 +48,7 @@ namespace Cl
 		void InitUI();
 		void InitConnections();
 
-		// Get  Set
-		void GetSelectedProjectWidget(QListWidgetItem* current, QListWidgetItem* previous);
 		int GetSelectedProjectWidgetIndex();
-
 
 	signals:
 		void E_DisplayProject(Project& project);
@@ -58,6 +56,8 @@ namespace Cl
 	public slots:
 		void OnAddProject(const Project& project);
 		void OnEditProject(const Project& project);
+
+		void OnChangeProjectSeleceted(ProjectItem projectItem);
 
 		void OnRemoveProject();
 		void LaunchProject();

@@ -1,4 +1,7 @@
 #pragma once
+#include "widget/ProjectWidgetItem.h"
+#include "core/Project.h"
+
 #include <QWidget>
 
 class QLineEdit;
@@ -8,8 +11,6 @@ class QListWidgetItem;
 
 namespace Cl
 {
-	struct Project;
-
 	class ProjectExplorer : public QWidget
 	{
 		Q_OBJECT
@@ -26,8 +27,6 @@ namespace Cl
 		void RemoveProjectInView(int indexProject);
 
 	private:
-		Project m_currentProject;
-
 		QVBoxLayout* m_projectViewLayout;
 		QLineEdit* m_searchBar;
 		QListWidget* m_projectsList;
@@ -38,6 +37,8 @@ namespace Cl
 		void OnProjetFilter(const QString& text);
 
 	signals:
+		void currentProjectChange(const ProjectItem& projectItem);
+
 		void E_FilterProjects(const QString& text);
 
 	public slots:

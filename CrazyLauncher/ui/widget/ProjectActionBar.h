@@ -19,6 +19,9 @@ namespace Cl
 		explicit ProjectActionBar(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~ProjectActionBar() override = default;
 
+	public:
+		void SetCurrentProject(const Project& currentProject);
+
 	private:
 		void OnAddWindowClicked();
 		void OnEditWindowClicked();
@@ -26,6 +29,7 @@ namespace Cl
 		void OnLaunchProjectClicked();
 
 	private:
+		Project m_currentProject;
 		ProjectTypeRegistry& m_projectTypeRegistry;
 
 		QHBoxLayout* m_actionBarLayout;

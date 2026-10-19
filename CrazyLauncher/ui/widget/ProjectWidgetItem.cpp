@@ -7,85 +7,65 @@
 
 namespace Cl
 {
-	ProjectWidgetItem::ProjectWidgetItem(QString title, QString description, QWidget* parent)
+	ProjectWidgetItem::ProjectWidgetItem(QWidget* parent) : QWidget(parent)
 	{
 		setObjectName("ProjectWidgetItem");
 		setAttribute(Qt::WA_StyledBackground, true);
 
-		CreateLayout();
-		CreateUI();
-		SetupLayout();
-
-		SetProjectTitle(title);
-		SetProjectDescription(description);
+		InitUI();
 	}
 
-	ProjectWidgetItem::~ProjectWidgetItem() {}
-
-	void ProjectWidgetItem::CreateUI()
-	{
-		m_projectIcon = new QLabel(this);
-		m_projectIcon->setObjectName("Icon");
-
-		m_projectTitle = new QLabel(this);
-		m_projectTitle->setObjectName("Title");
-
-		m_projectDesc = new QLabel(this);
-		m_projectDesc->setObjectName("Desc");
-
-		QPixmap pixmap(":/new/prefix1/Folder-Icon");
-		pixmap = pixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-		m_projectIcon->setPixmap(pixmap);
-	}
-
-	void ProjectWidgetItem::CreateLayout()
+	void ProjectWidgetItem::InitUI()
 	{
 		m_itemLayout = new QHBoxLayout(this);
-		m_textItemLayout = new QVBoxLayout();
-	}
-
-	void ProjectWidgetItem::SetupLayout()
-	{
-		m_textItemLayout->addWidget(m_projectTitle);
-		m_textItemLayout->addWidget(m_projectDesc);
-
-		m_textItemLayout->setSpacing(0);
-		m_textItemLayout->setContentsMargins(0, 0, 0, 0);
-		m_textItemLayout->addStretch(1);
-
-		m_itemLayout->addWidget(m_projectIcon, 0);
-		m_itemLayout->addLayout(m_textItemLayout, 1);
-
 		m_itemLayout->setSpacing(0);
 		m_itemLayout->setContentsMargins(0, 0, 0, 0);
+		
+		m_projectIcon = new QLabel(this);
+		m_projectIcon->setObjectName("Icon");
+		QPixmap pixmap(":/new/prefix1/assets/Folder-Icon");
+		pixmap = pixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		m_projectIcon->setPixmap(pixmap);
+
+		m_itemLayout->addWidget(m_projectIcon, 0);
+
+		auto* textLayout = new QVBoxLayout();
+		textLayout->setSpacing(0);
+		textLayout->setContentsMargins(0, 0, 0, 0);
+
+		m_projectTitle = new QLabel();
+		m_projectTitle->setObjectName("Title");
+		textLayout->addWidget(m_projectTitle);
+
+		m_projectDesc = new QLabel();
+		m_projectDesc->setObjectName("Desc");
+		textLayout->addWidget(m_projectDesc);
+
+		textLayout->addStretch(1);
+
+		m_itemLayout->addLayout(textLayout, 1);
 	}
 
-	// Getter, Setter for the widget infos
-	QString ProjectWidgetItem::GetProjectTitle()
+	const ProjectItem& ProjectWidgetItem::GetProjectInfo() const
 	{
-		return m_projectTitle->text();
+		return m_projectItem;
 	}
 
-	QString ProjectWidgetItem::GetProjectDescription()
+	void ProjectWidgetItem::SetProjectInfo(QString name, QString desc)
 	{
-		return m_projectDesc->text();
-	}
+		m_projectItem.name = name;
 
-	void ProjectWidgetItem::SetProjectTitle(QString newTitle)
-	{
-		m_projectTitle->setText(newTitle);
-	}
-
-	void ProjectWidgetItem::SetProjectDescription(QString newDescription)
-	{
 		int textLimit = 35;
-		QString displayText = newDescription;
+		QString displayText = desc;
 
-		if (newDescription.length() > textLimit)
+		if (desc.length() > textLimit)
 		{
-			displayText = newDescription.left(textLimit) + "...";
+			displayText = desc.left(textLimit) + "...";
 		}
 
-		m_projectDesc->setText(displayText);
+		m_projectItem.desc = displayText;
+
+		m_projectTitle->setText(name);
+		m_projectDesc->setText(desc);
 	}
 }
