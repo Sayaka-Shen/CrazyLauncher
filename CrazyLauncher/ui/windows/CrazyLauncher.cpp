@@ -108,10 +108,10 @@ namespace Cl
 		m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
-	void CrazyLauncher::OnChangeProjectSeleceted(ProjectItem projectItem)
+	void CrazyLauncher::OnChangeProjectSeleceted(const QString& projectName)
 	{
-		m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectItem.name));
-		m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectItem.name));
+		m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
+		m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
 	}
 
 	void CrazyLauncher::ClearListWidget()

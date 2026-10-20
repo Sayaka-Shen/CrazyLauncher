@@ -19,7 +19,7 @@ namespace Cl
 
 	public:
 		QList<Project>& GetProjects();
-		const Project* GetProjectByName(QString name);
+		const Project* GetProjectByName(QString projectName);
 
 		void AddProject(const Project& project);
 		void RemoveProjects(int indexProject);

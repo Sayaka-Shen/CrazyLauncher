@@ -57,11 +57,11 @@ namespace Cl
 		return m_projects;
 	}
 
-	const Project* ProjectController::GetProjectByName(QString name)
+	const Project* ProjectController::GetProjectByName(QString projectName)
 	{
 		for (const auto& project : m_projects)
 		{
-			if (project.name == name)
+			if (project.name == projectName)
 			{
 				return &project;
 			}

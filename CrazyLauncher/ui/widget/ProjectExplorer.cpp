@@ -56,7 +56,7 @@ namespace Cl
 		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(item);
 		if (widgetItem == nullptr) return;
 		
-		emit currentProjectChange(widgetItem->GetProjectInfo());
+		emit currentProjectChange(widgetItem->GetProjectInfo().name);
 	}
 
 	void ProjectExplorer::AddProjectInView(const Project& project)

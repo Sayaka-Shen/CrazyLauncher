@@ -37,7 +37,7 @@ namespace Cl
 		void OnProjetFilter(const QString& text);
 
 	signals:
-		void currentProjectChange(const ProjectItem& projectItem);
+		void currentProjectChange(const QString& projectName);
 
 		void E_FilterProjects(const QString& text);
 
