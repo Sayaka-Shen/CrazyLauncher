@@ -83,6 +83,8 @@ namespace Cl
 
 	void ProjectActionBar::OnEditWindowClicked()
 	{
+		if (m_currentProject.IsEmpty()) return;
+
 		m_editModal = new ProjectModal(&m_currentProject, m_projectTypeRegistry, this);
 		if (m_editModal->exec() == QDialog::Accepted)
 		{
@@ -96,7 +98,7 @@ namespace Cl
 
 	void ProjectActionBar::OnRemoveProjectClicked()
 	{
-		//emit E_RemoveProject();
+		emit removeProject();
 	}
 
 	void ProjectActionBar::OnLaunchProjectClicked()

@@ -22,8 +22,8 @@ namespace Cl
 		const Project* GetProjectByName(QString projectName);
 
 		void AddProject(const Project& project);
-		void RemoveProjects(int indexProject);
-		void EditProject(const Project& project);
+		void RemoveProject(int index);
+		void EditProject();
 		void LaunchProjects(Project* project);
 
 		void LoadProjects();
@@ -36,8 +36,6 @@ namespace Cl
 
 	signals:
 		void E_EditProjectToDescriptionView(const Project& project);
-		void E_RemoveProjectToView(int indexProject);
-
 		void E_ClearProjectInListWidget();
 		void E_FillProjectInListWidget(Project& project);
 	};

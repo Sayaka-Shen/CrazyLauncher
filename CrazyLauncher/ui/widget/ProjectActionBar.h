@@ -53,9 +53,8 @@ namespace Cl
 	signals:
 		void addProject(const Project& project);
 		void editProject(const Project& project);
+		void removeProject();
 
-		/*void E_RemoveProject();
-		void E_LaunchProject();*/
-
+		/*void E_LaunchProject();*/
 	};
 }

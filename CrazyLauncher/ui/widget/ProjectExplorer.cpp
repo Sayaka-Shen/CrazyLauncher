@@ -22,6 +22,11 @@ namespace Cl
 		return m_projectsList;
 	}
 
+	int ProjectExplorer::GetProjectListCurrentRow()
+	{
+		return GetProjectList()->currentRow();
+	}
+
 	void ProjectExplorer::InitUI()
 	{
 		m_projectViewLayout = new QVBoxLayout(this);
@@ -50,12 +55,17 @@ namespace Cl
 
 	void ProjectExplorer::OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous)
 	{
+		if (current == nullptr)
+		{
+			emit currentProjectChange("");
+			return;
+		}
+
 		QWidget* item = m_projectsList->itemWidget(current);
 		if (item == nullptr) return;
 
-		ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(item);
-		if (widgetItem == nullptr) return;
-		
+		auto* widgetItem = static_cast<ProjectWidgetItem*>(item);
+
 		emit currentProjectChange(widgetItem->GetProjectInfo().name);
 	}
 
@@ -84,7 +94,6 @@ namespace Cl
 	void ProjectExplorer::RemoveProjectInView(int indexProject)
 	{
 		QListWidgetItem* item = m_projectsList->takeItem(indexProject);
-		m_projectsList->setCurrentItem(nullptr);
 		delete item;
 	}
 }

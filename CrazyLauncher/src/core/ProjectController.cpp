@@ -23,17 +23,15 @@ namespace Cl
 		SaveProjects();
 	}
 
-	void ProjectController::RemoveProjects(int indexProject)
+	void ProjectController::RemoveProject(int index)
 	{
-		m_projects.remove(indexProject);
+		m_projects.remove(index);
 		SaveProjects();
-		emit E_RemoveProjectToView(indexProject);
 	}
 
-	void ProjectController::EditProject(const Project& project)
+	void ProjectController::EditProject()
 	{
 		SaveProjects();
-		emit E_EditProjectToDescriptionView(project);
 	}
 
 	void ProjectController::LaunchProjects(Project* project)

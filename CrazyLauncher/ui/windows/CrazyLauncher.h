@@ -48,8 +48,6 @@ namespace Cl
 		void InitUI();
 		void InitConnections();
 
-		int GetSelectedProjectWidgetIndex();
-
 	signals:
 		void E_DisplayProject(Project& project);
 
@@ -57,7 +55,7 @@ namespace Cl
 		void OnAddProject(const Project& project);
 		void OnEditProject(const Project& project);
 
-		void OnChangeProjectSeleceted(const QString& projectName);
+		void OnChangeProjectSelected(const QString& projectName);
 
 		void OnRemoveProject();
 		void LaunchProject();

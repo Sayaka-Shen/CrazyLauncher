@@ -21,6 +21,7 @@ namespace Cl
 
 	public:
 		QListWidget* GetProjectList();
+		int GetProjectListCurrentRow();
 
 		void AddProjectInView(const Project& project);
 		void EditProjectInView(const Project& project);
@@ -38,10 +39,10 @@ namespace Cl
 
 	signals:
 		void currentProjectChange(const QString& projectName);
-
 		void E_FilterProjects(const QString& text);
 
 	public slots:
 		void OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous);
+
 	};
 }

@@ -58,17 +58,15 @@ namespace Cl
 		connect(m_projectActionBar, &ProjectActionBar::addProject, this, &CrazyLauncher::OnAddProject);
 		connect(m_projectActionBar, &ProjectActionBar::editProject, this, &CrazyLauncher::OnEditProject);
 
+		// Link remove actionBar button to projectController
+		connect(m_projectActionBar, &ProjectActionBar::removeProject, this, &CrazyLauncher::OnRemoveProject); 
+
+
 		// Display in project detail view the current selected project
-		connect(m_projectExplorer, &ProjectExplorer::currentProjectChange, this, &CrazyLauncher::OnChangeProjectSeleceted);
-
-
+		connect(m_projectExplorer, &ProjectExplorer::currentProjectChange, this, &CrazyLauncher::OnChangeProjectSelected);
 
 		// Potentiellement à changer
-		//connect(m_projectController, &ProjectController::E_RemoveProjectToView, m_btnplorer, &ProjectExplorer::RemoveProjectInView);
-		
-		// Launch / Remove Projects
-		/*connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);
-		connect(m_projectActionBar, &ProjectActionBar::E_RemoveProject, this, &CrazyLauncher::OnRemoveProject);*/
+		/*connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);*/
 
 		// Load saves projects
 		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
@@ -76,11 +74,6 @@ namespace Cl
 
 		// Filter Projects
 		connect(m_projectExplorer, &ProjectExplorer::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
-	}
-
-	int CrazyLauncher::GetSelectedProjectWidgetIndex()
-	{
-		return m_projectExplorer->GetProjectList()->currentRow();
 	}
 
 	void CrazyLauncher::OnAddProject(const Project& project)
@@ -91,15 +84,15 @@ namespace Cl
 
 	void CrazyLauncher::OnEditProject(const Project& project)
 	{
-		m_projectController->EditProject(project);
+		m_projectController->EditProject();
 		m_projectExplorer->EditProjectInView(project);
 	}
 
 	void CrazyLauncher::OnRemoveProject()
 	{
-		if (GetSelectedProjectWidgetIndex() == -1) return;
-		int currentProjectSelectedIndex = GetSelectedProjectWidgetIndex();
-		m_projectController->RemoveProjects(currentProjectSelectedIndex);
+		if (m_projectExplorer->GetProjectListCurrentRow() == -1) return;
+		m_projectController->RemoveProject(m_projectExplorer->GetProjectListCurrentRow());
+		m_projectExplorer->RemoveProjectInView(m_projectExplorer->GetProjectListCurrentRow());
 	}
 
 	void CrazyLauncher::LaunchProject()
@@ -108,10 +101,18 @@ namespace Cl
 		m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
-	void CrazyLauncher::OnChangeProjectSeleceted(const QString& projectName)
+	void CrazyLauncher::OnChangeProjectSelected(const QString& projectName)
 	{
-		m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
-		m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
+		if (projectName.isEmpty())
+		{
+			m_projectActionBar->SetCurrentProject(Project{});
+			m_projectDetailsView->SetCurrentProject(Project{});
+		}
+		else
+		{
+			m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
+			m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
+		}
 	}
 
 	void CrazyLauncher::ClearListWidget()
