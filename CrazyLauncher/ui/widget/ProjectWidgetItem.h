@@ -1,5 +1,6 @@
 #pragma once
 #include "QWidget"
+#include "memory"
 
 class QHBoxLayout;
 class QVBoxLayout;
@@ -21,7 +22,7 @@ namespace Cl
 		explicit ProjectWidgetItem(QWidget* parent = nullptr);
 		~ProjectWidgetItem() override = default;
 
-		const ProjectItem& GetProjectInfo() const;
+		const ProjectItem* GetProjectInfo() const;
 		void SetProjectInfo(QString name, QString desc);
 
 	private:
@@ -31,7 +32,7 @@ namespace Cl
 		QLabel* m_projectTitle;
 		QLabel* m_projectDesc;
 
-		ProjectItem m_projectItem;
+		std::unique_ptr<ProjectItem> m_projectItem;
 
 	private:
 		void InitUI();

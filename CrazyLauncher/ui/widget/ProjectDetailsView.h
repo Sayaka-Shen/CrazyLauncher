@@ -19,9 +19,10 @@ namespace Cl
 		~ProjectDetailsView() override = default;
 
 	public:
-		void SetCurrentProject(const Project& project);
+		void SetCurrentProject(const Project* currentProject);
 
 	private:
+		const Project* m_currentProject;
 		QVBoxLayout* m_descViewLayout;
 
 		QLabel* m_title;

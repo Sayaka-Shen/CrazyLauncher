@@ -20,7 +20,7 @@ namespace Cl
 		~ProjectActionBar() override = default;
 
 	public:
-		void SetCurrentProject(const Project& currentProject);
+		void SetCurrentProject(const Project* currentProject);
 
 	private:
 		void OnAddWindowClicked();
@@ -29,7 +29,7 @@ namespace Cl
 		void OnLaunchProjectClicked();
 
 	private:
-		Project m_currentProject;
+		const Project* m_currentProject;
 		ProjectTypeRegistry& m_projectTypeRegistry;
 
 		QHBoxLayout* m_actionBarLayout;

@@ -2,12 +2,10 @@
 
 #include "QLabel"
 #include "QHBoxLayout"
-#include "QPixmap"
-#include "QVBoxLayout"
 
 namespace Cl
 {
-	ProjectWidgetItem::ProjectWidgetItem(QWidget* parent) : QWidget(parent)
+	ProjectWidgetItem::ProjectWidgetItem(QWidget* parent) : QWidget(parent), m_projectItem(std::make_unique<ProjectItem>())
 	{
 		setObjectName("ProjectWidgetItem");
 		setAttribute(Qt::WA_StyledBackground, true);
@@ -46,14 +44,14 @@ namespace Cl
 		m_itemLayout->addLayout(textLayout, 1);
 	}
 
-	const ProjectItem& ProjectWidgetItem::GetProjectInfo() const
+	const ProjectItem* ProjectWidgetItem::GetProjectInfo() const
 	{
-		return m_projectItem;
+		return m_projectItem.get();
 	}
 
 	void ProjectWidgetItem::SetProjectInfo(QString name, QString desc)
 	{
-		m_projectItem.name = name;
+		m_projectItem->name = name;
 
 		int textLimit = 35;
 		QString displayText = desc;
@@ -63,7 +61,7 @@ namespace Cl
 			displayText = desc.left(textLimit) + "...";
 		}
 
-		m_projectItem.desc = displayText;
+		m_projectItem->desc = displayText;
 
 		m_projectTitle->setText(name);
 		m_projectDesc->setText(desc);

@@ -55,7 +55,7 @@ namespace Cl
 		void OnAddProject(const Project& project);
 		void OnEditProject(const Project& project);
 
-		void OnChangeProjectSelected(const QString& projectName);
+		void OnChangeProjectSelected(const ProjectItem* projectItem);
 
 		void OnRemoveProject();
 		void LaunchProject();

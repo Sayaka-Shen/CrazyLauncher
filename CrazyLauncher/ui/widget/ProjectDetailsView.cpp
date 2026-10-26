@@ -18,11 +18,14 @@ namespace Cl
 		InitUI();
 	}
 
-	void ProjectDetailsView::SetCurrentProject(const Project& project)
+	void ProjectDetailsView::SetCurrentProject(const Project* currentProject)
 	{
-		m_title->setText(project.name);
-		m_descriptionField->setText(project.description);
-		m_pathField->setText(project.path);
+		if (currentProject == nullptr) return;
+		m_currentProject = currentProject;
+
+		m_title->setText((*m_currentProject).name);
+		m_descriptionField->setText((*m_currentProject).description);
+		m_pathField->setText((*m_currentProject).path);
 	}
 
 	void ProjectDetailsView::InitUI()

@@ -61,7 +61,6 @@ namespace Cl
 		// Link remove actionBar button to projectController
 		connect(m_projectActionBar, &ProjectActionBar::removeProject, this, &CrazyLauncher::OnRemoveProject); 
 
-
 		// Display in project detail view the current selected project
 		connect(m_projectExplorer, &ProjectExplorer::currentProjectChange, this, &CrazyLauncher::OnChangeProjectSelected);
 
@@ -101,17 +100,17 @@ namespace Cl
 		m_projectController->LaunchProjects(m_currentProjectSelected);
 	}
 
-	void CrazyLauncher::OnChangeProjectSelected(const QString& projectName)
+	void CrazyLauncher::OnChangeProjectSelected(const ProjectItem* projectItem)
 	{
-		if (projectName.isEmpty())
+		if (projectItem == nullptr)
 		{
-			m_projectActionBar->SetCurrentProject(Project{});
-			m_projectDetailsView->SetCurrentProject(Project{});
+			m_projectActionBar->SetCurrentProject(nullptr);
+			m_projectDetailsView->SetCurrentProject(nullptr);
 		}
 		else
 		{
-			m_projectActionBar->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
-			m_projectDetailsView->SetCurrentProject(*m_projectController->GetProjectByName(projectName));
+			m_projectActionBar->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
+			m_projectDetailsView->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
 		}
 	}
 
@@ -132,7 +131,7 @@ namespace Cl
 			QListWidgetItem* item = m_projectExplorer->GetProjectList()->item(i);
 			ProjectWidgetItem* widgetItem = static_cast<ProjectWidgetItem*>(m_projectExplorer->GetProjectList()->itemWidget(item));
 
-			bool matches = widgetItem->GetProjectInfo().name.contains(text, Qt::CaseInsensitive);
+			bool matches = widgetItem->GetProjectInfo()->name.contains(text, Qt::CaseInsensitive);
 			
 			item->setHidden(!matches);
 		}

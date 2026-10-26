@@ -24,14 +24,14 @@ namespace Cl
 
 	public:
 		explicit ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
-		explicit ProjectModal(Project* currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
+		explicit ProjectModal(const Project* m_currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent = nullptr);
 		~ProjectModal() override = default;
 
 		void closeEvent(QCloseEvent* event) override;
 		Project GetProject() const;
 
 	private:
-		Project* m_currentProject;
+		const Project* m_currentProject;
 
 		ProjectTypeRegistry& m_projectTypeRegistry;
 

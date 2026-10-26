@@ -38,7 +38,7 @@ namespace Cl
 		void OnProjetFilter(const QString& text);
 
 	signals:
-		void currentProjectChange(const QString& projectName);
+		void currentProjectChange(const ProjectItem* projectItem);
 		void E_FilterProjects(const QString& text);
 
 	public slots:

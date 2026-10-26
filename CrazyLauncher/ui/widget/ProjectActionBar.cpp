@@ -17,7 +17,7 @@ namespace Cl
 		InitConnections();
 	}
 
-	void ProjectActionBar::SetCurrentProject(const Project& currentProject)
+	void ProjectActionBar::SetCurrentProject(const Project* currentProject)
 	{
 		m_currentProject = currentProject;
 	}
@@ -83,9 +83,9 @@ namespace Cl
 
 	void ProjectActionBar::OnEditWindowClicked()
 	{
-		if (m_currentProject.IsEmpty()) return;
+		if (m_currentProject == nullptr) return;
 
-		m_editModal = new ProjectModal(&m_currentProject, m_projectTypeRegistry, this);
+		m_editModal = new ProjectModal(m_currentProject, m_projectTypeRegistry, this);
 		if (m_editModal->exec() == QDialog::Accepted)
 		{
 			emit editProject(m_editModal->GetProject());
