@@ -58,7 +58,7 @@ namespace Cl
 		void OnChangeProjectSelected(const ProjectItem* projectItem);
 
 		void OnRemoveProject();
-		void LaunchProject();
+		void OnLaunchProject(const Project* project);
 
 		// Load saved data
 		void ClearListWidget();

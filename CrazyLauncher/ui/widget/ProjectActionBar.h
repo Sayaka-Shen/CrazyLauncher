@@ -54,7 +54,6 @@ namespace Cl
 		void addProject(const Project& project);
 		void editProject(const Project& project);
 		void removeProject();
-
-		/*void E_LaunchProject();*/
+		void launchProject(const Project* project);
 	};
 }

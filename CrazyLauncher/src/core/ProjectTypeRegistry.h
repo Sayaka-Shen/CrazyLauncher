@@ -20,6 +20,7 @@ namespace Cl
 		QString name;
 		ProjectType projectType;
 		QString filter;
+		QString executable;
 	};
 
 	class ProjectTypeRegistry

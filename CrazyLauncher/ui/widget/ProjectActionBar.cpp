@@ -103,6 +103,6 @@ namespace Cl
 
 	void ProjectActionBar::OnLaunchProjectClicked()
 	{
-		//emit E_LaunchProject();
+		emit launchProject(m_currentProject);
 	}
 }

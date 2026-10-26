@@ -24,7 +24,7 @@ namespace Cl
 		void AddProject(const Project& project);
 		void RemoveProject(int index);
 		void EditProject();
-		void LaunchProjects(Project* project);
+		void LaunchProject(const Project* project);
 
 		void LoadProjects();
 

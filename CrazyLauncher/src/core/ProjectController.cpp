@@ -7,9 +7,12 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QUrl>
-#include <QIODevice>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QProcess>
+#include <QStandardPaths>
+#include <QDebug>
+#include <QDirIterator>
 
 namespace Cl
 {
@@ -34,20 +37,50 @@ namespace Cl
 		SaveProjects();
 	}
 
-	void ProjectController::LaunchProjects(Project* project)
+	void ProjectController::LaunchProject(const Project* project)
 	{
-		if (!project || project->path.isEmpty()) return;
+		if (project == nullptr) return;
 
 		QString cleanProjectPath = QDir::cleanPath(project->path);
-		//QString cleanSoftwarePath = QDir::cleanPath(project->softwareExe);
+		QString currentUnityVersion;
+		
+		if (QFile::exists(cleanProjectPath + "/ProjectSettings/ProjectVersion.txt"))
+		{
+			QFile file(cleanProjectPath + "/ProjectSettings/ProjectVersion.txt");
+			if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+				return;
 
-		//if (!cleanSoftwarePath.isEmpty())
-		//{
-		//	QProcess::startDetached(cleanSoftwarePath, { QDir::toNativeSeparators(cleanProjectPath) });
-		//	return;
-		//}
+			QTextStream in(&file);
+			while (!in.atEnd()) {
+				QString line = in.readLine();
 
-		QDesktopServices::openUrl(QUrl::fromLocalFile(cleanProjectPath));
+				if (line.contains("m_EditorVersion"))
+				{
+					currentUnityVersion = line.section(":", 1).trimmed();
+					break;
+				}
+			}
+		}
+
+		QDirIterator blenderIt("C:/Program Files (x86)/Steam/steamapps", QStringList() << "blender-launcher.exe", QDir::Files, QDirIterator::Subdirectories);
+		QDirIterator unityIt("C:/Program Files/Unity/Hub/Editor/" + currentUnityVersion, QStringList() << "Unity.exe", QDir::Files, QDirIterator::Subdirectories);
+		QString blenderPath;
+		while (blenderIt.hasNext())
+		{
+			blenderPath = blenderIt.next();
+			qDebug() << blenderPath;
+			break;
+		}
+
+		QString unityPath;
+		while (unityIt.hasNext())
+		{
+			unityPath = unityIt.next();
+			qDebug() << unityPath;
+			break;
+		}
+
+		//QProcess::startDetached(blen, { cleanProjectPath });
 	}
 
 	QList<Project>& ProjectController::GetProjects()

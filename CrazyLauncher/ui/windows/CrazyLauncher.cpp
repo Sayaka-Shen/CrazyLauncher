@@ -64,8 +64,8 @@ namespace Cl
 		// Display in project detail view the current selected project
 		connect(m_projectExplorer, &ProjectExplorer::currentProjectChange, this, &CrazyLauncher::OnChangeProjectSelected);
 
-		// Potentiellement à changer
-		/*connect(m_projectActionBar, &ProjectActionBar::E_LaunchProject, this, &CrazyLauncher::LaunchProject);*/
+		// Link launch action bar button to controller
+		connect(m_projectActionBar, &ProjectActionBar::launchProject, this, &CrazyLauncher::OnLaunchProject);
 
 		// Load saves projects
 		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
@@ -94,10 +94,10 @@ namespace Cl
 		m_projectExplorer->RemoveProjectInView(m_projectExplorer->GetProjectListCurrentRow());
 	}
 
-	void CrazyLauncher::LaunchProject()
+	void CrazyLauncher::OnLaunchProject(const Project* project)
 	{
-		if (m_currentProjectSelected == nullptr) return;
-		m_projectController->LaunchProjects(m_currentProjectSelected);
+		if (project == nullptr) return;
+		m_projectController->LaunchProject(project);
 	}
 
 	void CrazyLauncher::OnChangeProjectSelected(const ProjectItem* projectItem)

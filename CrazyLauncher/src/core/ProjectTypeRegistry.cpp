@@ -5,12 +5,12 @@ namespace Cl
 	ProjectTypeRegistry::ProjectTypeRegistry()
 	{
 		m_projectTypes = {
-			{ "Script", ProjectType::Script, "*.sln" },
-			{ "Unreal", ProjectType::Unreal, "*.uproject" },
-			{ "Unity", ProjectType::Unity, "" },
-			{ "Blender", ProjectType::Blender, "*.blend" },
-			{ "Photoshop", ProjectType::Photoshop, "*.psd" },
-			{ "Zbrush", ProjectType::Zbrush, "*.zpr" }
+			{ "Script", ProjectType::Script, "*.sln", "" },
+			{ "Unreal", ProjectType::Unreal, "*.uproject", "" },
+			{ "Unity", ProjectType::Unity, "", "" },
+			{ "Blender", ProjectType::Blender, "*.blend", "" },
+			{ "Photoshop", ProjectType::Photoshop, "*.psd", "" },
+			{ "Zbrush", ProjectType::Zbrush, "*.zpr", "" }
 		};
 	}
 
