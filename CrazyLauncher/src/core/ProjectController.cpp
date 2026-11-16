@@ -40,15 +40,25 @@ namespace Cl
 	void ProjectController::LaunchProject(const Project* project)
 	{
 		if (project == nullptr) return;
-		QString cleanProjectPath = QDir::cleanPath(project->path);
+		QString cleanPath = QDir::cleanPath(project->path);
 
 		if (project->type == ProjectType::Script || project->type == ProjectType::Unreal)
 		{
-
+			QDesktopServices::openUrl(QUrl::fromLocalFile(cleanPath));
 		}
 		else
 		{
+			QString exe = project->executable;
+			QStringList args;
 
+			if (project->type == ProjectType::Unity)
+			{
+				args << "-projectPath";
+			}
+
+			args << QDir::toNativeSeparators(cleanPath);
+
+			QProcess::startDetached(exe, args);
 		}
 	}
 
