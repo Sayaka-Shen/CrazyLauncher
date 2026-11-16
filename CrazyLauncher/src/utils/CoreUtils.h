@@ -4,6 +4,7 @@
 namespace Cl::CoreUtils
 {
 	QString GetProjectsFilePath();
+	QString GetExecutableFilePath();
 }
 
 

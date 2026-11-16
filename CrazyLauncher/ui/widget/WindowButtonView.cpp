@@ -2,6 +2,8 @@
 
 #include "QHBoxLayout"
 #include "QPushButton"
+#include "QLabel"
+#include "QString"
 
 namespace Cl 
 {
@@ -15,9 +17,19 @@ namespace Cl
 		InitConnections();
 	}
 	
+	void WindowButtonView::SetInfoText(QString text, QString style)
+	{
+		m_info->setText(text);
+		m_info->setStyleSheet(style);
+	}
+
 	void WindowButtonView::InitUI()
 	{
 		m_buttonLayout = new QHBoxLayout(this);
+
+		m_info = new QLabel();
+		m_info->setContentsMargins(10, 0, 10, 0);
+		m_buttonLayout->addWidget(m_info);
 
 		m_buttonLayout->addStretch();
 

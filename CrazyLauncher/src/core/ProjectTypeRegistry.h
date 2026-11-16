@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 
 #include <QString>
 #include <QVector>
@@ -15,13 +16,13 @@ namespace Cl
 		Blender,
 		Photoshop,
 		Zbrush,
+		Substance,
 	};
 
 	struct ProjectTypeInfo
 	{
 		ProjectType projectType;
 		QString filter;
-		QString executable;
 	};
 
 	class ProjectTypeRegistry
@@ -37,13 +38,17 @@ namespace Cl
 		const QString GetSoftwarePathByProjectType() const;
 		QString GetTypeInfoExecutable(QString name);
 
-		QString SetSoftwareApproximation(ProjectType type, QString projectPath);
+		QString SetSoftwareApproximation(ProjectType type, QString projectPath, std::function<void(QString, QString)> func);
 		void SetExecutableFromChosenPath(QString path, QString type);
 
 		QString FindExecutableAtPath(QString path, QString exe);
 		QString FindUnityCurrentVersion(QString projectPath);
 
+		void SaveProjectTypeExecutables();
+		void LoadProjectTypeExecutables();
+
 	private:
 		QMap<QString, ProjectTypeInfo> m_projectTypes;
+		QMap<QString, QString> m_projectExecutables;
 	};
 }

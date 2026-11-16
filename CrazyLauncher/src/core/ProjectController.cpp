@@ -42,7 +42,14 @@ namespace Cl
 		if (project == nullptr) return;
 		QString cleanProjectPath = QDir::cleanPath(project->path);
 
-	
+		if (project->type == ProjectType::Script || project->type == ProjectType::Unreal)
+		{
+
+		}
+		else
+		{
+
+		}
 	}
 
 	QList<Project>& ProjectController::GetProjects()

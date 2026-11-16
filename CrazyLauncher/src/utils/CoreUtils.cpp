@@ -13,4 +13,13 @@ namespace Cl::CoreUtils
 		QDir().mkpath(savePath);
 		return savePath + "/crazy_projects.json";
 	}
+
+	QString GetExecutableFilePath()
+	{
+		QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+		// Create path if it does not exist
+		QDir().mkpath(savePath);
+		return savePath + "/crazy_executables.json";
+	}
 }

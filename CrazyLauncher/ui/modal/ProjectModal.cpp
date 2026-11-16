@@ -70,6 +70,7 @@ namespace Cl
 		nameLayout->addWidget(m_name);
 
 		m_nameField = new QLineEdit();
+		m_nameField->setPlaceholderText("Projet A");
 		nameLayout->addWidget(m_nameField);
 
 		m_modalLayout->addLayout(nameLayout);
@@ -81,6 +82,7 @@ namespace Cl
 		descLayout->addWidget(m_desc);
 
 		m_descField = new QLineEdit();
+		m_descField->setPlaceholderText("Le projet A est [...].");
 		m_descField->setMaxLength(150);
 		descLayout->addWidget(m_descField);
 
@@ -107,6 +109,7 @@ namespace Cl
 		auto* pathFieldLayout = new QHBoxLayout();
 		pathFieldLayout->setSpacing(2);
 		m_pathField = new QLineEdit();
+		m_pathField->setPlaceholderText("C:/Projet.[extension]/");
 		pathFieldLayout->addWidget(m_pathField, 2);
 
 		m_btnPathEplorer = new QPushButton();
@@ -162,7 +165,7 @@ namespace Cl
 
 		QMap<QString, ProjectTypeInfo> projectTypesInfo = m_projectTypeRegistry.GetProjectTypes();
 
-		int columnLength = 3;
+		int columnLength = 4;
 		int indexOfElement = 0;
 
 		for(auto [key, value] : projectTypesInfo.asKeyValueRange())
@@ -265,7 +268,7 @@ namespace Cl
 		if (!path.isEmpty())
 		{
 			m_pathField->setText(path);
-			m_softwarePathField->setText(m_projectTypeRegistry.SetSoftwareApproximation(m_projectTypeRegistry.GetProjectTypeByName(m_projectTypeButtonGroup->checkedButton()->text()), m_pathField->text()));
+			m_softwarePathField->setText(m_projectTypeRegistry.SetSoftwareApproximation(m_projectTypeRegistry.GetProjectTypeByName(m_projectTypeButtonGroup->checkedButton()->text()), m_pathField->text(), [this](QString text, QString style) { m_buttonView->SetInfoText(text, style); }));
 		}
 	}
 
