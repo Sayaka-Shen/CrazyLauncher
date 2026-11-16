@@ -74,6 +74,7 @@ namespace Cl
 		if (m_addModal->exec() == QDialog::Accepted)
 		{
 			emit addProject(m_addModal->GetProject());
+			m_addModal = nullptr;
 		}
 		else
 		{
@@ -89,6 +90,7 @@ namespace Cl
 		if (m_editModal->exec() == QDialog::Accepted)
 		{
 			emit editProject(m_editModal->GetProject());
+			m_editModal = nullptr;
 		}
 		else
 		{

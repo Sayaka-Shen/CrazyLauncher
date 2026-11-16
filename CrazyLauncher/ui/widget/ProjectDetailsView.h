@@ -19,7 +19,7 @@ namespace Cl
 		~ProjectDetailsView() override = default;
 
 	public:
-		void SetCurrentProject(const Project* currentProject);
+		void EditProjectInDetailsView(const Project& project);
 
 	private:
 		const Project* m_currentProject;

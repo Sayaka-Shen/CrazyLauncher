@@ -7,7 +7,7 @@
 
 namespace Cl 
 {
-	WindowButtonView::WindowButtonView(QWidget* parent) : QWidget(parent)
+	WindowButtonView::WindowButtonView(QString modalAcceptButtonTxt, QWidget* parent) : QWidget(parent), m_modalAcceptButtonText(modalAcceptButtonTxt)
 	{
 		setObjectName("WindowButtonView");
 		setAttribute(Qt::WA_StyledBackground, true);
@@ -39,7 +39,7 @@ namespace Cl
 
 		m_buttonLayout->addWidget(m_cancelBtn);
 
-		m_registerBtn = new QPushButton("Add");
+		m_registerBtn = new QPushButton(m_modalAcceptButtonText);
 		m_registerBtn->setObjectName("HighlightButton");
 		m_registerBtn->setAutoDefault(true);
 		m_registerBtn->setDefault(true);

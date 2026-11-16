@@ -13,7 +13,7 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		WindowButtonView(QWidget* parent = nullptr);
+		WindowButtonView(QString modalAcceptButtonTxt, QWidget* parent = nullptr);
 		~WindowButtonView() override = default;
 
 		void SetInfoText(QString text, QString style);
@@ -24,6 +24,8 @@ namespace Cl
 		QLabel* m_info;
 		QPushButton* m_cancelBtn;
 		QPushButton* m_registerBtn;
+
+		QString m_modalAcceptButtonText;
 
 	private:
 		void InitUI();

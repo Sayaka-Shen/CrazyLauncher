@@ -88,8 +88,11 @@ namespace Cl
 
 	void CrazyLauncher::OnEditProject(const Project& project)
 	{
-		m_projectController->EditProject();
+		if (m_projectExplorer->GetProjectListCurrentRow() == -1) return;
+
+		m_projectController->EditProject(m_projectExplorer->GetProjectListCurrentRow(), project);
 		m_projectExplorer->EditProjectInView(project);
+		m_projectDetailsView->EditProjectInDetailsView(project);
 	}
 
 	void CrazyLauncher::OnRemoveProject()
@@ -110,14 +113,13 @@ namespace Cl
 		if (projectItem == nullptr)
 		{
 			m_projectActionBar->SetCurrentProject(nullptr);
-			m_projectDetailsView->SetCurrentProject(nullptr);
 			m_projectExplorer->SetCurrentProject(nullptr);
 		}
 		else
 		{
 			m_projectActionBar->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
-			m_projectDetailsView->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
 			m_projectExplorer->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
+			m_projectDetailsView->EditProjectInDetailsView(*m_projectController->GetProjectByName(projectItem->name));
 		}
 	}
 

@@ -33,6 +33,7 @@ namespace Cl
 
 	private:
 		const Project* m_currentProject;
+		bool isEditing = false;
 
 		ProjectTypeRegistry& m_projectTypeRegistry;
 

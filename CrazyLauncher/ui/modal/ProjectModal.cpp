@@ -15,11 +15,13 @@
 
 namespace Cl
 {
-	ProjectModal::ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
+	ProjectModal::ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry), m_currentProject(nullptr)
 	{
-		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
 		setFixedSize(600, 500);
 		setObjectName("Modal");
+
+		isEditing = false;
 
 		InitUI();
 		InitConnections();
@@ -27,9 +29,11 @@ namespace Cl
 
 	ProjectModal::ProjectModal(const Project* m_currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent /*= nullptr*/) : m_currentProject(m_currentProject), QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
-		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
 		setFixedSize(600, 500);
 		setObjectName("Modal");
+
+		isEditing = true;
 
 		InitUI();
 		SetFieldDefaultValue();
@@ -144,7 +148,12 @@ namespace Cl
 
 		m_modalLayout->addLayout(softwarePathLayout);
 
-		m_buttonView = new WindowButtonView();
+		QString modalAcceptBtn = "Add";
+		if (isEditing)
+		{
+			modalAcceptBtn = "Edit";
+		}
+		m_buttonView = new WindowButtonView(modalAcceptBtn);
 
 		m_modalLayout->addWidget(m_buttonView);
 	}
@@ -281,7 +290,7 @@ namespace Cl
 		if (!path.isEmpty())
 		{
 			m_softwarePathField->setText(path);
-			m_projectTypeRegistry.SetExecutableFromChosenPath(m_projectTypeButtonGroup->checkedButton()->text(), m_path->text());
+			m_projectTypeRegistry.SetExecutableFromChosenPath(m_softwarePathField->text(), m_projectTypeButtonGroup->checkedButton()->text());
 		}
 	}
 }

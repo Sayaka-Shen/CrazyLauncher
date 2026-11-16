@@ -17,8 +17,7 @@
 namespace Cl
 {
 	ProjectController::ProjectController(ProjectTypeRegistry& projectTypeRegistry, QObject* parent) : m_projectTypeRegistry(projectTypeRegistry), QObject(parent)
-	{
-	}
+	{}
 
 	void ProjectController::AddProject(const Project& project)
 	{
@@ -32,8 +31,9 @@ namespace Cl
 		SaveProjects();
 	}
 
-	void ProjectController::EditProject()
+	void ProjectController::EditProject(int index, const Project& project)
 	{
+		m_projects[index] = project;
 		SaveProjects();
 	}
 
@@ -120,12 +120,12 @@ namespace Cl
 		for (const QJsonValue& value : jsonArray)
 		{
 			QJsonObject obj = value.toObject();
-			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["exe"].toString()};
+			Project project{ obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["exe"].toString() };
 
 			m_projects.append(project);
 			emit fillProjectInListWidget(project);
 		}
-		
+
 		file.close();
 	}
 }

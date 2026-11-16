@@ -18,15 +18,13 @@ namespace Cl
 		InitUI();
 	}
 
-	void ProjectDetailsView::SetCurrentProject(const Project* currentProject)
+	void ProjectDetailsView::EditProjectInDetailsView(const Project& project)
 	{
-		if (currentProject == nullptr) return;
-		m_currentProject = currentProject;
-
-		m_title->setText((*m_currentProject).name);
-		m_descriptionField->setText((*m_currentProject).description);
-		m_pathField->setText((*m_currentProject).path);
-		m_pathSoftwareField->setText((*m_currentProject).executable);
+		if (project.name == "") return;
+		m_title->setText(project.name);
+		m_descriptionField->setText(project.description);
+		m_pathField->setText(project.path);
+		m_pathSoftwareField->setText(project.executable);
 	}
 
 	void ProjectDetailsView::InitUI()
