@@ -14,7 +14,7 @@ namespace Cl
 		Q_OBJECT
 
 	public:
-		explicit ProjectController(QObject* parent = nullptr);
+		explicit ProjectController(ProjectTypeRegistry& projectTypeRegistry, QObject* parent = nullptr);
 		~ProjectController() override = default;
 
 	public:
@@ -30,6 +30,7 @@ namespace Cl
 
 	private:
 		QList<Project> m_projects;
+		ProjectTypeRegistry& m_projectTypeRegistry;
 
 	private:
 		void SaveProjects();

@@ -2,11 +2,13 @@
 
 #include <QString>
 #include <QVector>
+#include <QMap>
 
 namespace Cl
 {
 	enum ProjectType
 	{
+		None, 
 		Script,
 		Unreal,
 		Unity,
@@ -17,7 +19,6 @@ namespace Cl
 
 	struct ProjectTypeInfo
 	{
-		QString name;
 		ProjectType projectType;
 		QString filter;
 		QString executable;
@@ -30,11 +31,19 @@ namespace Cl
 		~ProjectTypeRegistry() = default;
 
 	public:
-		const QVector<ProjectTypeInfo>& GetProjectTypes() const;
+		const QMap<QString, ProjectTypeInfo>& GetProjectTypes() const;
 		const ProjectType GetProjectTypeByName(QString name) const;
 		const QString GetFilterTypeByName(QString name) const;
+		const QString GetSoftwarePathByProjectType() const;
+		QString GetTypeInfoExecutable(QString name);
+
+		QString SetSoftwareApproximation(ProjectType type, QString projectPath);
+		void SetExecutableFromChosenPath(QString path, QString type);
+
+		QString FindExecutableAtPath(QString path, QString exe);
+		QString FindUnityCurrentVersion(QString projectPath);
 
 	private:
-		QVector<ProjectTypeInfo> m_projectTypes;
+		QMap<QString, ProjectTypeInfo> m_projectTypes;
 	};
 }

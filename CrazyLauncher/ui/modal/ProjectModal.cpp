@@ -10,13 +10,15 @@
 #include <QStandardPaths>
 #include <QAbstractButton>
 #include <QButtonGroup>
+#include <string>
+#include <unordered_map>
 
 namespace Cl
 {
 	ProjectModal::ProjectModal(ProjectTypeRegistry& projectTypeRegistry, QWidget* parent) : QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
-		setFixedSize(600, 400);
+		setFixedSize(600, 500);
 		setObjectName("Modal");
 
 		InitUI();
@@ -26,7 +28,7 @@ namespace Cl
 	ProjectModal::ProjectModal(const Project* m_currentProject, ProjectTypeRegistry& projectTypeRegistry, QWidget* parent /*= nullptr*/) : m_currentProject(m_currentProject), QDialog(parent), m_projectTypeRegistry(projectTypeRegistry)
 	{
 		setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
-		setFixedSize(600, 400);
+		setFixedSize(600, 500);
 		setObjectName("Modal");
 
 		InitUI();
@@ -42,16 +44,14 @@ namespace Cl
 	Project ProjectModal::GetProject() const
 	{
 		QString path = m_pathField->text();
-		QFileInfo info(path);
-		bool isDir = info.exists() && info.isDir();
 
 		Project project
 		{
 			m_nameField->text(),
 			m_descField->text(),
-			m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())),
+			m_projectTypeRegistry.GetProjectTypeByName(m_projectTypeButtonGroup->checkedButton()->text()),
 			m_pathField->text(),
-			isDir
+			m_softwarePathField->text()
 		};
 
 		return project;
@@ -109,15 +109,37 @@ namespace Cl
 		m_pathField = new QLineEdit();
 		pathFieldLayout->addWidget(m_pathField, 2);
 
-		m_btnplorer = new QPushButton();
-		m_btnplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
-		m_btnplorer->setObjectName("ExplorerButton");
-		m_btnplorer->setDefault(false);
-		pathFieldLayout->addWidget(m_btnplorer);
-
+		m_btnPathEplorer = new QPushButton();
+		m_btnPathEplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
+		m_btnPathEplorer->setObjectName("ExplorerButton");
+		m_btnPathEplorer->setDefault(false);
+		pathFieldLayout->addWidget(m_btnPathEplorer);
 		projectPathLayout->addLayout(pathFieldLayout);
 
 		m_modalLayout->addLayout(projectPathLayout);
+
+		auto* softwarePathLayout = new QVBoxLayout();
+		softwarePathLayout->setContentsMargins(15, 0, 15, 10);
+		m_softwarePath = new QLabel("Software Path :", this);
+		softwarePathLayout->addWidget(m_softwarePath);
+
+		auto* softwarePathFieldLayout = new QHBoxLayout();
+		softwarePathFieldLayout->setSpacing(2);
+		m_softwarePathField = new QLineEdit();
+		m_softwarePathField->setEnabled(false);
+		m_softwarePathField->setEnabled(false);
+		softwarePathFieldLayout->addWidget(m_softwarePathField, 2);
+
+		m_btnSoftwarePathEplorer = new QPushButton();
+		m_btnSoftwarePathEplorer->setEnabled(false);
+		m_btnSoftwarePathEplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
+		m_btnSoftwarePathEplorer->setObjectName("ExplorerButton");
+		m_btnSoftwarePathEplorer->setDefault(false);
+		softwarePathFieldLayout->addWidget(m_btnSoftwarePathEplorer);
+
+		softwarePathLayout->addLayout(softwarePathFieldLayout);
+
+		m_modalLayout->addLayout(softwarePathLayout);
 
 		m_buttonView = new WindowButtonView();
 
@@ -128,7 +150,9 @@ namespace Cl
 	{
 		connect(m_buttonView, &WindowButtonView::onAcceptModal, this, &ProjectModal::OnAcceptModal);
 		connect(m_buttonView, &WindowButtonView::onCancelModal, this, &ProjectModal::OnRejectModal);
-		connect(m_btnplorer, &QPushButton::pressed, this, &ProjectModal::FindProject);
+		connect(m_btnPathEplorer, &QPushButton::pressed, this, &ProjectModal::FindProject);
+		connect(m_btnSoftwarePathEplorer, &QPushButton::pressed, this, &ProjectModal::FindSoftware);
+		connect(m_projectTypeButtonGroup, &QButtonGroup::buttonPressed, this, &ProjectModal::OnButtonTypePressed);
 	}
 
 	QButtonGroup* ProjectModal::InitProjectType(QGridLayout* projectTypeLayout)
@@ -136,21 +160,24 @@ namespace Cl
 		QButtonGroup* buttonGroup = new QButtonGroup(this);
 		buttonGroup->setExclusive(true);
 
+		QMap<QString, ProjectTypeInfo> projectTypesInfo = m_projectTypeRegistry.GetProjectTypes();
+
 		int columnLength = 3;
+		int indexOfElement = 0;
 
-		for(int i = 0; i < m_projectTypeRegistry.GetProjectTypes().length(); ++i)
+		for(auto [key, value] : projectTypesInfo.asKeyValueRange())
 		{
-			ProjectTypeInfo projectTypeInfo = m_projectTypeRegistry.GetProjectTypes()[i];
+			int column = indexOfElement % columnLength;
+			int row = indexOfElement / columnLength;
 
-			int column = i % columnLength;
-			int row = i / columnLength;
-
-			QPushButton* btn = new QPushButton(projectTypeInfo.name);
+			QPushButton* btn = new QPushButton(key);
 			btn->setObjectName("TypeButton");
 			btn->setCheckable(true);
 			btn->setCursor(Qt::PointingHandCursor);
-			buttonGroup->addButton(btn);
+			buttonGroup->addButton(btn);	
 			projectTypeLayout->addWidget(btn, row, column);
+
+			indexOfElement++;
 		}
 
 		return buttonGroup;
@@ -159,21 +186,34 @@ namespace Cl
 	// if modal is construct with the second constructor
 	void ProjectModal::SetFieldDefaultValue()
 	{
+		if (m_currentProject == nullptr) return;
 		m_nameField->setText(m_currentProject->name);
 		m_descField->setText(m_currentProject->description);
 
 		// Set current project type to edit
 		for (QAbstractButton* btn : m_projectTypeButtonGroup->buttons())
 		{
-			auto buttonType = m_projectTypeRegistry.GetProjectTypeByName(btn->text());
+			const auto& buttonType = m_projectTypeRegistry.GetProjectTypeByName(btn->text());
 			if (buttonType == m_currentProject->type)
 			{
 				btn->setChecked(true);
+
+				if (btn->text() == "Unity" || btn->text() == "Script" || btn->text() == "Unreal")
+				{
+					m_softwarePathField->setEnabled(false);
+					m_btnSoftwarePathEplorer->setEnabled(false);
+					break;
+				}
+
+				m_softwarePathField->setEnabled(true);
+				m_btnSoftwarePathEplorer->setEnabled(true);
+
 				break;
 			}
 		}
 
 		m_pathField->setText(m_currentProject->path);
+		m_softwarePathField->setText(m_currentProject->executable);
 	}
 
 	// SLOTS
@@ -188,6 +228,20 @@ namespace Cl
 		reject();
 	}
 
+	void ProjectModal::OnButtonTypePressed(QAbstractButton* button)
+	{
+		QPushButton* btn = static_cast<QPushButton*>(button);
+		if (btn->text() == "Unity" || btn->text() == "Script" || btn->text() == "Unreal")
+		{
+			m_softwarePathField->setEnabled(false);
+			m_btnSoftwarePathEplorer->setEnabled(false);
+			return;
+		}
+
+		m_softwarePathField->setEnabled(true);
+		m_btnSoftwarePathEplorer->setEnabled(true);
+	}
+
 	// Utilities
 	bool ProjectModal::IsOneOfTheFieldEmpty()
 	{
@@ -196,20 +250,34 @@ namespace Cl
 
 	void ProjectModal::FindProject()
 	{
+		if (m_projectTypeButtonGroup->checkedButton() == nullptr) return;
 		QString path;
 
-		if (m_projectTypeRegistry.GetProjectTypeByName((m_projectTypeButtonGroup->checkedButton()->text())) == ProjectType::Unity)
+		if (m_projectTypeRegistry.GetProjectTypeByName(m_projectTypeButtonGroup->checkedButton()->text()) == ProjectType::Unity)
 		{
 			path = QFileDialog::getExistingDirectory(this, tr("Open Directory"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 		}
 		else
 		{
-			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), m_projectTypeRegistry.GetFilterTypeByName((m_projectTypeButtonGroup->checkedButton()->text())));
+			path = QFileDialog::getOpenFileName(this, tr("Open File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), m_projectTypeRegistry.GetFilterTypeByName(m_projectTypeButtonGroup->checkedButton()->text()));
 		}
 
 		if (!path.isEmpty())
 		{
 			m_pathField->setText(path);
+			m_softwarePathField->setText(m_projectTypeRegistry.SetSoftwareApproximation(m_projectTypeRegistry.GetProjectTypeByName(m_projectTypeButtonGroup->checkedButton()->text()), m_pathField->text()));
+		}
+	}
+
+	void ProjectModal::FindSoftware()
+	{
+		QString path;
+		path = QFileDialog::getOpenFileName(this, tr("Open File"), "C:/", "*.exe");
+
+		if (!path.isEmpty())
+		{
+			m_softwarePathField->setText(path);
+			m_projectTypeRegistry.SetExecutableFromChosenPath(m_projectTypeButtonGroup->checkedButton()->text(), m_path->text());
 		}
 	}
 }

@@ -26,8 +26,8 @@ namespace Cl
 
 	void CrazyLauncher::InitController()
 	{
-		m_projectController = new ProjectController(this);
 		m_projectTypeRegistry = ProjectTypeRegistry();
+		m_projectController = new ProjectController(m_projectTypeRegistry, this);
 	}
 
 	void CrazyLauncher::InitUI()

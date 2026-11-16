@@ -13,6 +13,7 @@ class QHBoxLayout;
 class QButtonGroup;
 class QGridLayout;
 class QCloseEvent;
+class QAbstractButton;
 
 namespace Cl
 {
@@ -48,7 +49,11 @@ namespace Cl
 
 		QLabel* m_path;
 		QLineEdit* m_pathField;
-		QPushButton* m_btnplorer;
+		QPushButton* m_btnPathEplorer;
+
+		QLabel* m_softwarePath;
+		QLineEdit* m_softwarePathField;
+		QPushButton* m_btnSoftwarePathEplorer;
 
 		WindowButtonView* m_buttonView;
 
@@ -61,11 +66,11 @@ namespace Cl
 		// Utilities
 		bool IsOneOfTheFieldEmpty();
 		void FindProject();
-
-	signals:
+		void FindSoftware();
 
 	public slots:
 		void OnAcceptModal();
 		void OnRejectModal();
+		void OnButtonTypePressed(QAbstractButton* button);
 	};
 }

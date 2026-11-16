@@ -2,7 +2,6 @@
 #include "ProjectTypeRegistry.h"
 
 #include <QString>
-#include <QMetaType>
 
 namespace Cl
 {
@@ -12,11 +11,11 @@ namespace Cl
 		QString description;
 		ProjectType type;
 		QString path;
-		bool isDirectory;
+		QString executable;
 
 		bool IsEmpty()
 		{
-			return name.isEmpty() && description.isEmpty() && path.isEmpty();
+			return name.isEmpty() && description.isEmpty() && path.isEmpty() && type == ProjectType::None && executable.isEmpty();
 		}
 	};
 }

@@ -16,7 +16,7 @@
 
 namespace Cl
 {
-	ProjectController::ProjectController(QObject* parent) : QObject(parent) 
+	ProjectController::ProjectController(ProjectTypeRegistry& projectTypeRegistry, QObject* parent) : m_projectTypeRegistry(projectTypeRegistry), QObject(parent)
 	{
 	}
 
@@ -40,47 +40,9 @@ namespace Cl
 	void ProjectController::LaunchProject(const Project* project)
 	{
 		if (project == nullptr) return;
-
 		QString cleanProjectPath = QDir::cleanPath(project->path);
-		QString currentUnityVersion;
-		
-		if (QFile::exists(cleanProjectPath + "/ProjectSettings/ProjectVersion.txt"))
-		{
-			QFile file(cleanProjectPath + "/ProjectSettings/ProjectVersion.txt");
-			if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-				return;
 
-			QTextStream in(&file);
-			while (!in.atEnd()) {
-				QString line = in.readLine();
-
-				if (line.contains("m_EditorVersion"))
-				{
-					currentUnityVersion = line.section(":", 1).trimmed();
-					break;
-				}
-			}
-		}
-
-		QDirIterator blenderIt("C:/Program Files (x86)/Steam/steamapps", QStringList() << "blender-launcher.exe", QDir::Files, QDirIterator::Subdirectories);
-		QDirIterator unityIt("C:/Program Files/Unity/Hub/Editor/" + currentUnityVersion, QStringList() << "Unity.exe", QDir::Files, QDirIterator::Subdirectories);
-		QString blenderPath;
-		while (blenderIt.hasNext())
-		{
-			blenderPath = blenderIt.next();
-			qDebug() << blenderPath;
-			break;
-		}
-
-		QString unityPath;
-		while (unityIt.hasNext())
-		{
-			unityPath = unityIt.next();
-			qDebug() << unityPath;
-			break;
-		}
-
-		//QProcess::startDetached(blen, { cleanProjectPath });
+	
 	}
 
 	QList<Project>& ProjectController::GetProjects()
@@ -116,7 +78,7 @@ namespace Cl
 			obj["description"] = project.description;
 			obj["type"] = static_cast<ProjectType>(project.type);
 			obj["path"] = project.path;
-			obj["isDir"] = project.isDirectory;
+			obj["exe"] = project.executable;
 
 			jsonArray.append(obj);
 		}
@@ -141,7 +103,7 @@ namespace Cl
 		for (const QJsonValue& value : jsonArray)
 		{
 			QJsonObject obj = value.toObject();
-			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["isDir"].toBool()};
+			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["exe"].toString()};
 
 			m_projects.append(project);
 			emit E_FillProjectInListWidget(project);
