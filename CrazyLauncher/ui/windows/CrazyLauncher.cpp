@@ -40,6 +40,8 @@ namespace Cl
 		m_appLayout->setSpacing(0);
 
 		auto* centralLayout = new QHBoxLayout();
+		centralLayout->setContentsMargins(12, 12, 12, 12);
+		centralLayout->setSpacing(8);
 		m_projectExplorer = new ProjectExplorer();
 		centralLayout->addWidget(m_projectExplorer, 2);
 		m_projectDetailsView = new ProjectDetailsView();
@@ -67,12 +69,15 @@ namespace Cl
 		// Link launch action bar button to controller
 		connect(m_projectActionBar, &ProjectActionBar::launchProject, this, &CrazyLauncher::OnLaunchProject);
 
+		// Link double click from project explorer to launch action
+		connect(m_projectExplorer, &ProjectExplorer::launchProject, this, &CrazyLauncher::OnLaunchProject);
+
 		// Load saves projects
-		connect(m_projectController, &ProjectController::E_ClearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
-		connect(m_projectController, &ProjectController::E_FillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
+		connect(m_projectController, &ProjectController::clearProjectInListWidget, this, &CrazyLauncher::ClearListWidget);
+		connect(m_projectController, &ProjectController::fillProjectInListWidget, this, &CrazyLauncher::FillListWidget);
 
 		// Filter Projects
-		connect(m_projectExplorer, &ProjectExplorer::E_FilterProjects, this, &CrazyLauncher::FilterProjects);
+		connect(m_projectExplorer, &ProjectExplorer::filterProjects, this, &CrazyLauncher::FilterProjects);
 	}
 
 	void CrazyLauncher::OnAddProject(const Project& project)
@@ -106,11 +111,13 @@ namespace Cl
 		{
 			m_projectActionBar->SetCurrentProject(nullptr);
 			m_projectDetailsView->SetCurrentProject(nullptr);
+			m_projectExplorer->SetCurrentProject(nullptr);
 		}
 		else
 		{
 			m_projectActionBar->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
 			m_projectDetailsView->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
+			m_projectExplorer->SetCurrentProject(m_projectController->GetProjectByName(projectItem->name));
 		}
 	}
 

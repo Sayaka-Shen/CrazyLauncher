@@ -115,7 +115,7 @@ namespace Cl
 		m_btnPathEplorer = new QPushButton();
 		m_btnPathEplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
 		m_btnPathEplorer->setObjectName("ExplorerButton");
-		m_btnPathEplorer->setDefault(false);
+		m_btnPathEplorer->setAutoDefault(false);
 		pathFieldLayout->addWidget(m_btnPathEplorer);
 		projectPathLayout->addLayout(pathFieldLayout);
 
@@ -137,7 +137,7 @@ namespace Cl
 		m_btnSoftwarePathEplorer->setEnabled(false);
 		m_btnSoftwarePathEplorer->setIcon(QIcon(":/new/prefix1/assets/folder-black-white.png"));
 		m_btnSoftwarePathEplorer->setObjectName("ExplorerButton");
-		m_btnSoftwarePathEplorer->setDefault(false);
+		m_btnSoftwarePathEplorer->setAutoDefault(false);
 		softwarePathFieldLayout->addWidget(m_btnSoftwarePathEplorer);
 
 		softwarePathLayout->addLayout(softwarePathFieldLayout);
@@ -177,6 +177,7 @@ namespace Cl
 			btn->setObjectName("TypeButton");
 			btn->setCheckable(true);
 			btn->setCursor(Qt::PointingHandCursor);
+			btn->setAutoDefault(false);
 			buttonGroup->addButton(btn);	
 			projectTypeLayout->addWidget(btn, row, column);
 

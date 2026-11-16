@@ -108,7 +108,7 @@ namespace Cl
 	void ProjectController::LoadProjects()
 	{
 		m_projects.clear();
-		emit E_ClearProjectInListWidget();
+		emit clearProjectInListWidget();
 
 		QFile file(Cl::CoreUtils::GetProjectsFilePath());
 
@@ -123,7 +123,7 @@ namespace Cl
 			Project project{obj["name"].toString(), obj["description"].toString(), static_cast<ProjectType>(obj["type"].toInt()), obj["path"].toString(), obj["exe"].toString()};
 
 			m_projects.append(project);
-			emit E_FillProjectInListWidget(project);
+			emit fillProjectInListWidget(project);
 		}
 		
 		file.close();

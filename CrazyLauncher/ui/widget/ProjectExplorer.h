@@ -27,10 +27,13 @@ namespace Cl
 		void EditProjectInView(const Project& project);
 		void RemoveProjectInView(int indexProject);
 
+		void SetCurrentProject(const Project* currentProject);
+
 	private:
 		QVBoxLayout* m_projectViewLayout;
 		QLineEdit* m_searchBar;
 		QListWidget* m_projectsList;
+		const Project* m_currentProject;
 
 	private:
 		void InitUI();
@@ -39,10 +42,12 @@ namespace Cl
 
 	signals:
 		void currentProjectChange(const ProjectItem* projectItem);
-		void E_FilterProjects(const QString& text);
+		void filterProjects(const QString& text);
+		void launchProject(const Project* project);
 
 	public slots:
 		void OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous);
+		void OnProjectDoubleClicked();
 
 	};
 }

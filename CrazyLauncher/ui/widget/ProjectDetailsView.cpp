@@ -26,51 +26,64 @@ namespace Cl
 		m_title->setText((*m_currentProject).name);
 		m_descriptionField->setText((*m_currentProject).description);
 		m_pathField->setText((*m_currentProject).path);
+		m_pathSoftwareField->setText((*m_currentProject).executable);
 	}
 
 	void ProjectDetailsView::InitUI()
 	{
-		m_descViewLayout = new QVBoxLayout(this);
+		m_centralLayout = new QVBoxLayout(this);
 
 		m_title = new QLabel("Project");
 		m_title->setObjectName("ProjectTitle");
 
-		m_descViewLayout->addWidget(m_title);
+		m_centralLayout->addWidget(m_title);
+		m_centralLayout->setSpacing(10);
 
+		auto* descLayout = new QVBoxLayout();
+		descLayout->setContentsMargins(3, 0, 2, 0);
 		m_description = new QLabel("Description :");
-		m_description->setObjectName("DescriptionLabel");
+		m_description->setObjectName("DetailsLabel");
 
-		m_descViewLayout->addWidget(m_description);
-		m_descViewLayout->addSpacing(0);
+		descLayout->addWidget(m_description);
 
-		m_descriptionField = new QLabel("This is Project X...");
-		m_descriptionField->setObjectName("DescriptionField");
+		m_descriptionField = new QLabel("This is Project A [...]");
+		m_descriptionField->setObjectName("DetailsField");
 		m_descriptionField->setWordWrap(true);
 
-		m_descViewLayout->addWidget(m_descriptionField);
+		descLayout->addWidget(m_descriptionField);
 
+		m_centralLayout->addLayout(descLayout);
+
+		auto* pathLayout = new QVBoxLayout();
+		pathLayout->setContentsMargins(3, 0, 2, 0);
 		m_path = new QLabel("Path :");
-		m_path->setObjectName("PathLabel");
+		m_path->setObjectName("DetailsLabel");
 
-		m_descViewLayout->addWidget(m_path);
+		pathLayout->addWidget(m_path);
 
-		m_pathField = new QLabel("C:/project");
-		m_pathField->setObjectName("PathField");
+		m_pathField = new QLabel("C:/Project/[...]");
+		m_pathField->setObjectName("DetailsField");
 		m_pathField->setWordWrap(true);
 
-		m_descViewLayout->addWidget(m_pathField);
+		pathLayout->addWidget(m_pathField);
 
-		m_pathSoftware = new QLabel("Software Used :");
-		m_pathSoftware->setObjectName("SoftwareLabel");
+		m_centralLayout->addLayout(pathLayout);
 
-		m_descViewLayout->addWidget(m_pathSoftware);
+		auto* pathSoftwareLayout = new QVBoxLayout();
+		pathSoftwareLayout->setContentsMargins(3, 0, 2, 0);
+		m_pathSoftware = new QLabel("Executable :");
+		m_pathSoftware->setObjectName("DetailsLabel");
 
-		m_pathSoftwareField = new QLabel("C:/Blender.exe");
-		m_pathSoftwareField->setObjectName("SoftwareField");
+		pathSoftwareLayout->addWidget(m_pathSoftware);
+
+		m_pathSoftwareField = new QLabel("C:/Program Files/[...].exe");
+		m_pathSoftwareField->setObjectName("DetailsField");
 		m_pathSoftwareField->setWordWrap(true);
 
-		m_descViewLayout->addWidget(m_pathSoftwareField);
+		pathSoftwareLayout->addWidget(m_pathSoftwareField);
 
-		m_descViewLayout->addStretch(1);
+		m_centralLayout->addLayout(pathSoftwareLayout);
+
+		m_centralLayout->addStretch(1);
 	}
 }

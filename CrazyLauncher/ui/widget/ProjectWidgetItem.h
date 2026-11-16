@@ -5,6 +5,7 @@
 class QHBoxLayout;
 class QVBoxLayout;
 class QLabel;
+class QMouseEvent;
 
 namespace Cl
 {
@@ -25,6 +26,9 @@ namespace Cl
 		const ProjectItem* GetProjectInfo() const;
 		void SetProjectInfo(QString name, QString desc);
 
+	protected:
+		void mouseDoubleClickEvent(QMouseEvent* event) override;
+
 	private:
 		QHBoxLayout* m_itemLayout;
 
@@ -36,6 +40,10 @@ namespace Cl
 
 	private:
 		void InitUI();
+		void InitConnections();
+
+	signals:
+		void onDoubleClicked();
 
 	};
 }

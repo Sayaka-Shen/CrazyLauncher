@@ -11,6 +11,7 @@ namespace Cl
 		setAttribute(Qt::WA_StyledBackground, true);
 
 		InitUI();
+		InitConnections();
 	}
 
 	void ProjectWidgetItem::InitUI()
@@ -42,6 +43,17 @@ namespace Cl
 		textLayout->addStretch(1);
 
 		m_itemLayout->addLayout(textLayout, 1);
+	}
+
+	void ProjectWidgetItem::InitConnections()
+	{
+
+	}
+
+	// overrided from qwidget
+	void ProjectWidgetItem::mouseDoubleClickEvent(QMouseEvent* event)
+	{
+		emit onDoubleClicked();
 	}
 
 	const ProjectItem* ProjectWidgetItem::GetProjectInfo() const

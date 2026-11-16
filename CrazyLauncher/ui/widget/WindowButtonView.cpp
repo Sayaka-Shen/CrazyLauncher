@@ -35,12 +35,13 @@ namespace Cl
 
 		m_cancelBtn = new QPushButton("Cancel");
 		m_cancelBtn->setObjectName("ApplicationButton");
-		m_cancelBtn->setDefault(false);
+		m_cancelBtn->setAutoDefault(false);
 
 		m_buttonLayout->addWidget(m_cancelBtn);
 
 		m_registerBtn = new QPushButton("Add");
 		m_registerBtn->setObjectName("HighlightButton");
+		m_registerBtn->setAutoDefault(true);
 		m_registerBtn->setDefault(true);
 
 		m_buttonLayout->addWidget(m_registerBtn);

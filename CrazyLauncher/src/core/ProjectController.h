@@ -36,8 +36,7 @@ namespace Cl
 		void SaveProjects();
 
 	signals:
-		void E_EditProjectToDescriptionView(const Project& project);
-		void E_ClearProjectInListWidget();
-		void E_FillProjectInListWidget(Project& project);
+		void clearProjectInListWidget();
+		void fillProjectInListWidget(Project& project);
 	};
 }

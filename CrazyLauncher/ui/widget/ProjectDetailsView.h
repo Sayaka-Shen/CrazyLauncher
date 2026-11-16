@@ -23,7 +23,7 @@ namespace Cl
 
 	private:
 		const Project* m_currentProject;
-		QVBoxLayout* m_descViewLayout;
+		QVBoxLayout* m_centralLayout;
 
 		QLabel* m_title;
 

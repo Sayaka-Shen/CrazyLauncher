@@ -5,12 +5,12 @@
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QListWidgetItem>
+#include <QDebug>
 
 namespace Cl
 {
 	ProjectExplorer::ProjectExplorer(QWidget* parent) : QWidget(parent)
 	{
-		setObjectName("ProjectExplorer");
 		setAttribute(Qt::WA_StyledBackground, true);
 
 		InitUI();
@@ -30,6 +30,7 @@ namespace Cl
 	void ProjectExplorer::InitUI()
 	{
 		m_projectViewLayout = new QVBoxLayout(this);
+		m_projectViewLayout->setContentsMargins(0, 0, 0, 0);
 
 		m_searchBar = new QLineEdit();
 		m_searchBar->setPlaceholderText("Search....");
@@ -50,7 +51,7 @@ namespace Cl
 
 	void ProjectExplorer::OnProjetFilter(const QString& text)
 	{
-		emit E_FilterProjects(text);
+		emit filterProjects(text);
 	}
 
 	void ProjectExplorer::OnProjectSelected(QListWidgetItem* current, QListWidgetItem* previous)
@@ -69,6 +70,11 @@ namespace Cl
 		emit currentProjectChange(widgetItem->GetProjectInfo());
 	}
 
+	void ProjectExplorer::OnProjectDoubleClicked()
+	{
+		emit launchProject(m_currentProject);
+	}
+
 	void ProjectExplorer::AddProjectInView(const Project& project)
 	{
 		QListWidgetItem* item = new QListWidgetItem(m_projectsList);
@@ -76,6 +82,7 @@ namespace Cl
 
 		ProjectWidgetItem* widgetItem = new ProjectWidgetItem();
 		widgetItem->SetProjectInfo(project.name, project.description);
+		connect(widgetItem, &ProjectWidgetItem::onDoubleClicked, this, &ProjectExplorer::OnProjectDoubleClicked);
 
 		m_projectsList->setItemWidget(item, widgetItem);
 		m_projectsList->setCurrentItem(item);
@@ -96,5 +103,10 @@ namespace Cl
 	{
 		QListWidgetItem* item = m_projectsList->takeItem(indexProject);
 		delete item;
+	}
+
+	void ProjectExplorer::SetCurrentProject(const Project* currentProject)
+	{
+		m_currentProject = currentProject;
 	}
 }
