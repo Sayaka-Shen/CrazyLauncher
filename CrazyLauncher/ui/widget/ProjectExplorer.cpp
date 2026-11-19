@@ -11,6 +11,7 @@ namespace Cl
 {
 	ProjectExplorer::ProjectExplorer(QWidget* parent) : QWidget(parent)
 	{
+		setObjectName("ProjectExplorer");
 		setAttribute(Qt::WA_StyledBackground, true);
 
 		InitUI();
