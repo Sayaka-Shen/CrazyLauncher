@@ -5,6 +5,9 @@
 #include <QApplication>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QString>
+#include <QDate>
+#include <QDebug>
 
 namespace Cl
 {
@@ -17,8 +20,9 @@ namespace Cl
 			{ "Unity",{ ProjectType::Unity, "" }},
 			{ "Blender",{ ProjectType::Blender, "*.blend" }},
 			{ "Photoshop",{ ProjectType::Photoshop, "*.psd" }},
-			{ "Zbrush",{ ProjectType::Zbrush, "*.zpr" } },
-			{ "Substance",{ ProjectType::Substance, "*.spp" } }
+			{ "Zbrush",{ ProjectType::Zbrush, "*.zpr *.ztl" } },
+			{ "Substance",{ ProjectType::Substance, "*.spp" } },
+			{ "AfterEffect",{ ProjectType::AfterEffect, "*.aep" } }
 		};
 
 		LoadProjectTypeExecutables();
@@ -122,13 +126,13 @@ namespace Cl
 		}
 		case ProjectType::Zbrush:
 		{
-			if (!m_projectExecutables["ZBrush"].isEmpty())
+			if (!m_projectExecutables["Zbrush"].isEmpty())
 			{
 				func("Logiciel trouvé !", "color: #01b20b;");
-				return m_projectExecutables["ZBrush"];
+				return m_projectExecutables["Zbrush"];
 			}
 
-			path = FindExecutableAtPath("C:/Program Files/Maxon ZBrush 2026/", "ZBrush.exe");
+			path = FindExecutableAtPath(QString("C:/Program Files/Maxon ZBrush %1/").arg(QDate::currentDate().year()), "ZBrush.exe");
 
 			if (path.isEmpty())
 			{
@@ -139,7 +143,7 @@ namespace Cl
 				func("Logiciel trouvé !", "color: #01b20b;");
 			}
 
-			m_projectExecutables["ZBrush"] = path;
+			m_projectExecutables["Zbrush"] = path;
 			SaveProjectTypeExecutables();
 			return path;
 		}
@@ -166,6 +170,29 @@ namespace Cl
 			SaveProjectTypeExecutables();
 			return path;
 		}
+		case ProjectType::AfterEffect:
+		{
+			if (!m_projectExecutables["AfterEffect"].isEmpty())
+			{
+				func("Logiciel trouvé !", "color: #01b20b;");
+				return m_projectExecutables["AfterEffect"];
+			}
+
+			path = FindExecutableAtPath(QString("C:/Program Files/Adobe/Adobe After Effects %1/Support Files/").arg(QDate::currentDate().year()), "AfterFX.exe");
+
+			if (path.isEmpty())
+			{
+				func("Logiciel non trouvé !", "color: #d9534f;");
+			}
+			else
+			{
+				func("Logiciel trouvé !", "color: #01b20b;");
+			}
+
+			m_projectExecutables["AfterEffect"] = path;
+			SaveProjectTypeExecutables();
+			return path;
+		}
 		default:
 			return path = "Aucun chemin nécessaire";
 		}
@@ -177,6 +204,7 @@ namespace Cl
 	{
 		if (type == "Unity") return;
 		m_projectExecutables[type] = path;
+		SaveProjectTypeExecutables();
 	}
 
 	QString ProjectTypeRegistry::FindExecutableAtPath(QString path, QString exe)

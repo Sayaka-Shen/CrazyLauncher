@@ -17,6 +17,7 @@ namespace Cl
 		Photoshop,
 		Zbrush,
 		Substance,
+		AfterEffect,
 	};
 
 	struct ProjectTypeInfo
